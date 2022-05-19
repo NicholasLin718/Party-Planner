@@ -1,9 +1,28 @@
+.calendar{
+    width: 45rem;
+    height: 52rem;
+    /* background-color: #222227; */
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
+}
+
 .calendar .day{
     position: relative;
     width: calc(100%/7);
     height: 44px;
     display: inline-block;
-    background-color:antiquewhite;
+    background-color:white;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    z-index: 1;
+    text-align: center;
+}
+.calendar .week{
+    position: relative;
+    width: calc(100%/7);
+    height: 44px;
+    display: inline-block;
+    background-color: blue;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -11,6 +30,13 @@
     text-align: center;
 }
 
+
 .calendar .day .selected{
-    background-color: aqua;
+    background-color: palevioletred;
+}
+.calendar .day .today{
+    background-color: gray;
+}
+.calendar .day .before{
+    opacity: 0.2; /* Real browsers */
 }
