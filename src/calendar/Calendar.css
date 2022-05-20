@@ -60,3 +60,6 @@
 .calendar .day .before{
     opacity: 0.2; /* Real browsers */
 }
+.calendar .day .after{
+    opacity: 0.2; /* Real browsers */
+}

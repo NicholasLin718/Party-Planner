@@ -13,9 +13,9 @@ export default function Calendar() {
     //This allows us to build the calendar only when we change the selected day, and prevents re-renders
     useEffect(() => {
         setCalendar(buildCalendar(selectedDay));
-    }, [selectedDay]);
+    }, []);
 
-        function prevMonth(){
+    function prevMonth(){
         return selectedDay.clone().subtract(1, "month");
     }
 
@@ -35,7 +35,7 @@ export default function Calendar() {
             <div className="header">
                 <div className= "prev" onClick={() => !currMonth() && setSelectedDay(prevMonth())}>{!currMonth() ? String.fromCharCode(171) : null}</div>
                 <div>{selectedDay.format("MMMM")} {selectedDay.format("YYYY")}</div>
-                <div className= "next" onClick={() => setSelectedDay(nextMonth())}>{String.fromCharCode(187)}</div>
+                <div className= "next" onClick={() => !setSelectedDay(nextMonth())}>{String.fromCharCode(187)}</div>
             </div>
 
             <div className="day-names">
@@ -48,6 +48,15 @@ export default function Calendar() {
                 }
             </div>
             {/* create div for each day */}
+            {/* <div className="body">
+                {calendar.map((week, i) => 
+                    <div key={i}>
+                        {week.map((day, j) => 
+                            <div className="day" key={j} onClick={() => {setSelectedDay(day)}}>
+                                <Day day={day} key={j} selectedDay={selectedDay}/>
+                            </div>)}
+                    </div>)}
+            </div> */}
             <div className="body">
                 {calendar.map((month, i) =>
                     <div key={i}>
@@ -55,7 +64,7 @@ export default function Calendar() {
                         {month.map((week, j) => 
                         <div key={j}>
                             {week.map((day, k) => 
-                            <div className="day" key={k} onClick={() => {setSelectedDay(day)}}>
+                            <div className="day" key={k}>
                                 <Day day={day} key={k} selectedDay={selectedDay}/>
                             </div>)}
                         </div>)}
@@ -66,3 +75,4 @@ export default function Calendar() {
         </div>
     )
 }
+
