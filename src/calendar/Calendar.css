@@ -3,6 +3,18 @@
     height: 52rem;
     /* background-color: #222227; */
     box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
+    margin: auto;
+    width: 50%;
+}
+
+.calendar .header .prev{
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.calendar .header .next{
+    font-size: 2.5rem;
+    cursor: pointer;
 }
 
 .calendar .day{
@@ -17,18 +29,26 @@
     z-index: 1;
     text-align: center;
 }
-.calendar .week{
-    position: relative;
-    width: calc(100%/7);
-    height: 44px;
-    display: inline-block;
-    background-color: blue;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    z-index: 1;
-    text-align: center;
+
+.calendar .day-names{
+    width: 100%;
+    height: 5rem;
+    padding: 0 0.4rem;
+    display: flex;
+    align-items: center;
 }
+
+.calendar .week{
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    width: calc(44.2rem / 7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
 
 
 .calendar .day .selected{
