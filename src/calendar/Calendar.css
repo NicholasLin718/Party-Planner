@@ -19,7 +19,7 @@
 
 .calendar .day{
     position: relative;
-    width: calc(100%/7);
+    width: 50px;
     height: 44px;
     display: inline-block;
     background-color:white;
@@ -28,6 +28,7 @@
     box-sizing: border-box;
     z-index: 1;
     text-align: center;
+    text-decoration: none;
 }
 
 .calendar .day-names{
@@ -60,6 +61,19 @@
 .calendar .day .before{
     opacity: 0.2; /* Real browsers */
 }
-.calendar .day .after{
+.calendar .day .disable{
     opacity: 0.2; /* Real browsers */
+}
+
+.calendar .body{
+    overflow: hidden;
+    height: 450px;
+    display: flex;
+    position: absolute;
+    left: 0;
+    transition: all 1s ease-out;
+}
+
+.calendar .body .container{
+    width: 100vw;
 }

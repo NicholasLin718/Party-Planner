@@ -9,35 +9,16 @@ export default function Calendar() {
     //React States
     const [calendar, setCalendar] = useState([]);
     const [selectedDay, setSelectedDay] = useState(moment());
-
+    const [currentMonth,setCurrentMonth] = useState(0);
+    const [selectedList, setSelectedList] = useState([]);
     //This allows us to build the calendar only when we change the selected day, and prevents re-renders
     useEffect(() => {
         setCalendar(buildCalendar(selectedDay));
     }, []);
-
-    function prevMonth(){
-        return selectedDay.clone().subtract(1, "month");
-    }
-
-    function nextMonth(){
-        return selectedDay.clone().add(1, "month");
-    }
     
-    function currMonth(){
-        return selectedDay.isSame(new Date(), "month");
-    }
-
-    const list = [];
     return (
         <div className="calendar">
-            {/* <Header selectedDay={selectedDay} setSelectedDay={setSelectedDay}/> */}
-
-            <div className="header">
-                <div className= "prev" onClick={() => !currMonth() && setSelectedDay(prevMonth())}>{!currMonth() ? String.fromCharCode(171) : null}</div>
-                <div>{selectedDay.format("MMMM")} {selectedDay.format("YYYY")}</div>
-                <div className= "next" onClick={() => !setSelectedDay(nextMonth())}>{String.fromCharCode(187)}</div>
-            </div>
-
+            <Header selectedDay={selectedDay} setSelectedDay={setSelectedDay} currentMonth={currentMonth} setCurrentMonth={setCurrentMonth}/>
             <div className="day-names">
                 {
                     ["S", "M", "T", "W", "T", "F", "S"].map((dayOfWeek, i) => 
@@ -48,24 +29,15 @@ export default function Calendar() {
                 }
             </div>
             {/* create div for each day */}
-            {/* <div className="body">
-                {calendar.map((week, i) => 
-                    <div key={i}>
-                        {week.map((day, j) => 
-                            <div className="day" key={j} onClick={() => {setSelectedDay(day)}}>
-                                <Day day={day} key={j} selectedDay={selectedDay}/>
-                            </div>)}
-                    </div>)}
-            </div> */}
             <div className="body">
                 {calendar.map((month, i) =>
-                    <div key={i}>
+                    <div className="container" key={i} style={{transform: `translateX(-${currentMonth*100}vw)`}}>
                         <br></br>
                         {month.map((week, j) => 
                         <div key={j}>
                             {week.map((day, k) => 
                             <div className="day" key={k}>
-                                <Day day={day} key={k} selectedDay={selectedDay}/>
+                                <Day key={k} day={day} selectedDay={selectedDay} selectedList={selectedList} currentMonth={currentMonth}/>
                             </div>)}
                         </div>)}
                     </div>

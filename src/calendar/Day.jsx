@@ -4,16 +4,29 @@ import dayStyles from './styleCalendar';
 import "./Calendar.css";
 import moment from 'moment';
 
-export default function Day({day, selectedDay}) {
+export default function Day({day, selectedDay, selectedList, currentMonth}) {
     const [select, setSelect] = useState(false);
-    if(day == selectedDay){
-        console.log(selectedDay.format("LLLL"));
-        console.log("pog");
-    }
+    const [clickable, setClickable] = useState(false);
+
     useEffect(() => {
+        setClickable(dayStyles(day,selectedDay, select) === "disable");
+    }, [currentMonth]);
+
+    useEffect(() => {
+        // if(select){
+        //     selectedList.push(day);
+        // }
+        // else{
+        //     let index = selectedList.indexOf(day);
+        //     if (index !== -1) {
+        //         selectedList.splice(index, 1);
+        //     }
+        // }
     }, [select]);
+
+    
     return (
-        <div onClick={() => {select ? setSelect(false) : setSelect(true)}} className={select ? "selected" : dayStyles(day, selectedDay, select)}>
+        <div onClick={() => {select ? setSelect(false) : setSelect(true)}} className={clickable ? "disable" : dayStyles(day, selectedDay, select)}>
             <div>
                 {day.format("D")}
             </div>

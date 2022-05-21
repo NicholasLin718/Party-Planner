@@ -16,9 +16,10 @@ function isToday(day){
 }
 
 export default function dayStyles(day, selectedDay, select){
-    if(isBeforeToday(day, selectedDay)) return "before";
-    if(isNextMonth(day, selectedDay)) return "after";
-    if(select && isSelected(day)) return "selected";
+    if(isBeforeToday(day, selectedDay)) return "disable";
+    if(isNextMonth(day, selectedDay)) return "disable";
+    // if(select && isSelected(day, selectedDay)) return "selected";
+    if(select) return "selected";
     if(isToday(day)) return "today";
     return "";
 }

@@ -21,9 +21,7 @@ export default function buildCalendar(selectedDay){
     let day = startDay.clone().subtract(1, "day");
     const calendar = [];
     //iterate through until we hit the end date
-    for(let i = 0; i < 12; i++){
-        console.log(endDay.format("LLLL"));
-        console.log(day.clone().endOf("month").format("LLLL"));
+    for(let i = 0; i < 13; i++){
         const month = [];
         while(day.isBefore(endDay, "day")){
             month.push(Array(7)
