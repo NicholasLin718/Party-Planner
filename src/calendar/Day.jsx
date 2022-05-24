@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import dayStyles from './styleCalendar';
-import storeDays from './storeDays';
+import {storeDays} from './storeDays';
 import "./Calendar.css";
 import moment from 'moment';
 
