@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import dayStyles from './styleCalendar';
+import storeDays from './storeDays';
 import "./Calendar.css";
 import moment from 'moment';
 
@@ -26,7 +27,13 @@ export default function Day({day, selectedDay, selectedList, currentMonth}) {
 
     
     return (
-        <div onClick={() => {select ? setSelect(false) : setSelect(true)}} className={clickable ? "disable" : dayStyles(day, selectedDay, select)}>
+        <div onClick=
+            {() => {
+                select ? setSelect(false) : setSelect(true);
+                storeDays(day, select); //even though we setState above, the select value is still the old value as setState does not instantly update
+            }} 
+            
+            className={clickable ? "disable" : dayStyles(day, selectedDay, select)}>
             <div>
                 {day.format("D")}
             </div>
@@ -34,31 +41,3 @@ export default function Day({day, selectedDay, selectedList, currentMonth}) {
     )
 }
 
-// class Day extends React.Component{
-//     constructor(props) {
-//       super(props);
-//       this.state = {
-//         select: false,
-//       };
-//       this.dayClick = this.dayClick.bind(this);
-//     }
-  
-//     dayClick() {
-//       this.setState(!this.select);
-//     }
-  
-//     render() {
-//       return (
-//         <div>
-//           <div  className={dayStyles(this.props.day, this.props.selectedDay, this.select)} onClick={this.dayClick}>
-
-//                 <div>
-//                     {this.props.day.format("D")}
-//                 </div>
-//           </div>
-//         </div>
-//       );
-//     }
-//   }
-
-//   export default Day;
