@@ -31,15 +31,17 @@ export default function Calendar() {
             {/* create div for each day */}
             <div className="body">
                 {calendar.map((month, i) =>
-                    <div className="container" key={i} style={{transform: `translateX(-${currentMonth*100}vw)`}}>
+                    <div className="slider" key={i} style={{transform: `translateX(-${currentMonth*100}vw)`}}>
                         <br></br>
-                        {month.map((week, j) => 
-                        <div key={j}>
-                            {week.map((day, k) => 
-                            <div className="day" key={k}>
-                                <Day key={k} day={day} selectedDay={selectedDay} selectedList={selectedList} currentMonth={currentMonth}/>
+                        <div className="container">
+                            {month.map((week, j) => 
+                            <div key={j}>
+                                {week.map((day, k) => 
+                                <div className="day" key={k}>
+                                    <Day key={k} day={day} selectedDay={selectedDay} selectedList={selectedList} currentMonth={currentMonth}/>
+                                </div>)}
                             </div>)}
-                        </div>)}
+                        </div>
                     </div>
                 )}
                 
