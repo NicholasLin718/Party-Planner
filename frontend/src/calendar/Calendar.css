@@ -74,6 +74,11 @@
     transition: all 1s ease-out;
 }
 
-.calendar .body .container{
+.calendar .body .slider{
     width: 100vw;
-}
+}   
+
+.calendar .body .container{
+    width: 500px;
+    padding-left: 50%;
+}   
