@@ -1,10 +1,10 @@
 .calendar{
-    width: 45rem;
-    height: 52rem;
+    width: 800px;
+    height: 700px;
     /* background-color: #222227; */
     box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
     margin: auto;
-    width: 50%;
+    /* width: 50%; */
 }
 
 .calendar .header .prev{
@@ -18,20 +18,20 @@
 }
 
 .calendar .day{
-    position: relative;
+    /* position: relative;
     width: 50px;
     height: 44px;
-    display: inline-block;
-    background-color:white;
+    display: inline-block; */
+    /* background-color:white;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     z-index: 1;
     text-align: center;
-    text-decoration: none;
+    text-decoration: none; */
 }
 
-.calendar .day-names{
+.calendar .day-names, .week{
     width: 100%;
     height: 5rem;
     padding: 0 0.4rem;
@@ -39,15 +39,13 @@
     align-items: center;
 }
 
-.calendar .week{
-    font-size: 1.5rem;
+.calendar .dayOfWeek, .day{
+    font-size: 24px;
     font-weight: 400;
-    letter-spacing: 0.1rem;
-    width: calc(44.2rem / 7);
+    width: calc(812.8px / 7);
     display: flex;
     justify-content: center;
     align-items: center;
-    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 
@@ -70,7 +68,7 @@
     height: 450px;
     display: flex;
     position: absolute;
-    left: 0;
+    /* left: 0; */
     transition: all 1s ease-out;
 }
 
@@ -79,6 +77,6 @@
 }   
 
 .calendar .body .container{
-    width: 500px;
-    padding-left: 50%;
+    /* width: 500px; */
+    /* padding-left: 50%; */
 }   

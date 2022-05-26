@@ -23,7 +23,7 @@ export default function Calendar() {
                 {
                     ["S", "M", "T", "W", "T", "F", "S"].map((dayOfWeek, i) => 
                         (
-                            <div className="week" key={i}>{dayOfWeek}</div>
+                            <div className="dayOfWeek" key={i}>{dayOfWeek}</div>
                         )
                     )
                 }
@@ -35,7 +35,7 @@ export default function Calendar() {
                         <br></br>
                         <div className="container">
                             {month.map((week, j) => 
-                            <div key={j}>
+                            <div className="week" key={j}>
                                 {week.map((day, k) => 
                                 <div className="day" key={k}>
                                     <Day key={k} day={day} selectedDay={selectedDay} selectedList={selectedList} currentMonth={currentMonth}/>
