@@ -1,14 +1,21 @@
 const Page = require('../models/model');
 
 const createPage = (req, res)=>{
-    const newPage = Page(req.body);
+    console.log(req.body);
+    if(!req.body || !req.body.code){
+        res.status(400);
+        throw new Error('body has missing values');
+    }
+    const newPage = new Page({code: req.body.code});
     newPage.save()
         .then(
             (result)=>res.send(result)
         ).catch(
-            (err) =>console.log(err)
-        );
-    
+            (err) =>{
+                console.log(err)
+                res.send('error');
+            }
+        );    
 }
 
 const getPage = (req, res) => {

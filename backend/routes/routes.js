@@ -8,5 +8,5 @@ router.get("/", (req, res) => {
 })
 
 router.get('/pages/:id', getPage);
-router.post('/pages', createPage);
+router.post('/pages/create', createPage);
 module.exports = router;
