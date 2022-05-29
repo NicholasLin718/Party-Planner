@@ -3,19 +3,10 @@ const colors = require('colors');
 const dotenv = require('dotenv').config();
 const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
-
+const Page = require('./models/model');
+const routes = require('./routes/routes');
 connectDB();
 
 const app = express();
-
-app.get("/", (req, res) => {
-    res.send("pog");
-})
-
-app.get('/pages/:id', (req, res) => {
-    const id = req.params.id;
-    res.send(id);
-    console.log(id);
-})
-
+app.use('/', routes);
 app.listen(port, () => console.log(`Server started on port ${port}`));
