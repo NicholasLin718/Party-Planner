@@ -1,39 +1,42 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import dayStyles from './styleCalendar';
-import {storeDays} from './storeDays';
 import "./Calendar.css";
 import moment from 'moment';
 
-export default function Day({day, selectedDay, selectedList, currentMonth}) {
+export default function Day(props) {
+    const {day, selectedDay, selectedList, setSelectedList, currentMonth} = props;
     const [select, setSelect] = useState(false);
-    const [clickable, setClickable] = useState(false);
+    const [unclickable, setUnclickable] = useState(false);
 
     useEffect(() => {
-        setClickable(dayStyles(day,selectedDay, select) === "disable");
+        setUnclickable(dayStyles(day,selectedDay, select) === "disable");
     }, [currentMonth]);
 
     useEffect(() => {
-        // if(select){
-        //     selectedList.push(day);
-        // }
-        // else{
-        //     let index = selectedList.indexOf(day);
-        //     if (index !== -1) {
-        //         selectedList.splice(index, 1);
-        //     }
-        // }
+        if(select){
+            selectedList.push(day.format("LLLL"));
+        }
+        else{
+            let index = selectedList.indexOf(day.format("LLLL"));
+            if (index !== -1) {
+                selectedList.splice(index, 1);
+            }
+        }
+        setSelectedList(selectedList);
+        console.log(selectedList)
     }, [select]);
 
     
     return (
         <div onClick=
             {() => {
-                select ? setSelect(false) : setSelect(true);
-                storeDays(day, select); //even though we setState above, the select value is still the old value as setState does not instantly update
+                if(!unclickable){
+                    select ? setSelect(false) : setSelect(true);
+                }
             }} 
             
-            className={clickable ? "disable" : dayStyles(day, selectedDay, select)}>
+            className={unclickable ? "disable" : dayStyles(day, selectedDay, select)}>
             <div>
                 {day.format("D")}
             </div>
