@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import DragSelect from './DragSelect';
-import "./styles.css";
-import "./TimeSelector.css";
 import { SelectableGroup } from 'react-selectable-fast'
 
 
