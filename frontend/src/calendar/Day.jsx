@@ -36,7 +36,7 @@ export default function Day(props) {
                 }
             }} 
             
-            className={unclickable ? "disable" : dayStyles(day, selectedDay, select)}>
+            className={"day " + (unclickable ? "disable" : dayStyles(day, selectedDay, select)) + ((!select && !unclickable) ? " unselected" : "")}>
             <div>
                 {day.format("D")}
             </div>

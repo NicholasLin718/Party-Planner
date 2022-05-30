@@ -17,24 +17,10 @@
     cursor: pointer;
 }
 
-.calendar .day{
-    /* position: relative;
-    width: 50px;
-    height: 44px;
-    display: inline-block; */
-    /* background-color:white;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    z-index: 1;
-    text-align: center;
-    text-decoration: none; */
-}
-
 .calendar .day-names, .week{
-    width: 800px;
+    width: 100%;
     height: 5rem;
-    /* padding: 0 0.4rem; */
+    padding: 0 0.4rem;
     display: flex;
     align-items: center;
 }
@@ -42,24 +28,27 @@
 .calendar .dayOfWeek, .day{
     font-size: 24px;
     font-weight: 400;
-    width: calc(812.8px / 7);
+    width: calc(800px / 7);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-
-.calendar .day .selected{
+.calendar .selected{
     background-color: palevioletred;
 }
-.calendar .day .today{
+.calendar .unselected:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+
+.calendar .today{
     background-color: gray;
 }
-.calendar .day .before{
+.calendar .before{
     opacity: 0.2; /* Real browsers */
 }
-.calendar .day .disable{
+.calendar .disable{
     opacity: 0.2; /* Real browsers */
 }
 
@@ -67,8 +56,7 @@
     overflow: hidden;
     height: 450px;
     display: flex;
-    /* position: absolute; */
-    left: 0;
+    position: absolute;
     transition: all 1s ease-out;
 }
 
@@ -80,3 +68,4 @@
     /* width: 500px; */
     /* padding-left: 50%; */
 }   
+

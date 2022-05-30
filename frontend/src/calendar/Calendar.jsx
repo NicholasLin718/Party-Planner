@@ -37,9 +37,8 @@ export default function Calendar() {
                             {month.map((week, j) => 
                             <div className="week" key={j}>
                                 {week.map((day, k) => 
-                                <div className="day" key={k}>
                                     <Day key={k} day={day} selectedDay={selectedDay} selectedList={selectedList} setSelectedList={setSelectedList} currentMonth={currentMonth}/>
-                                </div>)}
+                                    )}
                             </div>)}
                         </div>
                     </div>
