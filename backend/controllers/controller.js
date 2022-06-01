@@ -1,10 +1,10 @@
 const Page = require('../models/model');
 
 // @desc Get page
-// @route GET /pages/:id
+// @route GET /pages/:code
 // @access Public
 const getPage = (req, res) => {
-    const code = req.params.id;
+    const code = req.params.code;
     Page.findOne({ code: code })
         .then(() => {
             res.send(code);
@@ -36,7 +36,7 @@ const createPage = (req, res) => {
 }
 
 // @desc Update page
-// @route PUT /pages/:id
+// @route PUT /pages/:code
 // @access Public
 const updatePage = (req, res) => {
     console.log(req.body);
@@ -48,7 +48,7 @@ const updatePage = (req, res) => {
 }
 
 // @desc Delete page
-// @route DELETE /pages/:id
+// @route DELETE /pages/:code
 // @access Private
 const deletePage = (req, res) => {
     console.log(req.body);
