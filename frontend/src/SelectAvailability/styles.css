@@ -39,6 +39,9 @@ body {
   .selected {
     background-color: chocolate;
   }
+  .unselected {
+    background-color: white;
+  }
   
   .selection-box-info {
     margin-top: 10px;
