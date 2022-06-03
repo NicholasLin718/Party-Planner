@@ -18,7 +18,6 @@ const getPage = (req, res) => {
 // @route POST /pages/create
 // @access Public
 const createPage = (req, res) => {
-    console.log(req.body);
     if (!req.body || !req.body.code) {
         res.status(400);
         throw new Error('body has missing values');
@@ -39,7 +38,6 @@ const createPage = (req, res) => {
 // @route PUT /pages/:code
 // @access Public
 const updatePage = (req, res) => {
-    console.log(req.body);
     if (!req.body || !req.body.code) {
         res.status(400);
         throw new Error('body has missing values');
