@@ -1,0 +1,14 @@
+.slot {
+    width: 100px;
+    height: 100px;
+    outline: 1px solid;
+
+}
+
+.selected {
+    background-color: chocolate;
+  }
+.unselected {
+background-color: white;
+}
+  
