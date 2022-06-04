@@ -1,15 +1,14 @@
 import React from 'react';
 import Calendar from './calendar/Calendar';
 import Index from './AvailabilitySelector/Index';
+import TimePeriod from './TimePeriod/TimePeriod';
 
 function App() {
   return (
     <div>
-        {/* <h1>app</h1> */}
-        {/* <Calendar/> */}
-        {/* <TimeSelector/> */}
-        {/* <SelectAvailability/> */}
-        <Index/>
+
+        <TimePeriod/>
+        {/* <Index/> */}
     </div>
   );
 }
