@@ -8,7 +8,8 @@ export default function Slot() {
         } 
     }
     return (
-        <div onMouseEnter={handleEnter} onMouseDown={() => {select ? setSelect(false) : setSelect(true)}}  className={"slot " + (select ? "selected" : "unselected")}>
+        <div>
+            <div onMouseEnter={handleEnter} onMouseDown={() => {select ? setSelect(false) : setSelect(true)}}  className={"slot " + (select ? "selected" : "unselected")}></div>
         </div>
     )
 }

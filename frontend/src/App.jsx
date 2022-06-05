@@ -7,8 +7,8 @@ function App() {
   return (
     <div>
 
-        <TimePeriod/>
-        {/* <Index/> */}
+        {/* <TimePeriod/> */}
+        <Index/>
     </div>
   );
 }
