@@ -4,17 +4,8 @@ import LabelColumn from './LabelColumn';
 import Slot from './Slot';
 import "./styles.css";
 export default function Index() {
-  // var data = [];
-  // for(var i = 0; i < ; i++) {
-  //     data.push(
-  //         <DragSelect key={i} data={i}/>
-  //     );
-  // }
-  // const startValue = 15;
-  // const endValue = 12;
-  // const isStart00 = true;
-  const startValue = {"hour": 16, "is_00": true};
-  const endValue = {"hour": 18, "is_00": true};
+  const startValue = {"hour": 15, "is_00": false};
+  const endValue = {"hour": 16, "is_00": false};
   return (
     <div>
       <LabelColumn startValue={startValue} endValue={endValue}/>
