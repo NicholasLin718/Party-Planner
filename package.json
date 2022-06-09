@@ -34,7 +34,6 @@
     "react-selectable-fast": "^3.4.0"
 =======
     "react-dom": "^18.1.0"
->>>>>>> 8b835d6cca72855ece1e4fb098565454c3aef7cb
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
