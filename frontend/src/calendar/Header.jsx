@@ -20,10 +20,10 @@ export default function Header({selectedDay, setSelectedDay, currentMonth, setCu
     }
 
   return (
-    <div className="header">
-        <div className= "prev" onClick={() => {currentMonth !== 0 && handleClick("left"); setSelectedDay(prevMonth())}}>{!currMonth() ? String.fromCharCode(171) : null}</div>
+    <div class="header">
+        <div class= "prev" onClick={() => {currentMonth !== 0 && handleClick("left"); setSelectedDay(prevMonth())}}>{!currMonth() ? String.fromCharCode(171) : null}</div>
         <div>{selectedDay.format("MMMM")} {selectedDay.format("YYYY")}</div>
-        <div className= "next" onClick={() => {currentMonth < 36 && handleClick("right"); setSelectedDay(nextMonth())}}>{currentMonth < 36 ? String.fromCharCode(187) : null}</div>
+        <div class= "next" onClick={() => {currentMonth < 36 && handleClick("right"); setSelectedDay(nextMonth())}}>{currentMonth < 36 ? String.fromCharCode(187) : null}</div>
     </div>
   )
 }

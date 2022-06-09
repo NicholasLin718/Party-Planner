@@ -17,25 +17,25 @@ export default function Calendar() {
     }, []);
     
     return (
-        <div className="calendar">
+        <div class="calendar">
             <Header selectedDay={selectedDay} setSelectedDay={setSelectedDay} currentMonth={currentMonth} setCurrentMonth={setCurrentMonth}/>
-            <div className="day-names">
+            <div class="day-names">
                 {
                     ["S", "M", "T", "W", "T", "F", "S"].map((dayOfWeek, i) => 
                         (
-                            <div className="dayOfWeek" key={i}>{dayOfWeek}</div>
+                            <div class="dayOfWeek" key={i}>{dayOfWeek}</div>
                         )
                     )
                 }
             </div>
             {/* create div for each day */}
-            <div className="body">
+            <div class="body">
                 {calendar.map((month, i) =>
-                    <div className="slider" key={i} style={{transform: `translateX(-${currentMonth*100}vw)`}}>
+                    <div class="slider" key={i} style={{transform: `translateX(-${currentMonth*100}vw)`}}>
                         <br></br>
-                        <div className="container">
+                        <div class="container">
                             {month.map((week, j) => 
-                            <div className="week" key={j}>
+                            <div class="week" key={j}>
                                 {week.map((day, k) => 
                                     <Day key={k} day={day} selectedDay={selectedDay} selectedList={selectedList} setSelectedList={setSelectedList} currentMonth={currentMonth}/>
                                     )}
