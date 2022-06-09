@@ -18,7 +18,10 @@ export default function LabelColumn(props) {
             {columnArr.map((time, i) => 
                 (
                     <div key={i}>
-                        <h1>{time}</h1>
+                        <div className="time" key={i}>
+                            <h1>{time}</h1>
+                        </div>
+                        <div className="time"></div>
                     </div>
                 )
             )}

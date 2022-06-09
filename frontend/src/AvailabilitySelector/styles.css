@@ -1,13 +1,28 @@
+.columns{
+  display: grid;
+  justify-content: center;
+  align-content: center;
+
+  grid-gap: 10px;
+  grid-auto-flow: column;
+}
+
+.label {
+  transform: translate(100%, 50%);
+  position: absolute;
+  bottom: 0;
+  right: -5px;
+}
+
 .slot {
-    width: 100px;
+    width: 300px;
     height: 100px;
     outline: 1px solid;
-
 }
 
 .selected {
     background-color: chocolate;
-  }
+}
 .unselected {
 background-color: white;
 }
