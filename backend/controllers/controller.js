@@ -22,7 +22,7 @@ const createPage = (req, res) => {
         res.status(400);
         throw new Error('body has missing values');
     }
-    const newPage = new Page({ code: req.body.code });
+    const newPage = new Page(req.body);
     newPage.save()
         .then(
             (result) => res.send(result)
