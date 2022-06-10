@@ -5,9 +5,10 @@ const Page = require('../models/model');
 // @access Public
 const getPage = (req, res) => {
     const code = req.params.code;
+    console.log(code);
     Page.findOne({ code: code })
-        .then(() => {
-            res.send(code);
+        .then((q) => {
+            res.json(q);
         })
         .catch((err) => {
             console.log(err);
