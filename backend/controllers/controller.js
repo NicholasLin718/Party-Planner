@@ -1,61 +1,62 @@
+const asyncHandler = require('express-async-handler')
 const Page = require('../models/model');
 
 // @desc Get page
 // @route GET /pages/:code
 // @access Public
-const getPage = (req, res) => {
+const getPage = asyncHandler(async (req, res) => {
     const code = req.params.code;
-    Page.findOne({ code: code })
-        .then(() => {
-            res.send(code);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
+    const page = await Page.findOne({ code: code });
+    res.status(200).json(page);
+})
 
 // @desc Create page
 // @route POST /pages/create
 // @access Public
-const createPage = (req, res) => {
+const createPage = asyncHandler(async (req, res) => {
     if (!req.body || !req.body.code) {
         res.status(400);
-        throw new Error('body has missing values');
-    }
-    const newPage = new Page(req.body);
-    newPage.save()
-        .then(
-            (result) => res.send(result)
-        ).catch(
-            (err) => {
-                console.log(err)
-                res.send('error');
-            }
-        );
-}
+        throw new Error('Body has missing values');
+    };
+
+    const createdPage = await Page.create({
+        code: req.body.code
+    });
+
+    res.status(200).json(createdPage);
+})
 
 // @desc Update page
 // @route PUT /pages/:code
 // @access Public
-const updatePage = (req, res) => {
+const updatePage = asyncHandler(async (req, res) => {
+    const code = req.params.code;
+    const page = await Page.findOne({ code: code });
     if (!req.body || !req.body.code) {
         res.status(400);
-        throw new Error('body has missing values');
-    }
-    res.status(200).json({ code: req.body.code })
-}
+        throw new Error('Page not found');
+    };
+
+    const updatedPage = await Page.findByIdAndUpdate(page._id, req.body, {
+        new: true,
+    })
+    res.status(200).json(updatedPage);
+})
 
 // @desc Delete page
 // @route DELETE /pages/:code
 // @access Private
-const deletePage = (req, res) => {
-    console.log(req.body);
+const deletePage = asyncHandler(async (req, res) => {
+    const code = req.params.code;
+    const page = await Page.findOne({ code: code });
     if (!req.body || !req.body.code) {
         res.status(400);
-        throw new Error('body has missing values');
+        throw new Error('Page not found');
     }
-    res.status(200).json({ code: req.body.code })
-}
+
+    await page.remove();
+    res.status(200).json({ code: code });
+})
 
 module.exports = {
     getPage,

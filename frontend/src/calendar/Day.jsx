@@ -15,7 +15,9 @@ export default function Day(props) {
 
     useEffect(() => {
         if(select){
-            selectedList.push(day.format("LLLL"));
+            if(!selectedList.includes(day.format("LLLL"))) {
+                selectedList.push(day.format("LLLL"));
+            }
         }
         else{
             let index = selectedList.indexOf(day.format("LLLL"));
@@ -24,7 +26,7 @@ export default function Day(props) {
             }
         }
         setSelectedList(selectedList);
-        console.log(selectedList)
+        console.log(selectedList);
     }, [select]);
 
     
