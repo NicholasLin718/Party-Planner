@@ -15,12 +15,12 @@ export default function Day(props) {
 
     useEffect(() => {
         if(select){
-            if(!selectedList.includes(day.format("LLLL"))) {
-                selectedList.push(day.format("LLLL"));
+            if(!selectedList.includes(day.toISOString())) {
+                selectedList.push(day.toISOString());
             }
         }
         else{
-            let index = selectedList.indexOf(day.format("LLLL"));
+            let index = selectedList.indexOf(day.toISOString());
             if (index !== -1) {
                 selectedList.splice(index, 1);
             }
