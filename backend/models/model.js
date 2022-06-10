@@ -22,21 +22,22 @@ const pageSchema = new Schema(
             required: true,
             unique: true
         },
-        meetingName:{
+        // SET TO FALSE FOR NOW TO TEST CRUD
+        meetingName: {
             type: String,
-            required: true
+            required: false
         },
-        meetingDescripton:{
+        meetingDescripton: {
             type: String,
-            require: false
+            required: false
         },
         participants: {
             type: [personSchema],
-            required: true
+            required: false
         },
         meetingDays: {
             type: [String],
-            require: true
+            required: false
         }
     }
 );
