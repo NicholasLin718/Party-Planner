@@ -20,7 +20,7 @@ export default function Calendar() {
         setCalendar(buildCalendar(selectedDay));
     }, []);
     
-    const handleCock = () => {
+    const handleClick = () => {
         if(selectedList.length > 0){
             console.log("ran");
             console.log(selectedList);
@@ -59,7 +59,7 @@ export default function Calendar() {
                     
                 </div>
             </div>
-            <button onClick={handleCock} style={{marginTop: '1000px'}}>click for cock</button>
+            <button onClick={handleClick} style={{marginTop: '1000px'}}>click me</button>
         </div>
     )
 }

@@ -18,7 +18,7 @@ function App() {
     <div>
       <Calendar/>
       <TimePeriod/>
-      {/* <Index style={{marginTop: '1000px'}}/> */}
+      <Index style={{marginTop: '1000px'}}/>
 
     </div>
   );

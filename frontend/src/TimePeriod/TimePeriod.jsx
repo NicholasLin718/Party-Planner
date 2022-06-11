@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import TimezoneSelect from 'react-timezone-select';
 import TimePicker from "react-time-range";
 import moment from 'moment';
-
+import { useDispatch } from 'react-redux';
+import {setRange} from "../features/TimeRangeSlice";
 export default function TimePeriod() {
+    const dispatch = useDispatch();
     const [selectedTimezone, setSelectedTimezone] = useState({  
         "value": "America/Detroit",
         "label": "(GMT-4:00) Eastern Time (Eastern Daylight Time)",
@@ -19,9 +21,12 @@ export default function TimePeriod() {
     //return value would be {JSON.stringify(selectedTimezone, null, 4)}
     const returnFunctionStart = (e) => {
         setStartTime(e.startTime);
-        let result = startTime.match(/\d\d:\d\d/);
+        let result = e.startTime.match(/\d\d:\d\d/);
+        console.log(result);
+        let hour = parseInt(result[0].substring(0,2)) + selectedTimezone.offset;
+        if(hour < 0) hour += 24;
         setStartValue({
-            "hour": (parseInt(result[0].substring(0,2)) + selectedTimezone.offset),
+            "hour": hour,
             "is_00": (result[0].substring(3,5) === "00")
         })
         console.log(startValue);
@@ -29,13 +34,20 @@ export default function TimePeriod() {
     
     const returnFunctionEnd = (e) => {
         setEndTime(e.endTime);
-        let result = endTime.match(/\d\d:\d\d/);
+        let result = e.endTime.match(/\d\d:\d\d/);
+        console.log(result);
+        let hour = parseInt(result[0].substring(0,2)) + selectedTimezone.offset;
+        if(hour < 0) hour += 24;
         setEndValue({
-            "hour": (parseInt(result[0].substring(0,2)) + selectedTimezone.offset),
+            "hour": hour,
             "is_00": (result[0].substring(3,5) === "00")
         })
         console.log(endValue);
     };
+
+    const handleClick = () => {
+        dispatch(setRange(startValue, endValue));
+    }
     return (
       <div className="App">
         <blockquote>Please make a selection</blockquote>
@@ -51,7 +63,7 @@ export default function TimePeriod() {
                 endMoment={endTime}
             />
         </div>
-
+        <button onClick={handleClick} style={{marginTop: '200px'}}>click me papi</button>
       </div>
     )
 }
