@@ -5,6 +5,10 @@ import "./styles.css";
 export default function Column(props) {
     const startValue = props.startValue;
     const endValue = props.endValue;
+    const day = props.day;
+
+    let formattedDay = day.match(/\d\d\d\d-\d\d-\d\d/);
+
     let iterations = (endValue.hour - startValue.hour);
     const [requireStart] = useState(!startValue.is_00);
     const [requireEnd] = useState(!endValue.is_00);
@@ -16,17 +20,20 @@ export default function Column(props) {
     }
     return (
         <div>
-            {requireStart && <div><h1>{startValue.hour}</h1><Slot/></div>}
+            {formattedDay[0].substring(5, 10)}
+            {/* {requireStart && <div><h1>{startValue.hour}</h1><Slot/></div>} */}
+            {requireStart && <div><Slot/></div>}
             {columnArr.map((i) => 
                 (
                     <div key={i}>
-                        <h1>{startValue.hour + i}</h1>
+                        {/* <h1>{startValue.hour + i}</h1> */}
                         <Slot/>
                         <Slot/>
                     </div>
                 )
             )}
-            {requireEnd && <div><h1>{endValue.hour}</h1><Slot/></div>}
+            {requireEnd && <div><Slot/></div>}
+            {/* {requireEnd && <div><h1>{endValue.hour}</h1><Slot/></div>} */}
         </div>
     )
 }

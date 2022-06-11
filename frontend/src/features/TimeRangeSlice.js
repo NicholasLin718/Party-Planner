@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+/*
+{
+    startValue: {"hour": 15, "is_00": false},
+    endValue: {"hour": 15, "is_00": false}
+}
+*/
 const initialState={
     range: {}
 }
@@ -23,6 +28,6 @@ const timeRangeSlice = createSlice({
     }
 })
 
-export const selectAllRange = (state) => state.timeRange;
+export const selectAllRange = (state) => state.selectRange;
 export const {setRange} = timeRangeSlice.actions;
 export default timeRangeSlice.reducer;
