@@ -4,26 +4,6 @@ import Login from './HomePageComponents/Login';
 import LoginButton from './HomePageComponents/LoginButton'
 import './HomePage.css';
 
-const styles = makeStyles({
-  wrapper: {
-    width: "65%",
-    margin: "auto",
-    textAlign: "center"
-  },
-  bigSpace: {
-    marginTop: "5rem"
-  },
-  littleSpace:{
-    marginTop: "2.5rem",
-  },
-  grid:{
-    display: "flex", 
-    justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap", 
-  },
-})
-
 //creating theme
 const theme = createTheme({
   palette: {
@@ -51,7 +31,6 @@ const theme = createTheme({
 });
 
 function HomePage() {
-  const classes = styles(); 
   return (
     <div className="homepage">
         <ThemeProvider theme={theme}>
