@@ -1,9 +1,8 @@
-import logo from './logotemp.png';
 import { createTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
-import NavBar from './components/NavBar';
-import Login from './components/Login';
-import LoginButton from './components/LoginButton'
-import './App.css';
+import NavBar from './HomePageComponents/NavBar';
+import Login from './HomePageComponents/Login';
+import LoginButton from './HomePageComponents/LoginButton'
+import './HomePage.css';
 
 const styles = makeStyles({
   wrapper: {
@@ -51,10 +50,10 @@ const theme = createTheme({
   },
 });
 
-function App() {
+function HomePage() {
   const classes = styles(); 
   return (
-    <div className="App">
+    <div className="homepage">
         <ThemeProvider theme={theme}>
           <NavBar/>
           <Login/>
@@ -64,5 +63,5 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;
 

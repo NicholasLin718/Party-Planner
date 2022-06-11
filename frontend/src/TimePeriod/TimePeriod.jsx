@@ -16,8 +16,17 @@ export default function TimePeriod() {
     const [startTime, setStartTime] = useState(moment().toISOString());
     const [endTime, setEndTime] = useState(moment().toISOString());
 
-    const [startValue, setStartValue] = useState({});
-    const [endValue, setEndValue] = useState({});
+    const createValue = (time) => {
+        let result = time.match(/\d\d:\d\d/);
+        let hour = parseInt(result[0].substring(0,2)) + selectedTimezone.offset;
+        if(hour < 0) hour += 24;
+        return {"hour": hour, "is_00": (result[0].substring(3,5) === "00")};
+    }
+
+    let defaultValue = createValue(startTime);
+    const [startValue, setStartValue] = useState(defaultValue);
+    const [endValue, setEndValue] = useState(defaultValue);
+    dispatch(setRange(startValue, endValue));
     //return value would be {JSON.stringify(selectedTimezone, null, 4)}
     const returnFunctionStart = (e) => {
         setStartTime(e.startTime);
@@ -47,6 +56,7 @@ export default function TimePeriod() {
 
     const handleClick = () => {
         dispatch(setRange(startValue, endValue));
+        console.log("stored");
     }
     return (
       <div className="App">
