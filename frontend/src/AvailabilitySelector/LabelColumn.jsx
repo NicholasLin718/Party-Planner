@@ -22,6 +22,7 @@ export default function LabelColumn(props) {
                             <h1>{time}</h1>
                         </div>
                         <div className="time"></div>
+                        <div className="time"></div>
                     </div>
                 )
             )}

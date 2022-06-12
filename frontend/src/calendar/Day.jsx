@@ -14,13 +14,14 @@ export default function Day(props) {
     }, [currentMonth]);
 
     useEffect(() => {
+        const date = new Date(day.toISOString());
         if(select){
-            if(!selectedList.includes(day.toISOString())) {
-                selectedList.push(day.toISOString());
+            if(!selectedList.some(item => item.isoTime === day.toISOString())){
+                selectedList.push({"isoTime": day.toISOString(), "dayOfWeek": date.getDay()});
             }
         }
         else{
-            let index = selectedList.indexOf(day.toISOString());
+            let index = selectedList.indexOf({"isoTime": day.toISOString(), "dayOfWeek": date.getDay()});
             if (index !== -1) {
                 selectedList.splice(index, 1);
             }

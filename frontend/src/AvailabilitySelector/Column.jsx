@@ -3,11 +3,13 @@ import Slot from './Slot';
 import "./styles.css";
 
 export default function Column(props) {
+    const listOfWeekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     const startValue = props.startValue;
     const endValue = props.endValue;
-    const day = props.day;
+    const date = props.day.isoTime;
+    const dayOfWeek = props.day.dayOfWeek;
 
-    let formattedDay = day.match(/\d\d\d\d-\d\d-\d\d/);
+    let formattedDay = date.match(/\d\d\d\d-\d\d-\d\d/);
 
     let iterations = (endValue.hour - startValue.hour);
     const [requireStart] = useState(!startValue.is_00);
@@ -21,6 +23,8 @@ export default function Column(props) {
     return (
         <div>
             {formattedDay[0].substring(5, 10)}
+            <br/>
+            {listOfWeekDays[dayOfWeek]}
             {/* {requireStart && <div><h1>{startValue.hour}</h1><Slot/></div>} */}
             {requireStart && <div><Slot/></div>}
             {columnArr.map((i) => 

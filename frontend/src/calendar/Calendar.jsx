@@ -60,6 +60,11 @@ export default function Calendar() {
                 </div>
             </div>
             <button onClick={handleClick} style={{marginTop: '1000px'}}>click me</button>
+            <div>
+                {selectedList.map((day, i ) => {
+                    <div key={i}>{day}</div>
+                })}
+            </div>
         </div>
     )
 }
