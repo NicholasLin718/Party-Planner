@@ -4,7 +4,7 @@ import TimePicker from "react-time-range";
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import {setRange} from "../features/TimeRangeSlice";
-export default function TimePeriod() {
+export default function TimeRange() {
     const dispatch = useDispatch();
     const [selectedTimezone, setSelectedTimezone] = useState({  
         "value": "America/Detroit",
