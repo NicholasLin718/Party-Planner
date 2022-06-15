@@ -6,7 +6,9 @@ import { createSlice } from "@reduxjs/toolkit";
 }
 */
 const initialState={
-    range: {}
+    range: {},
+    title: "Enter Title",
+    description: "Enter Description"
 }
 const timeRangeSlice = createSlice({
     name: "Time Range",
@@ -24,10 +26,18 @@ const timeRangeSlice = createSlice({
                     }
                 }
             }
+        },
+        setTitle: (state, action) => {
+            const title = action.payload;
+            state.title = title;
+        },
+        setDescription: (state, action) => {
+            const description = action.payload;
+            state.description = description;
         }
     }
 })
 
 export const selectAllRange = (state) => state.selectRange;
-export const {setRange} = timeRangeSlice.actions;
+export const {setRange, setTitle, setDescription} = timeRangeSlice.actions;
 export default timeRangeSlice.reducer;

@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
 import moment from 'moment';
 import buildCalendar from './buildCalendar';
 import Day from './Day';
 import "./Calendar.css";
 import Header from './Header';
 import {useDispatch, useSelector} from "react-redux";
-import {storeList, selectAllDays} from "../features/CalendarSlice";
+import {storeList, selectAllDays} from "../../features/CalendarSlice";
 import Index from "../AvailabilitySelector/Index";
-export default function Calendar() {
+const Calendar = forwardRef((props, ref) => {
     const printList = useSelector(selectAllDays);
     const dispatch = useDispatch();
     //React States
@@ -20,6 +20,17 @@ export default function Calendar() {
         setCalendar(buildCalendar(selectedDay));
     }, []);
     
+    useImperativeHandle(ref, () => ({
+        storeSelectedList() {
+            console.log("hi");
+            if(selectedList.length > 0){
+                console.log("ran");
+                console.log(selectedList);
+                dispatch(storeList(selectedList));
+            }
+        }
+    }))
+
     const handleClick = () => {
         if(selectedList.length > 0){
             console.log("ran");
@@ -29,7 +40,6 @@ export default function Calendar() {
     }
     return (
         <div>
-            
             <div className="calendar">
                 <Header selectedDay={selectedDay} setSelectedDay={setSelectedDay} currentMonth={currentMonth} setCurrentMonth={setCurrentMonth}/>
                 <div className="day-names">
@@ -67,4 +77,6 @@ export default function Calendar() {
             </div>
         </div>
     )
-}
+})
+
+export default Calendar;
