@@ -21,8 +21,8 @@ export default function Day(props) {
             }
         }
         else{
-            let index = selectedList.indexOf({"isoTime": day.toISOString(), "dayOfWeek": date.getDay()});
-            if (index !== -1) {
+            let index = selectedList.map(object => object.isoTime).indexOf(day.toISOString());
+            if (index != -1) {
                 selectedList.splice(index, 1);
             }
         }
