@@ -4,10 +4,11 @@ import "./styles.css";
 
 export default function Column(props) {
     const listOfWeekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-    const startValue = props.startValue;
-    const endValue = props.endValue;
-    const date = props.day.isoTime;
-    const dayOfWeek = props.day.dayOfWeek;
+    const {day, startValue, endValue} = props;
+    // const startValue = props.startValue;
+    // const endValue = props.endValue;
+    const date = day.isoTime;
+    const dayOfWeek = day.dayOfWeek;
 
     let formattedDay = date.match(/\d\d\d\d-\d\d-\d\d/);
 

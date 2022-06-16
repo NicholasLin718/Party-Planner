@@ -1,6 +1,6 @@
 import React from 'react';
 import Calendar from './components/Calendar/Calendar';
-import Index from './components/AvailabilitySelector/Index';
+import Selector from './components/AvailabilitySelector/Selector';
 import TimeRange from './components/TimeRange/TimeRange';
 import FindPage from './components/LandingPages/findPage';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
@@ -13,11 +13,10 @@ function App() {
       <Routes>
        <Route path='/' element={<HomePage/>}/>
        <Route path='/findpage' element={<FindPage/>}/>
-       <Route path='/select' element={<Index/>}/>
        <Route path = '/:code' element = {<PartyPage/>}/>
        <Route path = '/create' element = {<CreateMeetupPage/>}/>
        <Route path = '/range' element = {<TimeRange/>}/>
-       <Route path = '/index' element = {<Index/>}/>
+       <Route path = '/select' element = {<Selector/>}/>
       </Routes> 
     </BrowserRouter>
     // <div>

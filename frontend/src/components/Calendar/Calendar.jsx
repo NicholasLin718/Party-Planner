@@ -6,7 +6,7 @@ import "./Calendar.css";
 import Header from './Header';
 import {useDispatch, useSelector} from "react-redux";
 import {storeList, selectAllDays} from "../../features/CalendarSlice";
-import Index from "../AvailabilitySelector/Index";
+import Selector from "../AvailabilitySelector/Selector";
 const Calendar = forwardRef((props, ref) => {
     const printList = useSelector(selectAllDays);
     const dispatch = useDispatch();
