@@ -3,30 +3,22 @@ import NavBar from './HomePageComponents/NavBar';
 import Login from './HomePageComponents/Login';
 import LoginButton from './HomePageComponents/LoginButton'
 import './HomePage.css';
+import AnimationLady from './HomePageComponents/AnimationLady'
 
 //creating theme
 const theme = createTheme({
   palette: {
     primary: {
-      main:"#2e1667",
+      main:"#f47b8f",
     },
     secondary: {
-      main:"#c7d8ed",
+      main:"#51aeae",
     },
   },
   typography: {
     fontFamily: [
-      'Roboto'
+      'Montserrat'
     ],
-    h4: {
-      fontWeight: 600,
-      fontSize: 28,
-      lineHeight: '2rem',
-      },
-    h5: {
-      fontWeight: 100,
-      lineHeight: '2rem',
-    },
   },
 });
 
@@ -37,6 +29,9 @@ function HomePage() {
           <NavBar/>
           <Login/>
           <LoginButton/>
+          <div class = "animationBottom">
+            <AnimationLady/>
+          </div>
         </ThemeProvider>
     </div>
   );

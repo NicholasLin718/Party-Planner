@@ -23,3 +23,10 @@
 .homepage-link {
   color: #61dafb;
 }
+
+.animationBottom {
+  padding: 15px;
+  position: relative;
+  max-width: 60vh;
+  float: right;
+}
