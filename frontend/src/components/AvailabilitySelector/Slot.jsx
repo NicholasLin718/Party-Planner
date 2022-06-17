@@ -10,6 +10,7 @@ export default function Slot() {
     return (
         <div>
             <div onMouseEnter={handleEnter} onMouseDown={() => {select ? setSelect(false) : setSelect(true)}}  className={"slot " + (select ? "selected" : "unselected")}></div>
+            {/* <h1>{Math.random()*5}</h1> */}
         </div>
     )
 }
