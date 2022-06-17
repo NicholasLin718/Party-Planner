@@ -9,6 +9,15 @@ export default function CreateMeetupPage() {
   const TimeRangeRef = useRef();
   const navigate = useNavigate();
   //create a function such that when button outside here is pressed, it will
+
+  function createCode(){
+    const payload = {}
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(),
+    }
+  }
   return (
     <div>
         <TimeRange ref = {TimeRangeRef}/>        
