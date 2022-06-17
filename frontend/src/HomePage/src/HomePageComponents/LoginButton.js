@@ -16,26 +16,33 @@ const styles = makeStyles({
         color: "#f47b8f",
         cursor: "pointer", 
         fontFamily: "Dosis",
-        paddingTop: "10rem",
         flexGrow: 1,
         ['@media (max-width:780px)']: { 
             paddingBottom: "1rem"    }
     },
     loginField: {
-        borderSide: "1px solid #f47b8f",
+        color: "#f47b8f",
+        background: "1px solid #f47b8f",
         borderRadius: "50px"
     }
 })
+
 function Login() {
     const classes = styles()
 
     return (
-        <Toolbar position="center" color="rgba(0, 0, 0, 0.87)" className={classes.bar}>   
-        <TextField className={classes.loginField}
+        <Toolbar className={classes.bar}>   
+        <TextField position="center" className={classes.loginField}
             variant="outlined"
             id = "outlined"
-            value=""
+            defaultValue={""}
             label= "Username"
+            InputProps={{
+                className: classes.text,  
+            }}
+            style={{
+                backgroundColor: "blue"
+            }}
         />
         
         </Toolbar>

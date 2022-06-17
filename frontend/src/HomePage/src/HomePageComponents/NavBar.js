@@ -34,15 +34,6 @@ function NavBar() {
     return (
         <Toolbar position="sticky" color="rgba(0, 0, 0, 0.87)" className={classes.bar}>   
             <img src={logo} className={classes.logo}/> 
-            <Typography variant="h6" className={classes.menuItem}>
-                About
-            </Typography>
-            <Typography variant="h6" className={classes.menuItem}>
-                Blog
-            </Typography>
-            <Typography variant="h6" className={classes.menuItem}>
-                Terms of Use
-            </Typography>
         </Toolbar>
 
 
