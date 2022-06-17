@@ -19,9 +19,7 @@ const createPage = asyncHandler(async (req, res) => {
         throw new Error('Body has missing values');
     };
 
-    const createdPage = await Page.create({
-        code: req.body.code
-    });
+    const createdPage = await Page.create(req.body);
 
     res.status(200).json(createdPage);
 })

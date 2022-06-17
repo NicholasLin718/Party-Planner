@@ -7,6 +7,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import PartyPage from './components/partyPages/partyPage';
 import HomePage from './HomePage/src/HomePage';
 import CreateMeetupPage from './pages/CreateMeetupPage';
+
 function App() {
   return (
     <BrowserRouter>

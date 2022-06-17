@@ -22,10 +22,9 @@ const pageSchema = new Schema(
             required: true,
             unique: true
         },
-        // SET TO FALSE FOR NOW TO TEST CRUD
         meetupName: {
             type: String,
-            required: false
+            required: true
         },
         meetupDescripton: {
             type: String,
@@ -37,11 +36,11 @@ const pageSchema = new Schema(
         },
         meetupDays: {
             type: [String],
-            required: false
+            required: true
         },
         meetupTimeRange: {
             type: String,
-            required: false
+            required: true
         }
     }
 );
