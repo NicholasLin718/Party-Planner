@@ -1,16 +1,16 @@
-.select-wrapper{
+.select-wrapper {
     width: 60%;
 }
 
-.timepicker{
+.timepicker {
     background-color: white;
 }
 
-.select-end{
+.select-end {
     background-color: navy;
 }
 
-input[type=text] {
+input[type='text'] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

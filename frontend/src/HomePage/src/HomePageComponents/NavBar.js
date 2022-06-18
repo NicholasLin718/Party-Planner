@@ -1,44 +1,45 @@
 import React from 'react';
 import logo from '../logotemp.png';
-import {Toolbar, Typography} from '@material-ui/core'
-import {makeStyles} from "@material-ui/core/styles"; 
+import { Toolbar, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles({
-    bar:{
-        paddingTop: "0.2rem",
-        ['@media (max-width:200px)']: { 
-           flexDirection: "column"
-          }
+    bar: {
+        paddingTop: '0.2rem',
+        ['@media (max-width:200px)']: {
+            flexDirection: 'column'
+        }
     },
     logo: {
-        width: "20vh", 
-        ['@media (max-width:200px)']: { 
-           display: "none"
-           }
+        width: '20vh',
+        ['@media (max-width:200px)']: {
+            display: 'none'
+        }
     },
     menuItem: {
-        color: "#51aeae",
-        cursor: "pointer", 
-        fontFamily: "Dosis",
-        fontWeight: "",
+        color: '#51aeae',
+        cursor: 'pointer',
+        fontFamily: 'Dosis',
+        fontWeight: '',
         flexGrow: 1,
-        "&:hover": {
-            color:  "#a1dcd8",
+        '&:hover': {
+            color: '#a1dcd8'
         },
-        ['@media (max-width:780px)']: { 
-            paddingBottom: "1rem"    }
+        ['@media (max-width:780px)']: {
+            paddingBottom: '1rem'
+        }
     }
-})
+});
 function NavBar() {
-    const classes = styles()
+    const classes = styles();
     return (
-        <Toolbar position="sticky" color="rgba(0, 0, 0, 0.87)" className={classes.bar}>   
-            <img src={logo} className={classes.logo}/> 
+        <Toolbar
+            position='sticky'
+            color='rgba(0, 0, 0, 0.87)'
+            className={classes.bar}>
+            <img src={logo} className={classes.logo} />
         </Toolbar>
-
-
     );
 }
 
 export default NavBar;
-

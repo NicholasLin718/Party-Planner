@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Column from './Column';
 const ColumnPage = (props) => {
-    const {startValue, endValue, currentColumns, columnPageArr} = props;
+    const { startValue, endValue, currentColumns, columnPageArr } = props;
 
     /*
     (9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
@@ -18,14 +18,14 @@ const ColumnPage = (props) => {
     7: {date: {…}, slots: Array(24)}
     8: {date: {…}, slots: Array(24)}
     */
-   console.log(columnPageArr[0]["date"]);
+    console.log(columnPageArr[0]['date']);
     return (
-        <div className="columns">
+        <div className='columns'>
             {columnPageArr.map((column, i) => (
-                <Column key={i} column={column}/>
+                <Column key={i} column={column} />
             ))}
-      </div>
-    )
-}
+        </div>
+    );
+};
 
 export default ColumnPage;

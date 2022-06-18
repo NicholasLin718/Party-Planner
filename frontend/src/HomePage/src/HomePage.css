@@ -1,32 +1,32 @@
 .homepage {
-  text-align: center;
-  background-color: #faf0ef;
-  height: 100vh;
+    text-align: center;
+    background-color: #faf0ef;
+    height: 100vh;
 }
 
 .homepage-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .homepage-header {
-  /* background-color: #282c34; */
-  /* min-height: 100vh; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  /* color: white; */
+    /* background-color: #282c34; */
+    /* min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    /* color: white; */
 }
 
 .homepage-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 .animationBottom {
-  padding: 15px;
-  position: relative;
-  max-width: 60vh;
-  float: right;
+    padding: 15px;
+    position: relative;
+    max-width: 60vh;
+    float: right;
 }
