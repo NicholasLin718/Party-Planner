@@ -6,13 +6,13 @@ import {makeStyles} from "@material-ui/core/styles";
 const styles = makeStyles({
     bar:{
         paddingTop: "0.2rem",
-        ['@media (max-width:780px)']: { 
+        ['@media (max-width:200px)']: { 
            flexDirection: "column"
           }
     },
     logo: {
-        width: "8%", 
-        ['@media (max-width:780px)']: { 
+        width: "20vh", 
+        ['@media (max-width:200px)']: { 
            display: "none"
            }
     },
