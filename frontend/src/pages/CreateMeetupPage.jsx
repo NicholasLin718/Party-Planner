@@ -9,14 +9,19 @@ export default function CreateMeetupPage() {
     const TimeRangeRef = useRef();
     const navigate = useNavigate();
     //create a function such that when button outside here is pressed, it will
-
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     function createCode() {
-        const payload = {};
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify()
-        };
+        let code = '';
+        for (let i = 0; i < 6; i++) {
+            code += letters.charAt(Math.floor(Math.random() * letters.length));
+        }
+        console.log(code);
+        // const payload = {};
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify()
+        // };
     }
     return (
         <div>
@@ -30,6 +35,7 @@ export default function CreateMeetupPage() {
                 }}>
                 submit
             </button>
+            <button onClick={createCode}></button>
         </div>
     );
 }
