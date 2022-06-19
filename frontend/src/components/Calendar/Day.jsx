@@ -33,7 +33,11 @@ export default function Day(props) {
                 selectedList.splice(index, 1);
             }
         }
-        setSelectedList(selectedList);
+        setSelectedList(
+            selectedList
+                .slice()
+                .sort((a, b) => a.isoTime.localeCompare(b.isoTime))
+        );
         console.log(selectedList);
     }, [select]);
 

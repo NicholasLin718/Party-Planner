@@ -1,16 +1,22 @@
 import React from 'react';
 import { useState } from 'react';
 export default function Slot(props) {
-    const { slotData } = props;
+    //{hour: 7, is_00: false, selected: false}
+    const { slotData, index, setSingleColumn } = props;
+    const [slots, setSlots] = useState(slotData);
     const [select, setSelect] = useState(slotData.selected);
     const handleEnter = (e) => {
         if (e.buttons === 1) {
             select ? setSelect(false) : setSelect(true);
+            setSlots({ ...slotData, selected: select });
+            console.log({ ...slotData, selected: select });
         }
     };
 
     const handleMouseDown = () => {
         select ? setSelect(false) : setSelect(true);
+        setSlots({ ...slotData, selected: select });
+        console.log({ ...slotData, selected: select });
     };
 
     return (

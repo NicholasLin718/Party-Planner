@@ -19,15 +19,15 @@ import Pagination from './Pagination';
 */
 const Selector = () => {
     const printList = [
-        { isoTime: '2022-06-29T04:00:00.000Z', dayOfWeek: 3 },
+        // { isoTime: '2022-06-29T04:00:00.000Z', dayOfWeek: 3 },
         { isoTime: '2022-06-28T04:00:00.000Z', dayOfWeek: 2 },
-        { isoTime: '2022-06-27T04:00:00.000Z', dayOfWeek: 1 },
-        { isoTime: '2022-06-26T04:00:00.000Z', dayOfWeek: 0 },
-        { isoTime: '2022-06-22T04:00:00.000Z', dayOfWeek: 3 },
-        { isoTime: '2022-06-21T04:00:00.000Z', dayOfWeek: 2 },
-        { isoTime: '2022-06-30T04:00:00.000Z', dayOfWeek: 4 },
-        { isoTime: '2022-06-25T04:00:00.000Z', dayOfWeek: 6 },
-        { isoTime: '2022-06-24T04:00:00.000Z', dayOfWeek: 5 }
+        // { isoTime: '2022-06-27T04:00:00.000Z', dayOfWeek: 1 },
+        // { isoTime: '2022-06-26T04:00:00.000Z', dayOfWeek: 0 },
+        // { isoTime: '2022-06-22T04:00:00.000Z', dayOfWeek: 3 },
+        // { isoTime: '2022-06-21T04:00:00.000Z', dayOfWeek: 2 },
+        { isoTime: '2022-06-30T04:00:00.000Z', dayOfWeek: 4 }
+        // { isoTime: '2022-06-25T04:00:00.000Z', dayOfWeek: 6 },
+        // { isoTime: '2022-06-24T04:00:00.000Z', dayOfWeek: 5 }
     ];
     const [currentPage, setCurrentPage] = useState(1);
     const [columnsPerPage] = useState(5);
@@ -41,8 +41,9 @@ const Selector = () => {
     console.log(orderedPrintList);
     // const startValue = values.startValue;
     // const endValue = values.endValue;
-    const startValue = { hour: 7, is_00: false };
-    const endValue = { hour: 15, is_00: false };
+    const startValue = { hour: 19, is_00: true };
+    const endValue = { hour: 22, is_00: false };
+
     const renderedDays = printList.map((day, i) => (
         <div key={i}>{day.isoTime}</div>
     ));
@@ -83,6 +84,8 @@ const Selector = () => {
         indexOfLastColumn
     );
 
+    const [allColumns, setAllColumns] = useState(columnPageArr);
+
     console.log(currentColumns);
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
@@ -95,10 +98,9 @@ const Selector = () => {
             />
             <div className='column-page'>
                 <ColumnPage
-                    startValue={startValue}
-                    endValue={endValue}
                     currentColumns={currentColumns}
                     columnPageArr={columnPageArr}
+                    setAllColumns={setAllColumns}
                 />
                 <Pagination
                     columnsPerPage={columnsPerPage}

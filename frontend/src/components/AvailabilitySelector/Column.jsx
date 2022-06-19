@@ -4,7 +4,8 @@ import './styles.css';
 
 export default function Column(props) {
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    const { column } = props;
+    const { column, setAllColumns } = props;
+    const [singleColumn, setSingleColumn] = useState(column);
     // const startValue = props.startValue;
     // const endValue = props.endValue;
     const date = column.date.isoTime;
@@ -31,7 +32,11 @@ export default function Column(props) {
                 <div key={i}>
                     {/* <h1>{startValue.hour + i}</h1> */}
                     {/* <Slot/> */}
-                    <Slot slotData={slotData} />
+                    <Slot
+                        slotData={slotData}
+                        index={i}
+                        setSingleColumn={setSingleColumn}
+                    />
                 </div>
             ))}
             {/* {requireEnd && <div><Slot/></div>} */}

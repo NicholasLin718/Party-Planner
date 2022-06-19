@@ -1,7 +1,7 @@
 import React from 'react';
 import Column from './Column';
 const ColumnPage = (props) => {
-    const { startValue, endValue, currentColumns, columnPageArr } = props;
+    const { currentColumns, columnPageArr, setAllColumns } = props;
 
     /*
     (9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
@@ -22,7 +22,7 @@ const ColumnPage = (props) => {
     return (
         <div className='columns'>
             {columnPageArr.map((column, i) => (
-                <Column key={i} column={column} />
+                <Column key={i} column={column} setAllColumns={setAllColumns} />
             ))}
         </div>
     );
