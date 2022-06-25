@@ -98,14 +98,10 @@ const TimeRange = forwardRef((props, ref) => {
     return (
         <div className='App'>
             <form>
-                <label> First Name</label>
-                <input type='text' id='fname' onChange={onTitleFieldChanged} />
-                <label>Last Name</label>
-                <input
-                    type='text'
-                    id='lname'
-                    onChange={onDescriptionFieldChanged}
-                />
+                <label> Meetup Name</label>
+                <input type='text' onChange={onTitleFieldChanged} />
+                <label>Meetup Description</label>
+                <input type='text' onChange={onDescriptionFieldChanged} />
             </form>
             <blockquote>Please make a selection</blockquote>
             <div className='select-wrapper'>

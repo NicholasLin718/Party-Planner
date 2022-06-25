@@ -13,20 +13,19 @@ const styles = makeStyles({
 });
 
 function Login() {
-    const classes = styles();
+    const loginStyle = styles();
     const [title, setTitle] = useState('');
 
     return (
-        <Toolbar className={classes.textField}>
-            <form class='loginStyle'>
+        <Toolbar className={loginStyle.textField}>
+            <form className='loginStyle'>
                 <input
-                    class='loginButton'
+                    className='loginButton'
                     type='textarea'
-                    defaultValue={''}
                     placeholder='Enter Username'
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}></input>
-                <input type='submit' class='loginSubmit'></input>
+                <input type='submit' className='loginSubmit'></input>
             </form>
         </Toolbar>
     );

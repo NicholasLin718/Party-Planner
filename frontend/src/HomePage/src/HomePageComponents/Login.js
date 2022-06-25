@@ -15,17 +15,14 @@ const styles = makeStyles({
         fontWeight: '350',
         fontSize: '2.5em',
         paddingTop: '6rem',
-        flexGrow: 1,
-        ['@media (max-width:780px)']: {
-            paddingBottom: '1rem'
-        }
+        flexGrow: 1
     }
 });
 function Login() {
-    const classes = styles();
+    const loginStyle = styles();
     return (
-        <Toolbar position='center' className={classes.bar}>
-            <Typography variant='h4' className={classes.text}>
+        <Toolbar position='center' className={loginStyle.bar}>
+            <Typography variant='h4' className={loginStyle.text}>
                 Schedule meetings for everyone without the hassle.
             </Typography>
         </Toolbar>

@@ -31,7 +31,7 @@ function HomePage() {
                 <NavBar />
                 <Login />
                 <LoginButton />
-                <div class='animationBottom'>
+                <div className='animationBottom'>
                     <AnimationLady />
                 </div>
             </ThemeProvider>
