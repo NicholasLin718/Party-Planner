@@ -4,6 +4,7 @@ import { Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import EnterCode from '../../../components/LoginRouting/EnterCode';
 import CreateMeetupPage from '../../CreatePage/CreateMeetupPage';
 import './LoginButton.css';
@@ -19,21 +20,20 @@ function Login() {
     const [title, setTitle] = useState('');
     const [displayLogin, setDisplayLogin] = useState(false);
     const [displayNewLogin, setDisplayNewLogin] = useState(false);
-
+    const navigate = useNavigate();
     return (
         <Toolbar className={loginStyle.textField}>
+            <button
+                onClick={() => {
+                    navigate('/create');
+                }}>
+                Create New Room
+            </button>
             {!displayLogin && !displayNewLogin && (
-                <button onClick={() => setDisplayNewLogin(true)}>
-                    Create New Room
-                </button>
-            )}
-            {!displayLogin && !displayNewLogin && (
-                <button onClick={() => setDisplayLogin(true)}>
+                <button onClick={() => navigate('/enter')}>
                     Enter Existing Room Code
                 </button>
             )}
-            {displayLogin && !displayNewLogin && <EnterCode />}
-            {!displayLogin && displayNewLogin && <CreateMeetupPage />}
             {/* <form className='loginStyle'>
                 <input
                     className='loginButton'

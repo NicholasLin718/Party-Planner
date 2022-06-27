@@ -40,7 +40,7 @@ export default function CreateMeetupPage() {
                 }}>
                 submit
             </button>
-            <button onClick={createCode}>create code</button>
+            <button onClick={createCode}>Create Code</button>
         </div>
     );
 }
