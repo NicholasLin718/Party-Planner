@@ -18,12 +18,15 @@ export default function CreateMeetupPage() {
         console.log(code);
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code: code })
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            body: { code: code }
         };
-        fetch('/pages/create', requestOptions)
+        fetch('http://localhost:5000/pages/create', requestOptions)
             .then((response) => response.json())
-            .then((data) => this.setState({ postId: data.id }));
+            .then((data) => this.setState({ postId: data.id }))
+            .catch((error) => {
+                console.log(error);
+            });
     }
     return (
         <div>
@@ -37,7 +40,7 @@ export default function CreateMeetupPage() {
                 }}>
                 submit
             </button>
-            <button onClick={createCode}></button>
+            <button onClick={createCode}>create code</button>
         </div>
     );
 }
