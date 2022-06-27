@@ -1,30 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 /*
 {
     startValue: {"hour": 15, "is_00": false},
     endValue: {"hour": 15, "is_00": false}
 }
 */
-const initialState={
+const initialState = {
     range: {},
-    title: "Enter Title",
-    description: "Enter Description"
-}
+    title: 'Enter Title',
+    description: 'Enter Description'
+};
 const timeRangeSlice = createSlice({
-    name: "Time Range",
+    name: 'Time Range',
     initialState,
     reducers: {
         setRange: {
-            reducer(state, action){
+            reducer(state, action) {
                 state.range = action.payload;
             },
-            prepare(startValue, endValue){
-                return{
+            prepare(startValue, endValue) {
+                return {
                     payload: {
                         startValue,
                         endValue
                     }
-                }
+                };
             }
         },
         setTitle: (state, action) => {
@@ -36,8 +36,8 @@ const timeRangeSlice = createSlice({
             state.description = description;
         }
     }
-})
+});
 
 export const selectAllRange = (state) => state.selectRange;
-export const {setRange, setTitle, setDescription} = timeRangeSlice.actions;
+export const { setRange, setTitle, setDescription } = timeRangeSlice.actions;
 export default timeRangeSlice.reducer;
