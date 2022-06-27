@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PartyPage from './components/partyPages/partyPage';
 import HomePage from './pages/HomePage/HomePage';
 import CreateMeetupPage from './pages/CreatePage/CreateMeetupPage';
-
+import EnterCode from './components/LoginRouting/EnterCode';
 function App() {
     return (
         <BrowserRouter>
@@ -18,6 +18,7 @@ function App() {
                 <Route path='/create' element={<CreateMeetupPage />} />
                 <Route path='/range' element={<TimeRange />} />
                 <Route path='/select' element={<Selector />} />
+                <Route path='/enter' element={<EnterCode />} />
             </Routes>
         </BrowserRouter>
     );
