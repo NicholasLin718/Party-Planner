@@ -10,7 +10,7 @@ export default function CreateMeetupPage() {
   const navigate = useNavigate();
   //create a function such that when button outside here is pressed, it will
 
-  function createCode(){
+  function push(){
     const payload = {}
     const requestOptions = {
       method: 'POST',
