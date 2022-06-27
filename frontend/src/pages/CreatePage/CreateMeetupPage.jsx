@@ -1,5 +1,5 @@
-import Calendar from '../components/Calendar/Calendar';
-import TimeRange from '../components/TimeRange/TimeRange';
+import Calendar from '../../components/Calendar/Calendar';
+import TimeRange from '../../components/TimeRange/TimeRange';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';

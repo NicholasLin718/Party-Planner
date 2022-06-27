@@ -5,8 +5,8 @@ import TimeRange from './components/TimeRange/TimeRange';
 import FindPage from './components/LandingPages/findPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PartyPage from './components/partyPages/partyPage';
-import HomePage from './HomePage/src/HomePage';
-import CreateMeetupPage from './pages/CreateMeetupPage';
+import HomePage from './pages/HomePage/HomePage';
+import CreateMeetupPage from './pages/CreatePage/CreateMeetupPage';
 
 function App() {
     return (
@@ -20,12 +20,6 @@ function App() {
                 <Route path='/select' element={<Selector />} />
             </Routes>
         </BrowserRouter>
-        // <div>
-        //   <Calendar/>
-        //   <TimePeriod/>
-        //   <Index style={{marginTop: '1000px'}}/>
-
-        // </div>
     );
 }
 

@@ -4,6 +4,8 @@ import { Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import React, { useState } from 'react';
+import EnterCode from '../../../components/LoginRouting/EnterCode';
+import CreateMeetupPage from '../../CreatePage/CreateMeetupPage';
 import './LoginButton.css';
 
 const styles = makeStyles({
@@ -15,10 +17,24 @@ const styles = makeStyles({
 function Login() {
     const loginStyle = styles();
     const [title, setTitle] = useState('');
+    const [displayLogin, setDisplayLogin] = useState(false);
+    const [displayNewLogin, setDisplayNewLogin] = useState(false);
 
     return (
         <Toolbar className={loginStyle.textField}>
-            <form className='loginStyle'>
+            {!displayLogin && !displayNewLogin && (
+                <button onClick={() => setDisplayNewLogin(true)}>
+                    Create New Room
+                </button>
+            )}
+            {!displayLogin && !displayNewLogin && (
+                <button onClick={() => setDisplayLogin(true)}>
+                    Enter Existing Room Code
+                </button>
+            )}
+            {displayLogin && !displayNewLogin && <EnterCode />}
+            {!displayLogin && displayNewLogin && <CreateMeetupPage />}
+            {/* <form className='loginStyle'>
                 <input
                     className='loginButton'
                     type='textarea'
@@ -26,7 +42,7 @@ function Login() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}></input>
                 <input type='submit' className='loginSubmit'></input>
-            </form>
+            </form> */}
         </Toolbar>
     );
 }

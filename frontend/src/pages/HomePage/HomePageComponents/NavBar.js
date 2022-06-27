@@ -24,9 +24,6 @@ const styles = makeStyles({
         flexGrow: 1,
         '&:hover': {
             color: '#a1dcd8'
-        },
-        ['@media (max-width:780px)']: {
-            paddingBottom: '1rem'
         }
     }
 });

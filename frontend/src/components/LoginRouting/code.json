@@ -1,0 +1,12 @@
+[
+    {
+        "code": "ABCDEF",
+        "participants": ["Bob", "Joe"],
+        "data": "some data lmao"
+    },
+    {
+        "code": "KJACSD",
+        "participants": ["Bob", "Joe"],
+        "data": "yeah"
+    }
+]
