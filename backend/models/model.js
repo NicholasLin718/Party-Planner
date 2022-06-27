@@ -20,7 +20,7 @@ const pageSchema = new Schema({
     },
     meetupName: {
         type: String,
-        required: true
+        required: false // true
     },
     meetupDescripton: {
         type: String,
@@ -32,11 +32,11 @@ const pageSchema = new Schema({
     },
     meetupDays: {
         type: [String],
-        required: true
+        required: false // true
     },
     meetupTimeRange: {
         type: String,
-        required: true
+        required: false // true
     }
 });
 

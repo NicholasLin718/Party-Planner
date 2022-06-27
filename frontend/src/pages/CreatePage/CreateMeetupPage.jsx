@@ -16,12 +16,14 @@ export default function CreateMeetupPage() {
             code += letters.charAt(Math.floor(Math.random() * letters.length));
         }
         console.log(code);
-        // const payload = {};
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify()
-        // };
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: code })
+        };
+        fetch('/pages/create', requestOptions)
+            .then((response) => response.json())
+            .then((data) => this.setState({ postId: data.id }));
     }
     return (
         <div>
