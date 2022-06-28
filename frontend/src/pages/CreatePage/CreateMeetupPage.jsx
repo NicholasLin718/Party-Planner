@@ -1,14 +1,13 @@
 import Calendar from '../../components/Calendar/Calendar';
 import TimeRange from '../../components/TimeRange/TimeRange';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import axios from 'axios';
 export default function CreateMeetupPage() {
     const CalendarRef = useRef();
     const TimeRangeRef = useRef();
     const navigate = useNavigate();
-    const [postID, setPostID] = useState({});
+
     //create a function such that when button outside here is pressed, it will
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     function createCode() {
