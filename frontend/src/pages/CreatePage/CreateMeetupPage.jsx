@@ -44,17 +44,28 @@ export default function CreateMeetupPage() {
         //     console.log(e);
         // }
 
-        let payload = { code: code };
-        try {
-            const response = await fetch('http://localhost:5000/pages/create', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+        // let payload = { code: code };
+        // try {
+        //     const response = await fetch('http://localhost:5000/pages/create', {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify(payload)
+        //     });
+        //     console.log(response);
+        // } catch (e) {
+        //     console.log(e);
+        // }
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: code })
+        };
+        fetch('http://localhost:5000/pages/create', requestOptions)
+            .then((response) => response.json())
+            .then((data) => this.setState({ postId: data.id }))
+            .catch((error) => {
+                console.log(error);
             });
-            console.log(response);
-        } catch (e) {
-            console.log(e);
-        }
     }
 
     return (
