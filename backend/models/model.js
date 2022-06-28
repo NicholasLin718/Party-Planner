@@ -15,7 +15,7 @@ const personSchema = new Schema({
 const pageSchema = new Schema({
     code: {
         type: String,
-        required: true,
+        required: false,
         unique: true
     },
     meetupName: {

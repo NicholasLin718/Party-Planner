@@ -36,7 +36,7 @@ const updatePage = asyncHandler(async (req, res) => {
     }
 
     const updatedPage = await Page.findByIdAndUpdate(page._id, req.body, {
-        new: true
+        new: false
     });
     res.status(200).json(updatedPage);
 });
