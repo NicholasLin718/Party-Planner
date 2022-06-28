@@ -18,8 +18,8 @@ export default function CreateMeetupPage() {
         console.log(code);
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            body: { code: code }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: code })
         };
         fetch('http://localhost:5000/pages/create', requestOptions)
             .then((response) => response.json())
