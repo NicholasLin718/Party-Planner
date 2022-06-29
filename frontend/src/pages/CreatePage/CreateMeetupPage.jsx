@@ -53,7 +53,7 @@ export default function CreateMeetupPage() {
                     TimeRangeRef.current.storeRange();
 
                     createCode();
-                    // navigate('/' + code);
+                    navigate('/' + code);
                 }}>
                 submit
             </button>

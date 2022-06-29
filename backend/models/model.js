@@ -26,6 +26,19 @@ const pageSchema = new Schema({
         type: String,
         required: false
     },
+    meetupLocation: {
+        type: {
+            name: {
+                type: String,
+                required: false
+            },
+            address: {
+                type: String,
+                required: false
+            }
+        },
+        required: false
+    },
     participants: {
         type: [personSchema],
         required: false

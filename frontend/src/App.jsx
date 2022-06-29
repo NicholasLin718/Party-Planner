@@ -8,6 +8,7 @@ import PartyPage from './components/partyPages/partyPage';
 import HomePage from './pages/HomePage/HomePage';
 import CreateMeetupPage from './pages/CreatePage/CreateMeetupPage';
 import EnterCode from './components/LoginRouting/EnterCode';
+// import Dashboard from './components/Dashboard/Dashboard';
 function App() {
     return (
         <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
                 <Route path='/range' element={<TimeRange />} />
                 <Route path='/select' element={<Selector />} />
                 <Route path='/enter' element={<EnterCode />} />
+                {/* <Route path='/r/:code' element={<Dashboard />} /> */}
             </Routes>
         </BrowserRouter>
     );
