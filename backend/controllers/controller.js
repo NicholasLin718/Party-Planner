@@ -32,6 +32,10 @@ const updatePage = asyncHandler(async (req, res) => {
     const page = await Page.findOne({ code: code });
     if (!req.body || !req.body.code) {
         res.status(400);
+        throw new Error('Body has missing values');
+    }
+    if (!page) {
+        res.status(400);
         throw new Error('Page not found');
     }
 
@@ -45,13 +49,12 @@ const updatePage = asyncHandler(async (req, res) => {
 // @route DELETE /pages/:code
 // @access Private
 const deletePage = asyncHandler(async (req, res) => {
-    const code = req.params.code;
+    const { code } = req.params;
     const page = await Page.findOne({ code: code });
-    if (!req.body || !req.body.code) {
+    if (!page) {
         res.status(400);
         throw new Error('Page not found');
     }
-
     await page.remove();
     res.status(200).json({ code: code });
 });

@@ -5,9 +5,11 @@ const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
 const Page = require('./models/model');
 const routes = require('./routes/routes');
+
 connectDB();
 
 const app = express();
+
 app.use(express.json());
 
 // CORS middleware
