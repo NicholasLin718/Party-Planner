@@ -3,27 +3,38 @@ import TimeRange from '../../components/TimeRange/TimeRange';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import { store } from '../../store';
 export default function CreateMeetupPage() {
     const CalendarRef = useRef();
     const TimeRangeRef = useRef();
     const navigate = useNavigate();
-
+    let code = '';
     //create a function such that when button outside here is pressed, it will
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     function createCode() {
-        let code = '';
         for (let i = 0; i < 6; i++) {
             code += letters.charAt(Math.floor(Math.random() * letters.length));
         }
-        console.log(code);
-
-        postCode(code);
+        retrieveReduxData(code);
     }
-    async function postCode(code) {
+    function retrieveReduxData(code) {
+        const data = store.getState();
+        const rawBody = {
+            code: code,
+            meetupName: data.timeRange.title,
+            meetupDescription: data.timeRange.description,
+            meetupLocation: null,
+            meetupDays: JSON.stringify(data.selectedDays),
+            meetupTimeRange: JSON.stringify(data.timeRange.range)
+        };
+        console.log(rawBody);
+        postData(rawBody);
+    }
+    async function postData(rawBody) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code: code })
+            body: JSON.stringify(rawBody)
         };
         const response = await fetch(
             'http://localhost:5000/pages/create',
@@ -40,11 +51,13 @@ export default function CreateMeetupPage() {
                 onClick={() => {
                     CalendarRef.current.storeSelectedList();
                     TimeRangeRef.current.storeRange();
-                    navigate('../select');
+
+                    createCode();
+                    navigate('/' + code);
                 }}>
                 submit
             </button>
-            <button onClick={createCode}>Create Code</button>
+            {/* <button onClick={createCode}>Create Code</button> */}
         </div>
     );
 }

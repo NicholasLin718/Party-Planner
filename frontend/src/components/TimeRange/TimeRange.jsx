@@ -77,24 +77,6 @@ const TimeRange = forwardRef((props, ref) => {
         console.log(endValue);
     };
 
-    const handleClick = (e) => {
-        setTitleField(e.target.value);
-        dispatch(setTitle(e.target.value));
-        dispatch(setRange(startValue, endValue));
-        console.log('stored');
-    };
-
-    // const canSubmit = (title !== "Enter Title") && (description !== "Enter Description");
-    // const userOptions = users.map((user) => (
-    //     <option key={user.id} value={user.id}>
-    //         {user.name}
-    //     </option>
-    // ))
-
-    // const handleSubmit = (e) => {
-    //     setTitleField(e.target.value);
-    //     dispatch(setTitle(titleField))
-    // }
     return (
         <div className='App'>
             <form>
@@ -103,7 +85,6 @@ const TimeRange = forwardRef((props, ref) => {
                 <label>Meetup Description</label>
                 <input type='text' onChange={onDescriptionFieldChanged} />
             </form>
-            <blockquote>Please make a selection</blockquote>
             <div className='select-wrapper'>
                 <TimezoneSelect
                     value={selectedTimezone}
@@ -117,9 +98,6 @@ const TimeRange = forwardRef((props, ref) => {
                     endMoment={endTime}
                 />
             </div>
-            <button onClick={handleClick} style={{ marginTop: '200px' }}>
-                click me papi
-            </button>
         </div>
     );
 });

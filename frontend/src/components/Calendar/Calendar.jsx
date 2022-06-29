@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { storeList, selectAllDays } from '../../features/CalendarSlice';
 import Selector from '../AvailabilitySelector/Selector';
 const Calendar = forwardRef((props, ref) => {
-    const printList = useSelector(selectAllDays);
     const dispatch = useDispatch();
     //React States
     const [calendar, setCalendar] = useState([]);
@@ -36,13 +35,6 @@ const Calendar = forwardRef((props, ref) => {
         }
     }));
 
-    const handleClick = () => {
-        if (selectedList.length > 0) {
-            console.log('ran');
-            console.log(selectedList);
-            dispatch(storeList(selectedList));
-        }
-    };
     return (
         <div>
             <div className='calendar'>
@@ -93,9 +85,6 @@ const Calendar = forwardRef((props, ref) => {
                     ))}
                 </div>
             </div>
-            <button onClick={handleClick} style={{ marginTop: '1000px' }}>
-                click me
-            </button>
             <div>
                 {selectedList.map((day, i) => {
                     <div key={i}>{day}</div>;

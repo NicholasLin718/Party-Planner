@@ -15,15 +15,28 @@ const personSchema = new Schema({
 const pageSchema = new Schema({
     code: {
         type: String,
-        required: false,
+        required: true,
         unique: true
     },
     meetupName: {
         type: String,
-        required: false // true
+        required: true // true
     },
     meetupDescripton: {
         type: String,
+        required: false
+    },
+    meetupLocation: {
+        type: {
+            name: {
+                type: String,
+                required: false
+            },
+            address: {
+                type: String,
+                required: false
+            }
+        },
         required: false
     },
     participants: {
@@ -31,12 +44,12 @@ const pageSchema = new Schema({
         required: false
     },
     meetupDays: {
-        type: [String],
-        required: false // true
+        type: String,
+        required: true // true
     },
     meetupTimeRange: {
         type: String,
-        required: false // true
+        required: true // true
     }
 });
 
