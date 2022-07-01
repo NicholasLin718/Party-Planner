@@ -9,7 +9,7 @@ const styles = makeStyles({
     },
     text: {
         color: '#f47b8f',
-        cursor: 'pointer',
+        cursor: 'default',
         fontFamily: 'Oswald',
         textShadow: '1px 2px #f5cdd3 ',
         fontWeight: '350',
