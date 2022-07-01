@@ -23,12 +23,14 @@ export default function CreateMeetupPage() {
             code: code,
             meetupName: data.timeRange.title,
             meetupDescription: data.timeRange.description,
+            users: ['Nicholas'],
             meetupLocation: null,
             meetupDays: JSON.stringify(data.selectedDays),
             meetupTimeRange: JSON.stringify(data.timeRange.range)
         };
         console.log(rawBody);
         postData(rawBody);
+        localStorage.setItem(code, 'true');
     }
     async function postData(rawBody) {
         const requestOptions = {
@@ -49,11 +51,18 @@ export default function CreateMeetupPage() {
             <Calendar ref={CalendarRef} />
             <button
                 onClick={() => {
+                    //ADD CONDITIONS FOR REQUIRED FIELDS
                     CalendarRef.current.storeSelectedList();
                     TimeRangeRef.current.storeRange();
 
                     createCode();
-                    navigate('/' + code);
+                    if (localStorage.getItem(code)) {
+                        console.log('ij');
+                        navigate('/users/' + code);
+                    } else {
+                        alert('Error occured while creating the room!');
+                        navigate('/create');
+                    }
                 }}>
                 submit
             </button>

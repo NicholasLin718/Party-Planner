@@ -30,7 +30,7 @@ function Login() {
                 Create New Room
             </button>
             {!displayLogin && !displayNewLogin && (
-                <button onClick={() => navigate('/enter')}>
+                <button onClick={() => navigate('/r')}>
                     Enter Existing Room Code
                 </button>
             )}
