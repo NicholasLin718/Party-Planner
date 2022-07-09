@@ -4,16 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
-    // const [IP, setIP ] = useState("");
-    // const retrieveIP = async () => {
-    //   const res = await axios.get("https://geolocation-db.com/json/")
-    //   setIP(res.data.IPv4);
-    // }
-    // useEffect( () => {
-    //   retrieveIP();
-    // }, [])
-    // console.log(IP);
-
     const navigate = useNavigate();
     const handleClick = () => {
         console.log('login');

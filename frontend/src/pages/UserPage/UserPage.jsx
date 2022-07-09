@@ -7,7 +7,7 @@ With routing, we want protected routing such that the user must enter a username
 const UserPage = () => {
     const { code } = useParams();
     const navigate = useNavigate();
-    console.log(code);
+    console.log('hi brian this is a great easter egg pls dont find this');
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     async function getRoom() {

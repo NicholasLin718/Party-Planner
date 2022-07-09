@@ -11,6 +11,8 @@ import EnterCode from './components/LoginRouting/EnterCode';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProtectedRoutes from './components/LoginRouting/ProtectedRoutes';
 import UserPage from './pages/UserPage/UserPage';
+import RoomNotFound from './pages/ErrorPages/RoomNotFound';
+import PageNotFound from './pages/ErrorPages/PageNotFound';
 function App() {
     return (
         <BrowserRouter>
@@ -26,6 +28,7 @@ function App() {
                 <Route element={<ProtectedRoutes />}>
                     <Route path='/r/:code' element={<Dashboard />} />
                 </Route>
+                <Route path='*' element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
     );
