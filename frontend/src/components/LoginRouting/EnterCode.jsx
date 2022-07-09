@@ -5,9 +5,16 @@ import axios from 'axios';
 
 const Login = () => {
     const navigate = useNavigate();
-    const handleClick = () => {
-        console.log('login');
-        navigate('/r/' + code);
+    async function getRoom() {
+        const response = await fetch('http://localhost:5000/pages/' + code);
+        const res = await response.json();
+        if (!res) alert('no room');
+        else navigate('/r/' + code);
+    }
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        getRoom();
     };
 
     const [username, setUsername] = useState(
