@@ -40,7 +40,12 @@ const pageSchema = new Schema({
         required: false
     },
     users: {
-        type: [String],
+        type: [
+            {
+                username: { type: String, required: true },
+                password: { type: String, required: false }
+            }
+        ],
         required: false
     },
     participants: {

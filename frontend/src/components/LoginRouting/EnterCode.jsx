@@ -42,11 +42,7 @@ const Login = () => {
                 /> */}
                 <br></br>
                 <label>Code</label>
-                <input
-                    type='text'
-                    value={code ? code : ''}
-                    onChange={onCodeChange}
-                />
+                <input type='text' onChange={onCodeChange} />
                 <button
                     type='submit'
                     onClick={() => {
