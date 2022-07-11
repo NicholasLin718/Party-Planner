@@ -10,19 +10,29 @@ import CreateMeetupPage from './pages/CreatePage/CreateMeetupPage';
 import EnterCode from './components/LoginRouting/EnterCode';
 import Poll from './components/Polls/Poll'
 // import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
+import ProtectedRoutes from './components/LoginRouting/ProtectedRoutes';
+import UserPage from './pages/UserPage/UserPage';
+import PageNotFound from './pages/ErrorPages/PageNotFound';
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<HomePage />} />
                 <Route path='/findpage' element={<FindPage />} />
-                <Route path='/:code' element={<PartyPage />} />
+                {/* <Route path='/:code' element={<PartyPage />} /> */}
                 <Route path='/create' element={<CreateMeetupPage />} />
                 <Route path='/range' element={<TimeRange />} />
                 <Route path='/select' element={<Selector />} />
-                <Route path='/enter' element={<EnterCode />} />
+                {/*<Route path='/enter' element={<EnterCode />} >*/}
                 <Route path='/poll' element={<Poll />} />
                 {/* <Route path='/r/:code' element={<Dashboard />} /> */}
+                <Route path='/users/:code' element={<UserPage />} />
+                <Route element={<ProtectedRoutes />}>
+                    <Route path='/r/:code' element={<Dashboard />} />
+                </Route>
+                <Route path='*' element={<PageNotFound />} />
+                <Route path='/r/404' element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
     );

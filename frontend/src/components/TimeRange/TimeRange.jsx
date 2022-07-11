@@ -92,6 +92,7 @@ const TimeRange = forwardRef((props, ref) => {
                 />
                 <TimePicker
                     className='timepicker'
+                    label='Time Picker'
                     onStartTimeChange={returnFunctionStart}
                     onEndTimeChange={returnFunctionEnd}
                     startMoment={startTime}

@@ -30,7 +30,8 @@ const createPage = asyncHandler(async (req, res) => {
 const updatePage = asyncHandler(async (req, res) => {
     const code = req.params.code;
     const page = await Page.findOne({ code: code });
-    if (!req.body || !req.body.code) {
+    if (!req.body) {
+        //deleted !req.body.code
         res.status(400);
         throw new Error('Body has missing values');
     }

@@ -17,32 +17,16 @@ const styles = makeStyles({
 
 function Login() {
     const loginStyle = styles();
-    const [title, setTitle] = useState('');
-    const [displayLogin, setDisplayLogin] = useState(false);
-    const [displayNewLogin, setDisplayNewLogin] = useState(false);
     const navigate = useNavigate();
     return (
         <Toolbar className={loginStyle.textField}>
+            <EnterCode />
             <button
                 onClick={() => {
                     navigate('/create');
                 }}>
                 Create New Room
             </button>
-            {!displayLogin && !displayNewLogin && (
-                <button onClick={() => navigate('/enter')}>
-                    Enter Existing Room Code
-                </button>
-            )}
-            {/* <form className='loginStyle'>
-                <input
-                    className='loginButton'
-                    type='textarea'
-                    placeholder='Enter Username'
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}></input>
-                <input type='submit' className='loginSubmit'></input>
-            </form> */}
         </Toolbar>
     );
 }

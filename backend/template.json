@@ -6,6 +6,7 @@
         "name": "Yunshang Rice Noodle",
         "address": "3229 Hwy 7 #9, Markham, ON L3R 3P3"
     },
+    "users": ["Brian", "Nicholas", "Varshaa", "Kristy", "Joe"],
     "participants": [
         {
             "name": "Brian",

@@ -22,7 +22,7 @@ const pageSchema = new Schema({
         type: String,
         required: true // true
     },
-    meetupDescripton: {
+    meetupDescription: {
         type: String,
         required: false
     },
@@ -37,6 +37,15 @@ const pageSchema = new Schema({
                 required: false
             }
         },
+        required: false
+    },
+    users: {
+        type: [
+            {
+                username: { type: String, required: true },
+                password: { type: String, required: false }
+            }
+        ],
         required: false
     },
     participants: {
