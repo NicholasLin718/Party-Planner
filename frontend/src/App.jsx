@@ -22,7 +22,6 @@ function App() {
                 <Route path='/create' element={<CreateMeetupPage />} />
                 <Route path='/range' element={<TimeRange />} />
                 <Route path='/select' element={<Selector />} />
-                <Route path='/r' element={<EnterCode />} />
                 <Route path='/users/:code' element={<UserPage />} />
                 <Route element={<ProtectedRoutes />}>
                     <Route path='/r/:code' element={<Dashboard />} />
