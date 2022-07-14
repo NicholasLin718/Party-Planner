@@ -29,9 +29,9 @@ const UserPage = () => {
 
     return (
         <div>
-            <div>{data.code}</div>
-            <div>{data.meetupName}</div>
-            <div>{data.meetupDescription}</div>
+            <div>{!loading && data.code}</div>
+            <div>{!loading && data.meetupName}</div>
+            <div>{!loading && data.meetupDescription}</div>
             {!loading &&
                 data.users.map((user, i) => (
                     <div
