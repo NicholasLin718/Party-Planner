@@ -47,6 +47,10 @@ const Columns = (props) => {
             <SelectButton
                 clickHandler={() => setBooleanSelect(!booleanSelect)}
             />
+            <button
+                onClick={() => {
+                    console.log(slotArrays);
+                }}></button>
             <input type='checkbox' />
             <SelectableGroup onSelection={handleSelection} className='columns'>
                 {slotArrays.map((column, j) => {
@@ -59,14 +63,14 @@ const Columns = (props) => {
                             <br />
                             {listOfWeekDays[dayOfWeek]}
                             {slotArrays[j].slots.map((slotData, i) => {
-                                let selected = slotData.selected;
                                 return (
                                     <SelectableComponent
                                         key={i}
                                         selectableKey={{ i, j }}
                                         slotData={slotData}
-                                        selected={
-                                            selected
+                                        slotArrays={slotArrays}
+                                        setSlotArrays={
+                                            setSlotArrays
                                         }></SelectableComponent>
                                 );
                             })}

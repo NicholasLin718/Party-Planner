@@ -42,7 +42,7 @@ const RegisterForm = (props) => {
                 <input type='text' onChange={onUsernameChange} />
                 <label>Password (Optional)</label>
                 <input type='text' onChange={onPasswordChange} />
-                <button type='submit'>Click for cock</button>
+                <button type='submit'>Add new user</button>
             </form>
         </div>
     );
