@@ -7,6 +7,7 @@ import { selectAllDays } from '../../features/CalendarSlice';
 import { selectAllRange } from '../../features/TimeRangeSlice';
 import ColumnPage from './ColumnPage';
 import Pagination from './Pagination';
+import Columns from './Columns';
 
 /*
     Selector page will include pagination and the function that creates the list of each column containing the date value and its slots
@@ -21,10 +22,10 @@ const Selector = () => {
     const printList = [
         // { isoTime: '2022-06-29T04:00:00.000Z', dayOfWeek: 3 },
         { isoTime: '2022-06-28T04:00:00.000Z', dayOfWeek: 2 },
-        // { isoTime: '2022-06-27T04:00:00.000Z', dayOfWeek: 1 },
-        // { isoTime: '2022-06-26T04:00:00.000Z', dayOfWeek: 0 },
-        // { isoTime: '2022-06-22T04:00:00.000Z', dayOfWeek: 3 },
-        // { isoTime: '2022-06-21T04:00:00.000Z', dayOfWeek: 2 },
+        { isoTime: '2022-06-27T04:00:00.000Z', dayOfWeek: 1 },
+        { isoTime: '2022-06-26T04:00:00.000Z', dayOfWeek: 0 },
+        { isoTime: '2022-06-22T04:00:00.000Z', dayOfWeek: 3 },
+        { isoTime: '2022-06-21T04:00:00.000Z', dayOfWeek: 2 },
         { isoTime: '2022-06-30T04:00:00.000Z', dayOfWeek: 4 }
         // { isoTime: '2022-06-25T04:00:00.000Z', dayOfWeek: 6 },
         // { isoTime: '2022-06-24T04:00:00.000Z', dayOfWeek: 5 }
@@ -97,9 +98,9 @@ const Selector = () => {
                 endValue={endValue}
             />
             <div className='column-page'>
-                <ColumnPage
-                    currentColumns={currentColumns}
-                    columnPageArr={columnPageArr}
+                <Columns
+                    dayColumns={currentColumns}
+                    selectColumnArr={columnPageArr}
                     setAllColumns={setAllColumns}
                 />
                 <Pagination

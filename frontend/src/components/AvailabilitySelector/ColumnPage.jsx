@@ -3,6 +3,9 @@ import Column from './Column';
 const ColumnPage = (props) => {
     const { currentColumns, columnPageArr, setAllColumns } = props;
 
+    console.log(currentColumns);
+    console.log(columnPageArr);
+    console.log(setAllColumns);
     /*
     (9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
     0:
