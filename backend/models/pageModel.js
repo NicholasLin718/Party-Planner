@@ -1,16 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-const personSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    availableTimes: {
-        type: [(String, String)],
-        required: true
-    }
-});
+const {pollSchema} = require("./pollSchema");
+const {personSchema} = require ("./personSchema");
 
 const pageSchema = new Schema({
     code: {
@@ -40,17 +31,9 @@ const pageSchema = new Schema({
         required: false
     },
     users: {
-        type: [
-            {
-                username: { type: String, required: true },
-                password: { type: String, required: false }
-            }
-        ],
-        required: false
-    },
-    participants: {
         type: [personSchema],
-        required: false
+        required: false,
+        default: []
     },
     meetupDays: {
         type: String,
@@ -59,6 +42,11 @@ const pageSchema = new Schema({
     meetupTimeRange: {
         type: String,
         required: true // true
+    },
+    polls: {
+        type: [pollSchema],
+        required: false,
+        default: []
     }
 });
 
