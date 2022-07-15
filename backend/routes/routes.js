@@ -1,14 +1,25 @@
 const express = require('express');
-const Page = require('../models/model');
-const {
-    getPage,
-    createPage,
-    updatePage,
-    deletePage
-} = require('../controllers/controller');
+const Page = require('../models/pageModel');
+const {PageController} = require('../controllers/pageController');
+const {PollController} = require('../controllers/pollController');
 const router = express.Router();
+const asyncHandler = require('express-async-handler');
 
-router.route('/pages/:code').get(getPage).put(updatePage).delete(deletePage);
-router.route('/pages/create').post(createPage);
+router.route('/pages/:code')
+.get(asyncHandler(PageController.getPage))
+.put(asyncHandler(PageController.updatePage))
+.delete(asyncHandler(PageController.deletePage));
+
+router.route('/pages/create')
+.post(asyncHandler(PageController.createPage));
+
+router.route('/pages/:code/polls')
+.post(asyncHandler(PollController.createPoll));
+
+router.route('/pages/:code/polls/:id')
+.delete(asyncHandler(PollController.deletePoll));
+
+router.route('/pages/:code/polls/:id/votes')
+.put(asyncHandler(PollController.addVote));
 
 module.exports = router;

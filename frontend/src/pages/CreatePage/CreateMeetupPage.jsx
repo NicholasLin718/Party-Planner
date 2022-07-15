@@ -23,7 +23,6 @@ export default function CreateMeetupPage() {
             code: code,
             meetupName: data.timeRange.title,
             meetupDescription: data.timeRange.description,
-            users: [],
             meetupLocation: null,
             meetupDays: JSON.stringify(data.selectedDays),
             meetupTimeRange: JSON.stringify(data.timeRange.range)
