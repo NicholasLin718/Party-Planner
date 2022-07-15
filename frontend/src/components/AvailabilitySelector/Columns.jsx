@@ -7,7 +7,7 @@ import SelectButton from './SelectButton';
 const SelectableComponent = createSelectable(Slot);
 
 const Columns = (props) => {
-    const { dayColumns, selectColumnArr, setAllColumns } = props;
+    const { selectColumnArr } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [booleanSelect, setBooleanSelect] = useState(true);
 
@@ -23,7 +23,6 @@ const Columns = (props) => {
     const [selectedKeys, setSelectedKeys] = useState([]);
     const handleSelection = (keys) => {
         let arr = slotArrays.slice();
-        console.log(keys);
         keys.forEach((key) => {
             const { i, j } = key;
             arr[j].slots[i].selected = booleanSelect;
@@ -32,7 +31,6 @@ const Columns = (props) => {
         setSelectedKeys({
             selectedKeys: keys
         });
-        // console.log(selectedKeys);
     };
 
     // useEffect(() => {
@@ -47,11 +45,6 @@ const Columns = (props) => {
             <SelectButton
                 clickHandler={() => setBooleanSelect(!booleanSelect)}
             />
-            <button
-                onClick={() => {
-                    console.log(slotArrays);
-                }}></button>
-            <input type='checkbox' />
             <SelectableGroup onSelection={handleSelection} className='columns'>
                 {slotArrays.map((column, j) => {
                     const date = column.date.isoTime;

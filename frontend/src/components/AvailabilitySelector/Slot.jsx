@@ -5,7 +5,6 @@ export default function Slot(props) {
     const [selectedSlot, setSelectedSlot] = useState(slotData.selected);
 
     const handleClick = () => {
-        console.log('hi');
         let tempSlotArray = slotArrays.slice();
         tempSlotArray[selectableKey.j].slots[selectableKey.i].selected =
             !tempSlotArray[selectableKey.j].slots[selectableKey.i].selected;

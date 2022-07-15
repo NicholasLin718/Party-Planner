@@ -14,7 +14,10 @@ const Pagination = (props) => {
                 {pageNumbers.map((number) => (
                     <li key={number} className='page-number'>
                         <button
-                            onClick={() => paginate(number)}
+                            onClick={() => {
+                                paginate(number);
+                                console.log(number);
+                            }}
                             className='page-link'>
                             {number}
                         </button>
