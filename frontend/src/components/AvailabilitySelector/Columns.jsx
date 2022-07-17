@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState,
+    forwardRef,
+    useImperativeHandle
+} from 'react';
 import Slot from './Slot';
 import './styles.css';
 import { SelectableGroup, createSelectable } from 'react-selectable';
 import SelectButton from './SelectButton';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    storeAvailability,
+    selectAllAvailability
+} from '../../features/AvailabilitySlice';
 
 const SelectableComponent = createSelectable(Slot);
 
-const Columns = (props) => {
-    const { selectColumnArr } = props;
+const Columns = forwardRef((props, ref) => {
+    const dispatch = useDispatch();
+
+    const { currentColumns, arrayOfColumns } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [booleanSelect, setBooleanSelect] = useState(true);
-
-    let newArr = [];
-    selectColumnArr.forEach((column) => {
-        let newColumn = structuredClone(column);
-        newArr.push(newColumn);
-    });
-
-    const [slotArrays, setSlotArrays] = useState(newArr);
-    // console.log(slotArrays);
-
+    const [slotArrays, setSlotArrays] = useState(arrayOfColumns);
     const [selectedKeys, setSelectedKeys] = useState([]);
+
     const handleSelection = (keys) => {
         let arr = slotArrays.slice();
         keys.forEach((key) => {
@@ -33,13 +37,19 @@ const Columns = (props) => {
         });
     };
 
+    useImperativeHandle(ref, () => ({
+        storeSlotArrays() {
+            console.log(slotArrays);
+            dispatch(storeAvailability(slotArrays));
+        }
+    }));
+
     // useEffect(() => {
     //     slotArrays.forEach((j) => {
     //         console.log(slotArrays[j]);
     //         console.log('jo');
     //     });
     // }, [slotArrays]);
-
     return (
         <div>
             <SelectButton
@@ -47,11 +57,14 @@ const Columns = (props) => {
             />
             <SelectableGroup onSelection={handleSelection} className='columns'>
                 {slotArrays.map((column, j) => {
+                    console.log(column);
                     const date = column.date.isoTime;
                     const dayOfWeek = column.date.dayOfWeek;
                     let formattedDay = date.match(/\d\d\d\d-\d\d-\d\d/);
                     return (
-                        <div className={formattedDay[0].substring(5, 10)}>
+                        <div
+                            key={j}
+                            className={formattedDay[0].substring(5, 10)}>
                             {formattedDay[0].substring(5, 10)}
                             <br />
                             {listOfWeekDays[dayOfWeek]}
@@ -73,6 +86,6 @@ const Columns = (props) => {
             </SelectableGroup>
         </div>
     );
-};
+});
 
 export default Columns;

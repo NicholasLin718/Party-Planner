@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import LabelColumn from './LabelColumn';
 import './styles.css';
+import { useRef } from 'react';
 import Pagination from './Pagination';
 import Columns from './Columns';
+import { store } from '../../store';
 
 /*
     Selector page will include pagination and the function that creates the list of each column containing the date value and its slots
@@ -14,6 +16,8 @@ import Columns from './Columns';
     Determine how to pass in setStates through the child such that slots that are selected will reflect to the columnPageArr
 */
 const Selector = () => {
+    const slotArrayRef = useRef();
+
     const printList = [
         { isoTime: '2022-06-29T04:00:00.000Z', dayOfWeek: 3 },
         { isoTime: '2022-06-28T04:00:00.000Z', dayOfWeek: 2 },
@@ -43,42 +47,62 @@ const Selector = () => {
     // ));
 
     let daysSelected = orderedPrintList.length;
-    let columnPageArr = [];
-    let columnArr = [];
+    let arrayOfColumns = [];
+    let columnObject = [];
     let hour = startValue.hour;
     let is_00 = startValue.is_00;
     for (let i = 0; i < daysSelected; i++) {
         while (hour < endValue.hour) {
             //7:30 - 15:30
             if (is_00) {
-                columnArr.push({ hour: hour, is_00: is_00, selected: false });
+                columnObject.push({
+                    hour: hour,
+                    is_00: is_00,
+                    selected: false
+                });
                 is_00 = !is_00;
-                columnArr.push({ hour: hour, is_00: is_00, selected: false });
+                columnObject.push({
+                    hour: hour,
+                    is_00: is_00,
+                    selected: false
+                });
                 is_00 = !is_00;
             } else {
-                columnArr.push({ hour: hour, is_00: is_00, selected: false });
+                columnObject.push({
+                    hour: hour,
+                    is_00: is_00,
+                    selected: false
+                });
                 is_00 = !is_00;
             }
             hour++;
         }
         if (!endValue.is_00) {
-            columnArr.push({ hour: hour, is_00: is_00, selected: false });
+            columnObject.push({ hour: hour, is_00: is_00, selected: false });
         }
-        columnPageArr.push({ date: orderedPrintList[i], slots: columnArr });
+        arrayOfColumns.push({ date: orderedPrintList[i], slots: columnObject });
     }
+    let newArr = [];
+
+    arrayOfColumns.forEach((column) => {
+        let newColumn = structuredClone(column);
+        newArr.push(newColumn);
+    });
+    arrayOfColumns = newArr;
 
     const indexOfLastColumn = currentPage * columnsPerPage;
     const indexOfFirstColumn = indexOfLastColumn - columnsPerPage;
-    const currentColumns = columnPageArr.slice(
+    const currentColumns = arrayOfColumns.slice(
         indexOfFirstColumn,
         indexOfLastColumn
     );
-
-    // const [allColumns, setAllColumns] = useState(columnPageArr);
+    console.log(currentColumns);
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
+        //slotArrayRef.current.updateSlotArrays(currentColumns);
     };
+
     return (
         <div>
             {/* {renderedDays} */}
@@ -88,13 +112,30 @@ const Selector = () => {
                 endValue={endValue}
             />
             <div className='column-page'>
-                <Columns selectColumnArr={currentColumns} />
+                <Columns
+                    ref={slotArrayRef}
+                    currentColumns={currentColumns}
+                    arrayOfColumns={arrayOfColumns}
+                />
                 <Pagination
                     columnsPerPage={columnsPerPage}
                     totalColumns={orderedPrintList.length}
                     paginate={paginate}
                 />
             </div>
+            <button
+                onClick={() => {
+                    slotArrayRef.current.storeSlotArrays();
+                }}>
+                Click for funny
+            </button>
+            <button
+                onClick={() => {
+                    const data = store.getState();
+                    console.log(data);
+                }}>
+                Click for funny
+            </button>
         </div>
     );
 };
