@@ -30,8 +30,8 @@ class PollController {
         res.status(200).json(newPoll);
     };
 
-    // @desc Vote on a poll
-    // @route PUT /pages/:code/polls/:id
+    // @desc delete a poll
+    // @route DELETE /pages/:code/polls/:id
     // @access Private
     static async deletePoll(req, res){
         const codeToUpdate = req.params.code;
@@ -54,7 +54,7 @@ class PollController {
     };
     
     // @desc Vote on a poll
-    // @route PUT /pages/:code/polls/:id
+    // @route PUT /pages/:code/polls/:id/votes
     // @access Private
     static async addVote(req, res){
         if (!req.body || !req.body.option || !req.body.name) {
@@ -65,7 +65,6 @@ class PollController {
         const code = req.params.code;
         const id = parseInt(req.params.id);
         const voterName = req.body.name;
-        //REMEMBER TO ADD VALIDATION FOR WHETHER PPL ALREADY VOTED - done
 
         const curPage = await Page.findOne({"code": code});
         let found = false;
