@@ -19,6 +19,7 @@ export default function CreateMeetupPage() {
     }
     function retrieveReduxData(code) {
         const data = store.getState();
+        console.log(data);
         const rawBody = {
             code: code,
             meetupName: data.timeRange.title,
@@ -56,7 +57,6 @@ export default function CreateMeetupPage() {
 
                     createCode();
                     if (localStorage.getItem(code)) {
-                        console.log('ij');
                         navigate('/users/' + code);
                     } else {
                         alert('Error occured while creating the room!');

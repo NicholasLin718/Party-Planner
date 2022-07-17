@@ -12,7 +12,7 @@ const SelectButton = (props) => {
                     onChange={props.clickHandler}
                 />
                 <label
-                    for='color_mode'
+                    htmlFor='color_mode'
                     data-on='Deselect'
                     data-off='Select'
                     className='btn-color-mode-switch-inner'></label>

@@ -46,7 +46,6 @@ const TimeRange = forwardRef((props, ref) => {
             dispatch(setTitle(titleField));
             dispatch(setDescription(descriptionField));
             dispatch(setRange(startValue, endValue));
-            console.log('stored');
         }
     }));
     //return value would be {JSON.stringify(selectedTimezone, null, 4)}

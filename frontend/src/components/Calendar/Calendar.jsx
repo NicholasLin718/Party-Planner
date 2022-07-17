@@ -11,7 +11,7 @@ import './Calendar.css';
 import Header from './Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeList, selectAllDays } from '../../features/CalendarSlice';
-import Selector from '../AvailabilitySelector/Selector';
+
 const Calendar = forwardRef((props, ref) => {
     const dispatch = useDispatch();
     //React States
@@ -26,10 +26,7 @@ const Calendar = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSelectedList() {
-            console.log('hi');
             if (selectedList.length > 0) {
-                console.log('ran');
-                console.log(selectedList);
                 dispatch(storeList(selectedList));
             }
         }

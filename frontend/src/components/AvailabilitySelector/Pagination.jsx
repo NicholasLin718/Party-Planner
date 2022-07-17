@@ -5,7 +5,7 @@ const Pagination = (props) => {
 
     const pageNumbers = [];
 
-    for (let i = 0; i <= Math.ceil(totalColumns / columnsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(totalColumns / columnsPerPage); i++) {
         pageNumbers.push(i);
     }
     return (
