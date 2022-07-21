@@ -39,17 +39,10 @@ const Columns = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSlotArrays() {
-            console.log(slotArrays);
             dispatch(storeAvailability(slotArrays));
         }
     }));
 
-    // useEffect(() => {
-    //     slotArrays.forEach((j) => {
-    //         console.log(slotArrays[j]);
-    //         console.log('jo');
-    //     });
-    // }, [slotArrays]);
     return (
         <div>
             <SelectButton

@@ -5,9 +5,10 @@ const Dashboard = () => {
     const { code } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
     if (localStorage.getItem('authenticated') === 'false') navigate('/');
 
-    const handleClick = () => {
+    const logout = () => {
         navigate('/', { replace: true });
         localStorage.removeItem(code);
     };
@@ -15,6 +16,7 @@ const Dashboard = () => {
         const response = await fetch('http://localhost:5000/pages/' + code);
         const res = await response.json();
         setData(res);
+        setLoading(false);
         console.log(res);
     }
     useEffect(() => {
@@ -25,11 +27,17 @@ const Dashboard = () => {
         <div>
             <h1>Dashboard</h1>
             <div>
-                <div>{data.code}</div>
-                <div>{data.meetupName}</div>
-                <div>{data.meetupDescription}</div>
+                <div>{!loading && data.code}</div>
+                <div>{!loading && data.meetupName}</div>
+                <div>{!loading && data.meetupDescription}</div>
             </div>
-            <button onClick={handleClick}>Logout</button>
+            <button
+                onClick={() => {
+                    navigate('/r/' + code + '/select', { replace: true });
+                }}>
+                Select
+            </button>
+            <button onClick={logout}>Logout</button>
         </div>
     );
 };

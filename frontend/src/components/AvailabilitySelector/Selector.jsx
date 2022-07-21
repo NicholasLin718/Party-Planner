@@ -127,7 +127,7 @@ const Selector = () => {
                 onClick={() => {
                     slotArrayRef.current.storeSlotArrays();
                 }}>
-                Click for funny
+                Store
             </button>
             <button
                 onClick={() => {

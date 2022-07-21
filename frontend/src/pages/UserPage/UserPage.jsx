@@ -34,13 +34,13 @@ const UserPage = () => {
             <div>{!loading && data.meetupDescription}</div>
             {!loading &&
                 data.users.map((user, i) => (
-                    <div
+                    <button
                         onClick={() => {
                             setUserStorage(user.username);
                         }}
                         key={i}>
                         {user.username}
-                    </div>
+                    </button>
                 ))}
             <button onClick={() => setRegisterForm(true)}>
                 Register New User
