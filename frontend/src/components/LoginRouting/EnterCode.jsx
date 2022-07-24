@@ -24,12 +24,24 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className='mt-10'>
             <form onSubmit={handleClick}>
-                <br></br>
-                <label>Code</label>
-                <input type='text' onChange={onCodeChange} />
-                <button type='submit'>Submit</button>
+                <div className='flex flex-row '>
+                    <label className='mt-1 mr-2 block text-lg font-medium text-slate-700'>
+                        Code
+                    </label>
+                    <input
+                        type='text'
+                        onChange={onCodeChange}
+                        className='w-full px-2 py-1 bg-white border border-slate-300 rounded-md text-MD font-medium font-sans shadow-sm
+                        focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400'
+                    />
+                    <button
+                        type='submit'
+                        className='absolute ml-[12.2rem] mt-[1px] px-2 py-1 rounded bg-rose-100 hover:bg-rose-400 ease-in duration-150'>
+                        Submit
+                    </button>
+                </div>
             </form>
         </div>
     );

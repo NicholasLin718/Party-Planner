@@ -7,7 +7,8 @@
         "start": "node backend/server.js",
         "server": "nodemon backend/server.js",
         "frontend": "cross-env GENERATE_SOURCEMAP=false npm start --prefix frontend",
-        "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+        "watch:css": "npm run watch:css --prefix frontend",
+        "dev": "concurrently \"npm run server\" \"npm run frontend\" \"npm run watch:css\"",
         "prettier": "prettier --write ./**/*.{js,jsx,html,css,json}"
     },
     "repository": {

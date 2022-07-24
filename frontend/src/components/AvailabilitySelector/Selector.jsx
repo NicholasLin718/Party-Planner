@@ -6,15 +6,6 @@ import Pagination from './Pagination';
 import Columns from './Columns';
 import { store } from '../../store';
 
-/*
-    Selector page will include pagination and the function that creates the list of each column containing the date value and its slots
-    Selector page will contain the ColumnPage
-    ColumnPage will contain all the columns
-    Columns will contain slots
-    
-    We create a state for the 2D array in ColumnPageArr
-    Determine how to pass in setStates through the child such that slots that are selected will reflect to the columnPageArr
-*/
 const Selector = () => {
     const slotArrayRef = useRef();
 

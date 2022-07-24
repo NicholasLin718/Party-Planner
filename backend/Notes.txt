@@ -1,0 +1,2 @@
+For Redux-persist => Consider fetching all the data from the database at once and storing it in a state and only call database if we're updating data.
+When we navigate through pages, we won't have to call API again

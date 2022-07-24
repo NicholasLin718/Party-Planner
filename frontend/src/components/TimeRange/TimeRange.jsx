@@ -88,6 +88,7 @@ const TimeRange = forwardRef((props, ref) => {
                 <TimezoneSelect
                     value={selectedTimezone}
                     onChange={setSelectedTimezone}
+                    className='m-auto w-[800px]'
                 />
                 <TimePicker
                     className='timepicker'

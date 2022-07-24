@@ -10,7 +10,7 @@ function AnimationLady() {
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            animationData: require('../AnimationTest.json')
+            animationData: require('./AnimationTest.json')
         });
         return () => {
             lottie.destroy();

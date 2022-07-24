@@ -11,13 +11,13 @@ export default function CreateMeetupPage() {
     let code = '';
     //create a function such that when button outside here is pressed, it will
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    function createCode() {
+    async function createCode() {
         for (let i = 0; i < 6; i++) {
             code += letters.charAt(Math.floor(Math.random() * letters.length));
         }
-        retrieveReduxData(code);
+        await retrieveReduxData(code);
     }
-    function retrieveReduxData(code) {
+    async function retrieveReduxData(code) {
         const data = store.getState();
         console.log(data);
         const rawBody = {
@@ -29,7 +29,7 @@ export default function CreateMeetupPage() {
             meetupTimeRange: JSON.stringify(data.timeRange.range)
         };
         console.log(rawBody);
-        postData(rawBody);
+        await postData(rawBody);
         localStorage.setItem(code, 'true');
     }
     async function postData(rawBody) {

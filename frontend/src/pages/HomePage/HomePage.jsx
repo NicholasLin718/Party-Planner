@@ -3,11 +3,11 @@ import {
     ThemeProvider,
     makeStyles
 } from '@material-ui/core/styles';
-import NavBar from './HomePageComponents/NavBar';
-import Login from './HomePageComponents/Login';
-import LoginButton from './HomePageComponents/LoginButton';
+import NavBar from './NavBar';
+import Login from './Login';
+import LoginButton from './LoginButton';
 import './HomePage.css';
-import AnimationLady from './HomePageComponents/AnimationLady';
+import AnimationLady from './AnimationLady';
 
 //creating theme
 const theme = createTheme({

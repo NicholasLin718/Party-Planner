@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../logotemp.png';
+import logo from './logotemp.png';
 import { Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 

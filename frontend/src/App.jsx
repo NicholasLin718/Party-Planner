@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ProtectedRoutes from './components/LoginRouting/ProtectedRoutes';
 import UserPage from './pages/UserPage/UserPage';
 import PageNotFound from './pages/ErrorPages/PageNotFound';
+import './style.css';
 function App() {
     return (
         <BrowserRouter>

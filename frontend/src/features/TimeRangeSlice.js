@@ -38,6 +38,6 @@ const timeRangeSlice = createSlice({
     }
 });
 
-// export const selectAllRange = (state) => state.selectRange;
+export const selectAllRange = (state) => state.selectRange;
 export const { setRange, setTitle, setDescription } = timeRangeSlice.actions;
 export default timeRangeSlice.reducer;

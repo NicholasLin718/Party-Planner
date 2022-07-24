@@ -1,4 +1,4 @@
-.columns {
+/* .columns {
     display: grid;
     justify-content: center;
     align-content: center;
@@ -33,7 +33,6 @@ label {
     font-weight: 500;
 }
 
-/*Switch button styling*/
 .btn-color-mode-switch {
     display: inline-block;
     margin: 0px;
@@ -106,4 +105,4 @@ label {
     content: attr(data-off);
     right: auto;
     left: 20px;
-}
+} */
