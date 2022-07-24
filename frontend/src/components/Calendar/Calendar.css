@@ -6,7 +6,6 @@
     margin: auto;
     /* width: 50%; */
     max-width: 100%;
-    overflow-x: hidden;
 }
 
 .calendar .header .prev {
@@ -61,7 +60,6 @@
 }
 
 .calendar .body {
-    overflow: hidden;
     height: 450px;
     display: flex;
     position: absolute;

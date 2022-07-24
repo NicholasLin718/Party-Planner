@@ -38,7 +38,6 @@ export default function Day(props) {
                 .slice()
                 .sort((a, b) => a.isoTime.localeCompare(b.isoTime))
         );
-        console.log(selectedList);
     }, [select]);
 
     return (

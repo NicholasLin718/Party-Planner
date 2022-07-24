@@ -46,7 +46,7 @@ export default function CreateMeetupPage() {
     }
 
     return (
-        <div>
+        <div className='bg-[#faf0ef]'>
             <TimeRange ref={TimeRangeRef} />
             <Calendar ref={CalendarRef} />
             <button

@@ -78,7 +78,7 @@ const TimeRange = forwardRef((props, ref) => {
 
     return (
         <div className='App'>
-            <form className='mt-10'>
+            <form>
                 <div className='block'>
                     <label> Meetup Name</label>
                     <input
