@@ -50,12 +50,12 @@ export default function CreateMeetupPage() {
             <TimeRange ref={TimeRangeRef} />
             <Calendar ref={CalendarRef} />
             <button
-                onClick={() => {
+                onClick={async () => {
                     //ADD CONDITIONS FOR REQUIRED FIELDS
                     CalendarRef.current.storeSelectedList();
                     TimeRangeRef.current.storeRange();
 
-                    createCode();
+                    await createCode();
                     if (localStorage.getItem(code)) {
                         navigate('/users/' + code);
                     } else {
