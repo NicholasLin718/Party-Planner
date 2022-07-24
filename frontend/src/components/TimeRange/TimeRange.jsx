@@ -78,20 +78,34 @@ const TimeRange = forwardRef((props, ref) => {
 
     return (
         <div className='App'>
-            <form>
-                <label> Meetup Name</label>
-                <input type='text' onChange={onTitleFieldChanged} />
-                <label>Meetup Description</label>
-                <input type='text' onChange={onDescriptionFieldChanged} />
+            <form className='mt-10'>
+                <div className='block'>
+                    <label> Meetup Name</label>
+                    <input
+                        type='text'
+                        onChange={onTitleFieldChanged}
+                        className='w-full px-2 py-1 text-md font-medium font-sans shadow-sm border-b-2 border-b-slate-600
+                        focus:outline-none focus:border-b-2 focus:border-b-rose-400'
+                    />
+                </div>
+                <div className='block'>
+                    <label>Meetup Description</label>
+                    <input
+                        type='text'
+                        onChange={onDescriptionFieldChanged}
+                        className='w-full px-2 py-1 text-md font-medium font-sans shadow-sm border-b-2 border-b-slate-600
+                        focus:outline-none focus:border-b-2 focus:border-b-rose-400'
+                    />
+                </div>
             </form>
             <div className='select-wrapper'>
                 <TimezoneSelect
                     value={selectedTimezone}
                     onChange={setSelectedTimezone}
-                    className='m-auto w-[800px]'
+                    className='m-auto lg:w-[60rem] sm:w-[30rem] focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400'
                 />
                 <TimePicker
-                    className='timepicker'
+                    className='timepicker m-auto w-[1000px]'
                     label='Time Picker'
                     onStartTimeChange={returnFunctionStart}
                     onEndTimeChange={returnFunctionEnd}

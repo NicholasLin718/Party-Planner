@@ -672,6 +672,10 @@ video {
   margin-top: 2.5rem;
 }
 
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .block {
   display: block;
 }
@@ -716,6 +720,26 @@ video {
   width: 800px;
 }
 
+.w-\[1200px\] {
+  width: 1200px;
+}
+
+.w-\[100rem\] {
+  width: 100rem;
+}
+
+.w-\[20rem\] {
+  width: 20rem;
+}
+
+.w-\[50rem\] {
+  width: 50rem;
+}
+
+.w-\[60rem\] {
+  width: 60rem;
+}
+
 .transform {
   -webkit-transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
           transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -749,6 +773,14 @@ video {
   border-width: 0px;
 }
 
+.border-b-\[3px\] {
+  border-bottom-width: 3px;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
 .border-slate-300 {
   --tw-border-opacity: 1;
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
@@ -762,6 +794,11 @@ video {
 .border-rose-200 {
   --tw-border-opacity: 1;
   border-color: rgb(254 205 211 / var(--tw-border-opacity));
+}
+
+.border-b-slate-600 {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(71 85 105 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -889,14 +926,27 @@ video {
   background-color: transparent;
 }
 
+.focus\:border-b-2:focus {
+  border-bottom-width: 2px;
+}
+
 .focus\:border-rose-400:focus {
   --tw-border-opacity: 1;
   border-color: rgb(251 113 133 / var(--tw-border-opacity));
 }
 
+.focus\:border-b-rose-400:focus {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(251 113 133 / var(--tw-border-opacity));
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.focus\:outline-dotted:focus {
+  outline-style: dotted;
 }
 
 .focus\:ring-1:focus {
@@ -908,4 +958,24 @@ video {
 .focus\:ring-rose-400:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(251 113 133 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-transparent:focus {
+  --tw-ring-color: transparent;
+}
+
+@media (min-width: 640px) {
+  .sm\:w-\[10rem\] {
+    width: 10rem;
+  }
+
+  .sm\:w-\[30rem\] {
+    width: 30rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:w-\[60rem\] {
+    width: 60rem;
+  }
 }
