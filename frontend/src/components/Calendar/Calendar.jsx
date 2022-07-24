@@ -33,36 +33,45 @@ const Calendar = forwardRef((props, ref) => {
     }));
 
     return (
-        <div>
-            <div className='calendar'>
-                <Header
-                    selectedDay={selectedDay}
-                    setSelectedDay={setSelectedDay}
-                    currentMonth={currentMonth}
-                    setCurrentMonth={setCurrentMonth}
-                />
-                <div className='day-names'>
-                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((dayOfWeek, i) => (
-                        <div className='dayOfWeek' key={i}>
-                            {dayOfWeek}
+        <div className='flex absolute'>
+            {calendar.map((month, i) => (
+                <div className='w-[100vw]'>
+                    <div
+                        className='box-border h-[600px] w-[1200px] p-4 border-4 m-auto'
+                        key={i}
+                        style={{
+                            transform: `translateX(-${currentMonth * 100}vw)`
+                        }}>
+                        <Header
+                            selectedDay={selectedDay}
+                            setSelectedDay={setSelectedDay}
+                            currentMonth={currentMonth}
+                            setCurrentMonth={setCurrentMonth}
+                        />
+                        <div className='flex justify-center items-center w-[100%] h-16 p-0 overflow-hidden'>
+                            {[
+                                'SUN',
+                                'MON',
+                                'TUE',
+                                'WED',
+                                'THU',
+                                'FRI',
+                                'SAT'
+                            ].map((dayOfWeek, i) => (
+                                <div
+                                    className='calendar-alignment font-bold'
+                                    key={i}>
+                                    {dayOfWeek}
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-                {/* create div for each day */}
-                <div className='body'>
-                    {calendar.map((month, i) => (
-                        <div
-                            className='slider'
-                            key={i}
-                            style={{
-                                transform: `translateX(-${
-                                    currentMonth * 100
-                                }vw)`
-                            }}>
-                            <br></br>
-                            <div className='container'>
+                        {/* create div for each day */}
+                        <div className='flex justify-center ease-out duration-1000 h-[450px] '>
+                            <div className='overflow-hidden'>
                                 {month.map((week, j) => (
-                                    <div className='week' key={j}>
+                                    <div
+                                        className='flex justify-center items-center w-[100%] h-16 p-0 overflow-hidden'
+                                        key={j}>
                                         {week.map((day, k) => (
                                             <Day
                                                 key={k}
@@ -79,9 +88,9 @@ const Calendar = forwardRef((props, ref) => {
                                 ))}
                             </div>
                         </div>
-                    ))}
+                    </div>
                 </div>
-            </div>
+            ))}
             <div>
                 {selectedList.map((day, i) => {
                     <div key={i}>{day}</div>;

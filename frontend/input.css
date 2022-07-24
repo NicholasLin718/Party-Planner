@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .calendar-alignment {
+        @apply flex justify-center text-lg w-[calc(1200px/7)] select-none;
+    }
+}

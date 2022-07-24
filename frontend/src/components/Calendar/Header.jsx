@@ -27,18 +27,18 @@ export default function Header({
     return (
         <div className='header'>
             <div
-                className='prev'
+                className='fixed top-0 bottom-0 left-0 m-auto text-5xl cursor-pointer select-none'
                 onClick={() => {
                     currentMonth !== 0 && handleClick('left');
                     setSelectedDay(prevMonth());
                 }}>
                 {!currMonth() ? String.fromCharCode(171) : null}
             </div>
-            <div>
+            <div className='flex justify-center text-6xl font-sans font-extrabold'>
                 {selectedDay.format('MMMM')} {selectedDay.format('YYYY')}
             </div>
             <div
-                className='next'
+                className='fixed top-0 bottom-0 right-0 m-auto text-5xl cursor-pointer select-none'
                 onClick={() => {
                     currentMonth < 36 && handleClick('right');
                     setSelectedDay(nextMonth());

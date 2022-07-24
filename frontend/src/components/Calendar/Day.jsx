@@ -48,7 +48,7 @@ export default function Day(props) {
                 }
             }}
             className={
-                'day ' +
+                'calendar-alignment ' +
                 (unclickable
                     ? 'disable'
                     : dayStyles(day, selectedDay, select)) +
