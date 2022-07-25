@@ -33,11 +33,11 @@ const Calendar = forwardRef((props, ref) => {
     }));
 
     return (
-        <div className='flex absolute'>
+        <div className='flex absolute bg-[#faf0ef]'>
             {calendar.map((month, i) => (
-                <div className='w-[100vw]'>
+                <div className='flex w-[100vw] min-w-[500px]'>
                     <div
-                        className='box-border h-[600px] w-[1200px] p-4 border-4 m-auto'
+                        className='box-border h-[600px] w-[80%] sm:w-[80%] md:w-[75%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] 3xl:w-[40%] p-4 border-4 m-auto bg-white shadow-lg shadow-indigo-300'
                         key={i}
                         style={{
                             transform: `translateX(-${currentMonth * 100}vw)`

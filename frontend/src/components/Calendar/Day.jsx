@@ -48,7 +48,7 @@ export default function Day(props) {
                 }
             }}
             className={
-                'calendar-alignment ' +
+                'rounded-[20%] ml-[4%] mr-[4%] calendar-alignment ' +
                 (unclickable
                     ? 'disable'
                     : dayStyles(day, selectedDay, select)) +

@@ -5,7 +5,9 @@ body {
         'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
     overflow-x: hidden; /*removed so calendar doesn't show later days*/
+    background-color: #faf0ef;
 }
 
 code {

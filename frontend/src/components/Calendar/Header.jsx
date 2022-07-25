@@ -1,5 +1,9 @@
 import React from 'react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faChevronCircleRight,
+    faChevronCircleLeft
+} from '@fortawesome/free-solid-svg-icons';
 export default function Header({
     selectedDay,
     setSelectedDay,
@@ -26,25 +30,30 @@ export default function Header({
 
     return (
         <div className='header'>
-            <div
-                className='fixed top-0 bottom-0 left-0 m-auto text-5xl cursor-pointer select-none'
-                onClick={() => {
-                    currentMonth !== 0 && handleClick('left');
-                    setSelectedDay(prevMonth());
-                }}>
-                {!currMonth() ? String.fromCharCode(171) : null}
-            </div>
-            <div className='flex justify-center text-6xl font-sans font-extrabold'>
+            {console.log(currentMonth)}
+            {currentMonth > 0 && (
+                <FontAwesomeIcon
+                    icon={faChevronCircleLeft}
+                    className='fixed top-50 bottom-3 left-5 m-auto text-4xl cursor-pointer select-none'
+                    onClick={() => {
+                        currentMonth !== 0 && handleClick('left');
+                        setSelectedDay(prevMonth());
+                    }}
+                />
+            )}
+            <div className='flex justify-center text-3xl sm:text-6xl font-sans font-extrabold select-none'>
                 {selectedDay.format('MMMM')} {selectedDay.format('YYYY')}
             </div>
-            <div
-                className='fixed top-0 bottom-0 right-0 m-auto text-5xl cursor-pointer select-none'
-                onClick={() => {
-                    currentMonth < 36 && handleClick('right');
-                    setSelectedDay(nextMonth());
-                }}>
-                {currentMonth < 36 ? String.fromCharCode(187) : null}
-            </div>
+            {currentMonth < 36 && (
+                <FontAwesomeIcon
+                    icon={faChevronCircleRight}
+                    className='fixed top-50 bottom-3 right-5 m-auto text-4xl cursor-pointer select-none'
+                    onClick={() => {
+                        currentMonth < 36 && handleClick('right');
+                        setSelectedDay(nextMonth());
+                    }}
+                />
+            )}
         </div>
     );
 }

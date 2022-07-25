@@ -80,21 +80,25 @@ const TimeRange = forwardRef((props, ref) => {
         <div className='App'>
             <form>
                 <div className='block'>
-                    <label> Meetup Name</label>
+                    <label className='font-mono'>
+                        Give your meetup a name:
+                    </label>
                     <input
                         type='text'
                         onChange={onTitleFieldChanged}
-                        className='w-full px-2 py-1 text-md font-medium font-sans shadow-sm border-b-2 border-b-slate-600
-                        focus:outline-none focus:border-b-2 focus:border-b-rose-400'
+                        className='w-full px-2 py-2 text-xl font-medium font-mono shadow-sm border-b-2 border-b-slate-600
+                        focus:outline-none focus:border-b-2 focus:border-b-rose-400 bg-[#faf0ef]'
                     />
                 </div>
                 <div className='block'>
-                    <label>Meetup Description</label>
+                    <label className='font-mono'>
+                        What is your meetup about?
+                    </label>
                     <input
                         type='text'
                         onChange={onDescriptionFieldChanged}
-                        className='w-full px-2 py-1 text-md font-medium font-sans shadow-sm border-b-2 border-b-slate-600
-                        focus:outline-none focus:border-b-2 focus:border-b-rose-400'
+                        className='w-full px-2 py-2 text-xl font-medium font-mono shadow-sm border-b-2 border-b-slate-600
+                        focus:outline-none focus:border-b-2 focus:border-b-rose-400 bg-[#faf0ef]'
                     />
                 </div>
             </form>
@@ -102,10 +106,10 @@ const TimeRange = forwardRef((props, ref) => {
                 <TimezoneSelect
                     value={selectedTimezone}
                     onChange={setSelectedTimezone}
-                    className='m-auto lg:w-[60rem] sm:w-[30rem] focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400'
+                    className='m-auto lg:w-[60rem] sm:w-[30rem] focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 font-mono'
                 />
                 <TimePicker
-                    className='timepicker m-auto w-[1000px]'
+                    className='timepicker m-auto w-[1000px] font-mono'
                     label='Time Picker'
                     onStartTimeChange={returnFunctionStart}
                     onEndTimeChange={returnFunctionEnd}
