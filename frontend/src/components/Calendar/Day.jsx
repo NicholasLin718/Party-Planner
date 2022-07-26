@@ -51,8 +51,10 @@ export default function Day(props) {
                 'rounded-[20%] ml-[1.5%] mr-[1.5%] sm:ml-[4%] sm:mr-[4%] calendar-alignment ' +
                 (unclickable
                     ? 'disable'
-                    : dayStyles(day, selectedDay, select)) +
-                (!select && !unclickable ? ' unselected' : '')
+                    : dayStyles(day, selectedDay, select) +
+                      (!select
+                          ? ' unselected cursor-pointer'
+                          : ' cursor-pointer'))
             }>
             <div className='font-mono text-xl'>{day.format('D')}</div>
         </div>

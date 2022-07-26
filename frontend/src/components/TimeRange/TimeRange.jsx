@@ -9,6 +9,7 @@ import {
     setDescription
 } from '../../features/TimeRangeSlice';
 import './styles.css';
+import CreatePageTextBoxComponent from './CreatePageTextBoxComponent';
 const TimeRange = forwardRef((props, ref) => {
     const dispatch = useDispatch();
     const [selectedTimezone, setSelectedTimezone] = useState({
@@ -79,30 +80,16 @@ const TimeRange = forwardRef((props, ref) => {
     return (
         <div className='App mt-12'>
             <form className='max-w-[1300px] m-auto min-w-[300px]'>
-                <div className='block p-5'>
-                    <label className='font-mono font-semibold text-3xl'>
-                        What's The Event Called?
-                    </label>
-                    <input
-                        type='text'
-                        onChange={onTitleFieldChanged}
-                        placeholder={'Enter Meetup Name'}
-                        className='w-full px-2 py-2 text-xl font-medium font-mono shadow-sm border-b-2 border-b-slate-600
-                        focus:outline-none focus:border-b-2 focus:border-b-rose-400 bg-[#faf0ef]'
-                    />
-                </div>
-                <div className='block p-5'>
-                    <label className='font-mono font-semibold text-3xl'>
-                        What's The Event About?
-                    </label>
-                    <input
-                        type='text'
-                        onChange={onDescriptionFieldChanged}
-                        placeholder={'Partayyy'}
-                        className='w-full px-2 py-2 text-xl font-medium font-mono shadow-sm border-b-2 border-b-slate-600
-                        focus:outline-none focus:border-b-2 focus:border-b-rose-400 bg-[#faf0ef]'
-                    />
-                </div>
+                <CreatePageTextBoxComponent
+                    onChangeHandler={onTitleFieldChanged}
+                    placeholderText={'Enter Event Name'}
+                    labelText={"What's The Event Called?"}
+                />
+                <CreatePageTextBoxComponent
+                    onChangeHandler={onDescriptionFieldChanged}
+                    placeholderText={'Partayyy'}
+                    labelText={"What's The Event About?"}
+                />
             </form>
             <div className='mt-5 min-w-[300px]'>
                 <TimezoneSelect
