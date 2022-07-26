@@ -22,4 +22,7 @@ router.route('/pages/:code/polls/:id')
 router.route('/pages/:code/polls/:id/votes')
 .put(asyncHandler(PollController.addVote));
 
+router.route('/pages/:code/signin')
+.post(asyncHandler(PageController.signin));
+
 module.exports = router;
