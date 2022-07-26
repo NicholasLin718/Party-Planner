@@ -46,26 +46,28 @@ export default function CreateMeetupPage() {
     }
 
     return (
-        <div className='bg-[#faf0ef]'>
+        <div className='bg-[#faf0ef] pb-20'>
             <TimeRange ref={TimeRangeRef} />
             <Calendar ref={CalendarRef} />
-            <button
-                onClick={async () => {
-                    //ADD CONDITIONS FOR REQUIRED FIELDS
-                    CalendarRef.current.storeSelectedList();
-                    TimeRangeRef.current.storeRange();
+            <div className='text-center'>
+                <button
+                    onClick={async () => {
+                        //ADD CONDITIONS FOR REQUIRED FIELDS
+                        CalendarRef.current.storeSelectedList();
+                        TimeRangeRef.current.storeRange();
 
-                    await createCode();
-                    if (localStorage.getItem(code)) {
-                        navigate('/users/' + code);
-                    } else {
-                        alert('Error occured while creating the room!');
-                        navigate('/create');
-                    }
-                }}
-                className='px-2 py-1 z-10 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150 mt-10'>
-                Submit
-            </button>
+                        await createCode();
+                        if (localStorage.getItem(code)) {
+                            navigate('/users/' + code);
+                        } else {
+                            alert('Error occured while creating the room!');
+                            navigate('/create');
+                        }
+                    }}
+                    className='w-[500px] mt-[550px] px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'>
+                    Create Event
+                </button>
+            </div>
             {/* <button onClick={createCode}>Create Code</button> */}
         </div>
     );
