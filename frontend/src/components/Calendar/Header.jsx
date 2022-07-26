@@ -41,7 +41,7 @@ export default function Header({
                     }}
                 />
             )}
-            <div className='flex justify-center text-3xl sm:text-6xl font-sans font-extrabold select-none'>
+            <div className='flex justify-center text-3xl sm:text-5xl font-mono font-extrabold select-none'>
                 {selectedDay.format('MMMM')} {selectedDay.format('YYYY')}
             </div>
             {currentMonth < 36 && (

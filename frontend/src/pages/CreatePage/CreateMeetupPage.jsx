@@ -62,8 +62,9 @@ export default function CreateMeetupPage() {
                         alert('Error occured while creating the room!');
                         navigate('/create');
                     }
-                }}>
-                submit
+                }}
+                className='px-2 py-1 z-10 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150 mt-10'>
+                Submit
             </button>
             {/* <button onClick={createCode}>Create Code</button> */}
         </div>

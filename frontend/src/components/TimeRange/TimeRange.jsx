@@ -77,39 +77,41 @@ const TimeRange = forwardRef((props, ref) => {
     };
 
     return (
-        <div className='App'>
-            <form>
-                <div className='block'>
-                    <label className='font-mono'>
-                        Give your meetup a name:
+        <div className='App mt-12'>
+            <form className='max-w-[1300px] m-auto min-w-[300px]'>
+                <div className='block p-5'>
+                    <label className='font-mono font-semibold text-3xl'>
+                        What's The Event Called?
                     </label>
                     <input
                         type='text'
                         onChange={onTitleFieldChanged}
+                        placeholder={'Enter Meetup Name'}
                         className='w-full px-2 py-2 text-xl font-medium font-mono shadow-sm border-b-2 border-b-slate-600
                         focus:outline-none focus:border-b-2 focus:border-b-rose-400 bg-[#faf0ef]'
                     />
                 </div>
-                <div className='block'>
-                    <label className='font-mono'>
-                        What is your meetup about?
+                <div className='block p-5'>
+                    <label className='font-mono font-semibold text-3xl'>
+                        What's The Event About?
                     </label>
                     <input
                         type='text'
                         onChange={onDescriptionFieldChanged}
+                        placeholder={'Partayyy'}
                         className='w-full px-2 py-2 text-xl font-medium font-mono shadow-sm border-b-2 border-b-slate-600
                         focus:outline-none focus:border-b-2 focus:border-b-rose-400 bg-[#faf0ef]'
                     />
                 </div>
             </form>
-            <div className='select-wrapper'>
+            <div className='mt-5 min-w-[300px]'>
                 <TimezoneSelect
                     value={selectedTimezone}
                     onChange={setSelectedTimezone}
-                    className='m-auto lg:w-[60rem] sm:w-[30rem] focus:outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400 font-mono'
+                    className='m-auto w-[80%] sm:w-[80%] md:w-[75%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] 3xl:w-[40%] font-mono text-sm sm:text-base'
                 />
                 <TimePicker
-                    className='timepicker m-auto w-[1000px] font-mono'
+                    className='timepicker m-auto w-[80%] sm:w-[80%] md:w-[75%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] 3xl:w-[40%] font-mono text-sm sm:text-base'
                     label='Time Picker'
                     onStartTimeChange={returnFunctionStart}
                     onEndTimeChange={returnFunctionEnd}

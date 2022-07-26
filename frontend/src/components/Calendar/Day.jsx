@@ -48,13 +48,13 @@ export default function Day(props) {
                 }
             }}
             className={
-                'rounded-[20%] ml-[4%] mr-[4%] calendar-alignment ' +
+                'rounded-[20%] ml-[1.5%] mr-[1.5%] sm:ml-[4%] sm:mr-[4%] calendar-alignment ' +
                 (unclickable
                     ? 'disable'
                     : dayStyles(day, selectedDay, select)) +
                 (!select && !unclickable ? ' unselected' : '')
             }>
-            <div>{day.format('D')}</div>
+            <div className='font-mono text-xl'>{day.format('D')}</div>
         </div>
     );
 }

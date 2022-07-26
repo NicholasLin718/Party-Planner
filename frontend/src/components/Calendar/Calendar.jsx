@@ -33,11 +33,11 @@ const Calendar = forwardRef((props, ref) => {
     }));
 
     return (
-        <div className='flex absolute bg-[#faf0ef]'>
+        <div className='flex absolute bg-[#faf0ef] mb-10'>
             {calendar.map((month, i) => (
-                <div className='flex w-[100vw] min-w-[500px]'>
+                <div className='flex w-[100vw] min-w-[300px]'>
                     <div
-                        className='box-border h-[600px] w-[80%] sm:w-[80%] md:w-[75%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] 3xl:w-[40%] p-4 border-4 m-auto bg-white shadow-lg shadow-indigo-300'
+                        className='box-border h-[515px] w-[80%] sm:w-[80%] md:w-[75%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] 3xl:w-[40%] p-4 border-4 m-auto bg-white shadow-lg shadow-indigo-300'
                         key={i}
                         style={{
                             transform: `translateX(-${currentMonth * 100}vw)`
@@ -48,7 +48,7 @@ const Calendar = forwardRef((props, ref) => {
                             currentMonth={currentMonth}
                             setCurrentMonth={setCurrentMonth}
                         />
-                        <div className='flex justify-center items-center w-[100%] h-16 p-0 overflow-hidden'>
+                        <div className='flex justify-center items-center w-[100%] h-20 p-0 overflow-hidden'>
                             {[
                                 'SUN',
                                 'MON',
@@ -59,18 +59,18 @@ const Calendar = forwardRef((props, ref) => {
                                 'SAT'
                             ].map((dayOfWeek, i) => (
                                 <div
-                                    className='calendar-alignment font-bold'
+                                    className='calendar-alignment font-bold font-mono'
                                     key={i}>
                                     {dayOfWeek}
                                 </div>
                             ))}
                         </div>
                         {/* create div for each day */}
-                        <div className='flex justify-center ease-out duration-1000 h-[450px] '>
+                        <div className='flex justify-center'>
                             <div className='overflow-hidden'>
                                 {month.map((week, j) => (
                                     <div
-                                        className='flex justify-center items-center w-[100%] h-16 p-0 overflow-hidden'
+                                        className='flex justify-center items-center w-[100%] h-12 p-0 overflow-hidden'
                                         key={j}>
                                         {week.map((day, k) => (
                                             <Day
