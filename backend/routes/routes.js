@@ -17,7 +17,8 @@ router.route('/pages/:code/polls')
 .post(asyncHandler(PollController.createPoll));
 
 router.route('/pages/:code/polls/:id')
-.delete(asyncHandler(PollController.deletePoll));
+.delete(asyncHandler(PollController.deletePoll))
+.put(asyncHandler(PollController.updatePoll));
 
 router.route('/pages/:code/polls/:id/votes')
 .put(asyncHandler(PollController.addVote));
