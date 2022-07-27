@@ -6,10 +6,10 @@ export default function Slot(props) {
 
     const handleClick = () => {
         let tempSlotArray = slotArrays.slice();
-        tempSlotArray[selectableKey.j].slots[selectableKey.i].selected =
-            !tempSlotArray[selectableKey.j].slots[selectableKey.i].selected;
+        tempSlotArray[selectableKey.k.j].slots[selectableKey.i].selected =
+            !tempSlotArray[selectableKey.k.j].slots[selectableKey.i].selected;
         setSelectedSlot(
-            tempSlotArray[selectableKey.j].slots[selectableKey.i].selected
+            tempSlotArray[selectableKey.k.j].slots[selectableKey.i].selected
         );
         setSlotArrays(tempSlotArray);
     };

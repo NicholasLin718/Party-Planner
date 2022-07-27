@@ -2,7 +2,8 @@ import React, {
     useEffect,
     useState,
     forwardRef,
-    useImperativeHandle
+    useImperativeHandle,
+    useMemo
 } from 'react';
 import Slot from './Slot';
 import './styles.css';
@@ -13,23 +14,38 @@ import {
     storeAvailability,
     selectAllAvailability
 } from '../../features/AvailabilitySlice';
+import Pagination from './Pagination';
 
 const SelectableComponent = createSelectable(Slot);
 
 const Columns = forwardRef((props, ref) => {
     const dispatch = useDispatch();
 
-    const { currentColumns, arrayOfColumns } = props;
+    const { currentColumns, arrayOfPagesOfColumns, totalColumns } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [booleanSelect, setBooleanSelect] = useState(true);
-    const [slotArrays, setSlotArrays] = useState(arrayOfColumns);
+    const [slotArrays, setSlotArrays] = useState(arrayOfPagesOfColumns);
     const [selectedKeys, setSelectedKeys] = useState([]);
+    const PageSize = 5;
+
+    console.log(arrayOfPagesOfColumns);
+    const [currentPage, setCurrentPage] = useState(1);
+    // const currentColumnData = useMemo(() => {
+    //     const firstPageIndex = (currentPage - 1) * PageSize;
+    //     const lastPageIndex = firstPageIndex + PageSize;
+    //     console.log(firstPageIndex);
+    //     console.log(lastPageIndex);
+    //     console.log(arrayOfColumns.slice(firstPageIndex, lastPageIndex));
+    //     return arrayOfColumns.slice(firstPageIndex, lastPageIndex);
+    // }, [currentPage]);
 
     const handleSelection = (keys) => {
+        console.log(keys);
         let arr = slotArrays.slice();
+        console.log(arr);
         keys.forEach((key) => {
-            const { i, j } = key;
-            arr[j].slots[i].selected = booleanSelect;
+            const { i, j, k } = key;
+            arr[k][j].slots[i].selected = booleanSelect;
         });
         setSlotArrays(arr);
         setSelectedKeys({
@@ -43,40 +59,65 @@ const Columns = forwardRef((props, ref) => {
         }
     }));
 
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        //slotArrayRef.current.updateSlotArrays(currentColumns);
+    };
+
     return (
         <div>
             <SelectButton
                 clickHandler={() => setBooleanSelect(!booleanSelect)}
             />
-            <SelectableGroup onSelection={handleSelection} className='columns'>
-                {slotArrays.map((column, j) => {
-                    console.log(column);
-                    const date = column.date.isoTime;
-                    const dayOfWeek = column.date.dayOfWeek;
-                    let formattedDay = date.match(/\d\d\d\d-\d\d-\d\d/);
-                    return (
-                        <div
-                            key={j}
-                            className={formattedDay[0].substring(5, 10)}>
-                            {formattedDay[0].substring(5, 10)}
-                            <br />
-                            {listOfWeekDays[dayOfWeek]}
-                            {slotArrays[j].slots.map((slotData, i) => {
+            {slotArrays.map((page, k) => (
+                <div>
+                    {currentPage === k + 1 && (
+                        <SelectableGroup
+                            key={k}
+                            onSelection={handleSelection}
+                            className='columns bg-slate-100'>
+                            {page.map((column, j) => {
+                                console.log(column);
+                                console.log(column.slots);
+                                const date = column.date.isoTime;
+                                const dayOfWeek = column.date.dayOfWeek;
+                                let formattedDay =
+                                    date.match(/\d\d\d\d-\d\d-\d\d/);
                                 return (
-                                    <SelectableComponent
-                                        key={i}
-                                        selectableKey={{ i, j }}
-                                        slotData={slotData}
-                                        slotArrays={slotArrays}
-                                        setSlotArrays={
-                                            setSlotArrays
-                                        }></SelectableComponent>
+                                    <div
+                                        key={j}
+                                        className={
+                                            formattedDay[0].substring(5, 10) +
+                                            ' bg-slate-500'
+                                        }>
+                                        {formattedDay[0].substring(5, 10)}
+                                        <br />
+                                        {listOfWeekDays[dayOfWeek]}
+                                        {console.log(column)}
+                                        {column.slots.map((slotData, i) => {
+                                            return (
+                                                <SelectableComponent
+                                                    key={i}
+                                                    selectableKey={{ i, j, k }}
+                                                    slotData={slotData}
+                                                    slotArrays={slotArrays}
+                                                    setSlotArrays={
+                                                        setSlotArrays
+                                                    }></SelectableComponent>
+                                            );
+                                        })}
+                                    </div>
                                 );
                             })}
-                        </div>
-                    );
-                })}
-            </SelectableGroup>
+                        </SelectableGroup>
+                    )}
+                </div>
+            ))}
+            <Pagination
+                columnsPerPage={PageSize}
+                totalColumns={totalColumns}
+                paginate={paginate}
+            />
         </div>
     );
 });

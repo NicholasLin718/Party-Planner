@@ -18,7 +18,7 @@ const Pagination = (props) => {
                                 paginate(number);
                                 console.log(number);
                             }}
-                            className='page-link'>
+                            className='page-link block'>
                             {number}
                         </button>
                     </li>

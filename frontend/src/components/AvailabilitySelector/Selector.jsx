@@ -74,12 +74,22 @@ const Selector = () => {
         arrayOfColumns.push({ date: orderedPrintList[i], slots: columnObject });
     }
     let newArr = [];
+    let page = [];
+
+    let totalColumns = 0;
 
     arrayOfColumns.forEach((column) => {
         let newColumn = structuredClone(column);
-        newArr.push(newColumn);
+        page.push(newColumn);
+        totalColumns++;
+        if (totalColumns % 5 === 0) {
+            newArr.push(page);
+            console.log(newArr);
+            page = [];
+        }
     });
-    arrayOfColumns = newArr;
+    if (page.length > 0) newArr.push(page);
+    let arrayOfPagesOfColumns = newArr;
 
     const indexOfLastColumn = currentPage * columnsPerPage;
     const indexOfFirstColumn = indexOfLastColumn - columnsPerPage;
@@ -89,11 +99,6 @@ const Selector = () => {
     );
     console.log(currentColumns);
 
-    const paginate = (pageNumber) => {
-        setCurrentPage(pageNumber);
-        //slotArrayRef.current.updateSlotArrays(currentColumns);
-    };
-
     return (
         <div>
             {/* {renderedDays} */}
@@ -102,31 +107,28 @@ const Selector = () => {
                 startValue={startValue}
                 endValue={endValue}
             />
-            <div className='column-page'>
+            <div className='column-page bg-slate-800'>
                 <Columns
-                    ref={slotArrayRef}
-                    currentColumns={currentColumns}
-                    arrayOfColumns={arrayOfColumns}
-                />
-                <Pagination
-                    columnsPerPage={columnsPerPage}
-                    totalColumns={orderedPrintList.length}
-                    paginate={paginate}
+                    ref={slotArrayRef} //reference to slot array
+                    currentColumns={currentColumns} //array of 5 columns
+                    //arrayOfColumns={arrayOfColumns} //array of all the columns
+                    arrayOfPagesOfColumns={arrayOfPagesOfColumns} //array of all pages of the columns (2D array)
+                    totalColumns={totalColumns}
                 />
             </div>
-            <button
+            {/* <button
                 onClick={() => {
                     slotArrayRef.current.storeSlotArrays();
                 }}>
                 Store
-            </button>
-            <button
+            </button> */}
+            {/* <button
                 onClick={() => {
                     const data = store.getState();
                     console.log(data);
                 }}>
                 Click for funny
-            </button>
+            </button> */}
         </div>
     );
 };
