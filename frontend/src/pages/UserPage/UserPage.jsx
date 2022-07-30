@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
+import UserCard from '../../components/UserCard/UserCard';
 /*
 With routing, we want protected routing such that the user must enter a username in the userpage to authenticate. After that, the link with code will always work without userpage authentication.
 */
@@ -22,8 +23,8 @@ const UserPage = () => {
         getRoom();
     }, []);
 
-    const setUserStorage = (user) => {
-        localStorage.setItem(code, user);
+    const setUserStorage = (username) => {
+        localStorage.setItem(code, username);
         navigate('/r/' + code);
     };
 
@@ -34,13 +35,19 @@ const UserPage = () => {
             <div>{!loading && data.meetupDescription}</div>
             {!loading &&
                 data.users.map((user, i) => (
-                    <button
-                        onClick={() => {
-                            setUserStorage(user.username);
-                        }}
-                        key={i}>
-                        {user.username}
-                    </button>
+                    <div key={i}>
+                        <UserCard
+                            username={user.username}
+                            password={user.password}
+                            sprite={user.sprite}
+                        />
+                        <button
+                            onClick={() => {
+                                setUserStorage(user.username);
+                            }}>
+                            {user.username}
+                        </button>
+                    </div>
                 ))}
             <button onClick={() => setRegisterForm(true)}>
                 Register New User

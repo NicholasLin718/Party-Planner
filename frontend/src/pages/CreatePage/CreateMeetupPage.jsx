@@ -12,6 +12,7 @@ export default function CreateMeetupPage() {
     //create a function such that when button outside here is pressed, it will
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     async function createCode() {
+        code = '';
         for (let i = 0; i < 6; i++) {
             code += letters.charAt(Math.floor(Math.random() * letters.length));
         }
@@ -56,6 +57,9 @@ export default function CreateMeetupPage() {
                         CalendarRef.current.storeSelectedList();
                         TimeRangeRef.current.storeRange();
 
+                        const data = store.getState();
+                        if (!data.timeRange.title)
+                            alert('Event name required!');
                         await createCode();
                         if (localStorage.getItem(code)) {
                             navigate('/users/' + code);

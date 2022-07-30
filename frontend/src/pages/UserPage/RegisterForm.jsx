@@ -18,8 +18,15 @@ const RegisterForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const sprite = Math.ceil(Math.random() * 12 - 1);
         const rawBody = {
-            $push: { users: { username: username, password: password } }
+            $push: {
+                users: {
+                    username: username,
+                    password: password,
+                    sprite: sprite
+                }
+            }
         };
         //most likely need to fetch full thing and then update users
         const requestOptions = {

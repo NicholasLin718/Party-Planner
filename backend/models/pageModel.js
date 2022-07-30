@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {pollSchema} = require("./pollSchema");
-const {personSchema} = require ("./personSchema");
+const { pollSchema } = require('./pollSchema');
+const { personSchema } = require('./personSchema');
 
 const pageSchema = new Schema({
     code: {

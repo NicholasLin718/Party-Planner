@@ -21,11 +21,13 @@ const TimeRange = forwardRef((props, ref) => {
     }); //set default to EDT
     const [startTime, setStartTime] = useState(moment().toISOString());
     const [endTime, setEndTime] = useState(moment().toISOString());
-    const [titleField, setTitleField] = useState('Enter Title');
-    const [descriptionField, setDescriptionField] =
-        useState('Enter Description');
+    const [titleField, setTitleField] = useState('');
+    const [descriptionField, setDescriptionField] = useState('');
 
-    const onTitleFieldChanged = (e) => setTitleField(e.target.value);
+    const onTitleFieldChanged = (e) => {
+        setTitleField(e.target.value);
+        console.log(e.target.value);
+    };
     const onDescriptionFieldChanged = (e) =>
         setDescriptionField(e.target.value);
 
@@ -83,7 +85,7 @@ const TimeRange = forwardRef((props, ref) => {
                 <CreatePageTextBoxComponent
                     onChangeHandler={onTitleFieldChanged}
                     placeholderText={'Enter Event Name'}
-                    labelText={"What's The Event Called?"}
+                    labelText={"What's The Event Called? (Required)"}
                 />
                 <CreatePageTextBoxComponent
                     onChangeHandler={onDescriptionFieldChanged}
