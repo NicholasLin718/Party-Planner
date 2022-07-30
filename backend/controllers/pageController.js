@@ -21,13 +21,10 @@ class PageController {
             res.status(400);
             throw new Error('Body has missing values');
         }
-        try{
-            const createdPage = await Page.create(req.body);
-            res.status(200).json(createdPage);
-        } catch(error){
-            console.log(error);
 
-        }
+        const createdPage = await Page.create(req.body);
+
+        res.status(200).json(createdPage);
     };
 
     // @desc Update page
@@ -65,6 +62,26 @@ class PageController {
         await page.remove();
         res.status(200).json({ code: code });
     };
+
+    static async signin(req, res){
+        const {code}  = req.params;
+        const page = await Page.findOne({code: code});
+        if (!req.body || !req.body.username || !req.body.password) {
+            res.status(400);
+            throw new Error('Body has missing values');
+        }
+
+        const user = page.users.find(user => {return user.username == req.body.username});
+        if(!user){
+            res.status(404);
+            throw new Error('user not found');
+        }
+        if(user.password == req.body.password){
+            res.status(200).json({message: "SUCCESS"});
+        } else {
+            res.status(200).json({success: "FAIL"});
+        }
+    }
 
 }
 module.exports = {

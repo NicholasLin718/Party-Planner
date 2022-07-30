@@ -93,6 +93,33 @@ class PollController {
         const updatedPage = await Page.findOneAndUpdate({"code": code}, curPage, {new: true});
         res.status(200).json(updatedPage);
     };
+
+    // @desc Update a poll
+    // @route PUT /pages/:code/polls/:id
+    // @access Private
+    static async updatePoll(req, res){
+        if (!req.body) {
+            res.status(400);
+            throw new Error('Body has missing values');
+        }
+        const code = req.params.code;
+        const id = parseInt(req.params.id);
+
+        const curPage = await Page.findOne({"code": code});
+        let found = false;
+        for(let i = 0; i < curPage.polls.length; i++){
+            if(curPage.polls[i].id === id){
+                curPage.polls[i] = req.body;
+                found = true;
+            }
+        }
+        if (!found){
+            res.status(404);
+            throw new Error('Poll not found');
+        }
+        const updatedPage = await Page.findOneAndUpdate({"code": code}, curPage, {new: true});
+        res.status(200).json(updatedPage);
+    };
 }
 module.exports = {
     PollController

@@ -22,6 +22,9 @@
     },
     "homepage": "https://github.com/NicholasLin718/party-planner#readme",
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.1.2",
+        "@fortawesome/free-solid-svg-icons": "^6.1.2",
+        "@fortawesome/react-fontawesome": "^0.2.0",
         "axios": "^0.27.2",
         "colors": "^1.4.0",
         "concurrently": "^7.2.1",
@@ -32,7 +35,8 @@
         "express-async-handler": "^1.2.0",
         "mongoose": "^6.3.4",
         "node-fetch": "^3.2.6",
-        "react-dom": "^18.1.0"
+        "react-dom": "^18.1.0",
+        "react-selectable": "^2.1.1"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",

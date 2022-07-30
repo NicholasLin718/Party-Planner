@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import UserCard from '../../components/UserCard/UserCard';
+import PasswordForm from './PasswordForm';
 /*
 With routing, we want protected routing such that the user must enter a username in the userpage to authenticate. After that, the link with code will always work without userpage authentication.
 */
@@ -11,7 +12,8 @@ const UserPage = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [registerForm, setRegisterForm] = useState(false);
-
+    const [requirePassword, setRequirePassword] = useState(false);
+    const [selectedUser, setSelectedUser] = useState('');
     async function getRoom() {
         const response = await fetch('http://localhost:5000/pages/' + code);
         const res = await response.json();
@@ -28,6 +30,19 @@ const UserPage = () => {
         navigate('/r/' + code);
     };
 
+    const handleUserClick = (username) => {
+        const curUser = data.users.find((user) => {
+            return user.username === username;
+        });
+        setSelectedUser(username);
+        if (!curUser) console.log('not found');
+        if (curUser.password === '') {
+            setUserStorage(username);
+        } else {
+            setRequirePassword(true);
+        }
+    };
+
     return (
         <div>
             <div>{!loading && data.code}</div>
@@ -36,15 +51,24 @@ const UserPage = () => {
             {!loading &&
                 data.users.map((user, i) => (
                     <div key={i}>
-                        <UserCard
-                            username={user.username}
-                            password={user.password}
-                            sprite={user.sprite}
-                        />
+                        <div>
+                            <UserCard
+                                username={user.username}
+                                password={user.password}
+                                sprite={user.sprite}
+                            />
+                            <button
+                                onClick={() => {
+                                    setUserStorage(user.username);
+                                }}>
+                                {user.username}
+                            </button>
+                        </div>
                         <button
                             onClick={() => {
-                                setUserStorage(user.username);
-                            }}>
+                                handleUserClick(user.username);
+                            }}
+                            key={i}>
                             {user.username}
                         </button>
                     </div>
@@ -53,6 +77,12 @@ const UserPage = () => {
                 Register New User
             </button>
             {registerForm && <RegisterForm setUserStorage={setUserStorage} />}
+            {requirePassword && (
+                <PasswordForm
+                    setUserStorage={setUserStorage}
+                    selectedUser={selectedUser}
+                />
+            )}
         </div>
     );
 };

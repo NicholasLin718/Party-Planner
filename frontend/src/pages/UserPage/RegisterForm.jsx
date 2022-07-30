@@ -13,7 +13,8 @@ const RegisterForm = (props) => {
     };
 
     const onPasswordChange = (e) => {
-        setPassword(e.target.value);
+        const result = e.target.value.replace(/\D/g, '');
+        setPassword(result);
     };
 
     const handleSubmit = async (e) => {
@@ -24,7 +25,8 @@ const RegisterForm = (props) => {
                 users: {
                     username: username,
                     password: password,
-                    sprite: sprite
+                    sprite: sprite,
+                    availableTimes: new Array(24).fill(false)
                 }
             }
         };
@@ -48,7 +50,12 @@ const RegisterForm = (props) => {
                 <label>Username</label>
                 <input type='text' onChange={onUsernameChange} />
                 <label>Password (Optional)</label>
-                <input type='text' onChange={onPasswordChange} />
+                <input
+                    type='text'
+                    onChange={onPasswordChange}
+                    maxLength={4}
+                    value={password}
+                />
                 <button type='submit'>Add new user</button>
             </form>
         </div>

@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage/HomePage';
 import CreateMeetupPage from './pages/CreatePage/CreateMeetupPage';
 import EnterCode from './components/LoginRouting/EnterCode';
 import Poll from './components/Polls/Poll';
+import PollPage from './pages/PollPage/PollPage';
+import CreatePollPage from './pages/PollPage/CreatePollPage';
 // import Dashboard from './components/Dashboard/Dashboard';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProtectedRoutes from './components/LoginRouting/ProtectedRoutes';
@@ -26,7 +28,8 @@ function App() {
                 <Route path='/range' element={<TimeRange />} />
                 <Route path='/r/:code/select' element={<Selector />} />
                 {/*<Route path='/enter' element={<EnterCode />} >*/}
-                <Route path='/poll' element={<Poll />} />
+                <Route path='/r/:code/polls' element={<PollPage />} />
+                <Route path='/r/:code/polls/create' element={<CreatePollPage />} />
                 {/* <Route path='/r/:code' element={<Dashboard />} /> */}
                 <Route path='/users/:code' element={<UserPage />} />
                 <Route element={<ProtectedRoutes />}>
