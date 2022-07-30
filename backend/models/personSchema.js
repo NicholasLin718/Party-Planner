@@ -13,9 +13,11 @@ const personSchema = new Schema({
     password: {
         type: String,
         required: false
+    },
+    sprite: {
+        type: Number,
+        required: true
     }
 });
 
 module.exports = personSchema;
-
-
