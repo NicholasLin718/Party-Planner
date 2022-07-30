@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import dayStyles from './styleCalendar';
 import './Calendar.css';
-import moment from 'moment';
 
 export default function Day(props) {
     const { day, selectedDay, selectedList, setSelectedList, currentMonth } =
@@ -12,6 +11,8 @@ export default function Day(props) {
 
     useEffect(() => {
         setUnclickable(dayStyles(day, selectedDay, select) === 'disable');
+        if (dayStyles(day, selectedDay, select).includes('today'))
+            setSelect(true);
     }, [currentMonth]);
 
     useEffect(() => {
@@ -50,11 +51,9 @@ export default function Day(props) {
             className={
                 'rounded-[20%] ml-[1.5%] mr-[1.5%] sm:ml-[4%] sm:mr-[4%] calendar-alignment ' +
                 (unclickable
-                    ? 'disable'
+                    ? 'disable '
                     : dayStyles(day, selectedDay, select) +
-                      (!select
-                          ? ' unselected cursor-pointer'
-                          : ' cursor-pointer'))
+                      (!select ? ' unselected' : ' bg-[#db7093]'))
             }>
             <div className='font-mono text-xl'>{day.format('D')}</div>
         </div>

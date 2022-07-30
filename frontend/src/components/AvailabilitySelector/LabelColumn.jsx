@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles.css';
+import './selectorStyles.css';
 
 export default function LabelColumn(props) {
     const startValue = props.startValue;

@@ -1,58 +1,8 @@
-/* .calendar {
-    width: 800px;
-    height: 700px;
-    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
-    margin: auto;
-    max-width: 100%;
-}
-
-.calendar .header .prev {
-    font-size: 2.5rem;
-    cursor: pointer;
-}
-
-.calendar .header .next {
-    font-size: 2.5rem;
-    cursor: pointer;
-} */
-
-.calendar .day-names,
-.week {
-    /* width: 100%;
-    height: 5rem;
-    padding: 0 0;
-    display: flex;
-    align-items: center;
-    -webkit-user-drag: none;
-    overflow: hidden; */
-}
-
-/* .calendar .dayOfWeek,
-.day {
-    font-size: 24px;
-    font-weight: 400;
-    width: calc(800px / 7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    -webkit-user-drag: none;
-} */
-
-.selected {
-    background-color: palevioletred;
-}
 .unselected:hover {
     background-color: gray;
     cursor: pointer;
 }
 
-.today {
-    background-color: gray;
-}
-.before {
-    opacity: 0.2; /* Real browsers */
-}
 .disable {
     opacity: 0.2; /* Real browsers */
 }

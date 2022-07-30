@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LabelColumn from './LabelColumn';
-import './styles.css';
+import './selectorStyles.css';
 import { useRef } from 'react';
 import Pagination from './Pagination';
 import Columns from './Columns';

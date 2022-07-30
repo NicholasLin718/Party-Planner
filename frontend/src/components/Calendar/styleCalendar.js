@@ -10,10 +10,11 @@ function isSelected(day, selectedDay) {
     );
 }
 function isBeforeToday(day, selectedDay) {
-    return (
-        day.isBefore(new Date(), 'day') ||
-        day.isBefore(selectedDay.clone().startOf('month'), 'day')
-    );
+    return day.isBefore(new Date(), 'day');
+}
+
+function isLastMonth(day, selectedDay) {
+    return day.isBefore(selectedDay.clone().startOf('month'), 'day');
 }
 function isNextMonth(day, selectedDay) {
     return day.isAfter(selectedDay.clone().endOf('month'), 'day');
@@ -23,21 +24,10 @@ function isToday(day) {
 }
 
 export default function dayStyles(day, selectedDay, select) {
+    if (isToday(day)) return 'today cursor-pointer';
+    if (isNextMonth(day, selectedDay) || isLastMonth(day, selectedDay))
+        return 'opacity-0 cursor-not-allowed';
     if (isBeforeToday(day, selectedDay)) return 'disable';
-    if (isNextMonth(day, selectedDay)) return 'disable';
     // if(select && isSelected(day, selectedDay)) return "selected";
-    if (select) {
-        //STORE DAY TO DATABASE HERE
-        // arr.push(day.format("LLLL"));
-        // console.log(arr);
-        return 'selected';
-    }
-    // if(!select) {
-    //     let index = arr.indexOf(day);
-    //     const result = arr.filter(d  => !(d === day.format("LLLL")));
-    //     arr = result;
-    //     console.log(arr); //USE THIS TO DELETE DAY -> SELECTEDDAY IS IRRELEVANT FOR THIS
-    // }
-    if (isToday(day)) return 'today';
-    return '';
+    return ' cursor-pointer';
 }

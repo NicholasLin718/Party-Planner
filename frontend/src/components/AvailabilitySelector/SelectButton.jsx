@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import './selectorStyles.css';
 const SelectButton = (props) => {
     return (
         <div>

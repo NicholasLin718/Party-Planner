@@ -32,3 +32,12 @@
 // };
 
 // export default ColumnPage;
+
+// /*
+
+// totalCount -> Number of columns (days)
+// currentPage -> 1 based index
+// pageSize -> Number of columns on the active page
+// onPageChange -> click handler when moving to another page
+// siblingCount -> buttons next to the page - default to 1
+// */

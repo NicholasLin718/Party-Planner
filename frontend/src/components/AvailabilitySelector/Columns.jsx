@@ -6,7 +6,7 @@ import React, {
     useMemo
 } from 'react';
 import Slot from './Slot';
-import './styles.css';
+import './selectorStyles.css';
 import { SelectableGroup, createSelectable } from 'react-selectable';
 import SelectButton from './SelectButton';
 import { useDispatch, useSelector } from 'react-redux';
