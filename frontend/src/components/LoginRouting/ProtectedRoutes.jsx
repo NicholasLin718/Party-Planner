@@ -14,7 +14,6 @@ const ProtectedRoutes = () => {
         const res = await response.json();
         setData(res);
         setLoading(false);
-        console.log(res);
     }
     useEffect(() => {
         getRoom();
