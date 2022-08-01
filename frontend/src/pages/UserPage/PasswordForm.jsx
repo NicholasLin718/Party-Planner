@@ -8,8 +8,9 @@ const PasswordForm = (props) => {
     const [password, setPassword] = useState('');
 
     const onPasswordChange = (e) => {
-        const result = e.target.value.replace(/\D/g, '');
-        setPassword(result);
+        setPassword(e.target.result);
+        // const result = e.target.value.replace(/\D/g, '');
+        // setPassword(result);
     };
 
     const handleSubmit = async (e) => {
@@ -32,10 +33,10 @@ const PasswordForm = (props) => {
         );
         const res = await response.json();
         console.log(res);
-        if(res.message == "SUCCESS"){
+        if (res.message == 'SUCCESS') {
             setUserStorage(selectedUser);
-        } else{
-            console.log("wrong password");
+        } else {
+            console.log('wrong password');
         }
     };
 
@@ -43,7 +44,11 @@ const PasswordForm = (props) => {
         <div>
             <form onSubmit={handleSubmit}>
                 <label>Password</label>
-                <input type='text' onChange={onPasswordChange} maxLength={4} value={password}/>
+                <input
+                    type='password'
+                    onChange={onPasswordChange}
+                    value={password}
+                />
                 <button type='submit'>Submit</button>
             </form>
         </div>

@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faEye,
+    faEyeSlash,
+    faPersonWalkingArrowRight
+} from '@fortawesome/free-solid-svg-icons';
+import DropDownMenu from './DropDownMenu';
 
 const RegisterForm = (props) => {
     const { setUserStorage } = props;
@@ -7,14 +14,14 @@ const RegisterForm = (props) => {
     const { code } = useParams();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const [showPassword, setShowPassword] = useState(false);
     const onUsernameChange = (e) => {
         setUsername(e.target.value);
     };
 
     const onPasswordChange = (e) => {
-        const result = e.target.value.replace(/\D/g, '');
-        setPassword(result);
+        // const result = e.target.value.replace(/\D/g, '');
+        setPassword(e.target.value);
     };
 
     const handleSubmit = async (e) => {
@@ -45,18 +52,35 @@ const RegisterForm = (props) => {
         setUserStorage(username);
     };
     return (
-        <div>
+        <div className='mb-4'>
             <form onSubmit={handleSubmit}>
-                <label>Username</label>
-                <input type='text' onChange={onUsernameChange} />
-                <label>Password (Optional)</label>
-                <input
-                    type='text'
-                    onChange={onPasswordChange}
-                    maxLength={4}
-                    value={password}
-                />
-                <button type='submit'>Add new user</button>
+                <div>
+                    <label>Username</label>
+                    <input type='text' onChange={onUsernameChange} />
+                    <label>Password (Optional)</label>
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        onChange={onPasswordChange}
+                        value={password}
+                    />
+                    <FontAwesomeIcon
+                        className='ml-[-24px] text-slate-600'
+                        icon={showPassword ? faEyeSlash : faEye}
+                        onClick={() => {
+                            setShowPassword(!showPassword);
+                        }}
+                    />
+                    <button
+                        type='submit'
+                        className='group block w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'>
+                        Join Event
+                        <FontAwesomeIcon
+                            icon={faPersonWalkingArrowRight}
+                            className='ml-2 group-hover:ml-4 ease-in duration-300'
+                        />
+                    </button>
+                    <DropDownMenu />
+                </div>
             </form>
         </div>
     );
