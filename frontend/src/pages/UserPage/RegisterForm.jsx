@@ -6,7 +6,6 @@ import {
     faEyeSlash,
     faPersonWalkingArrowRight
 } from '@fortawesome/free-solid-svg-icons';
-import DropDownMenu from './DropDownMenu';
 
 const RegisterForm = (props) => {
     const { setUserStorage } = props;
@@ -79,7 +78,6 @@ const RegisterForm = (props) => {
                             className='ml-2 group-hover:ml-4 ease-in duration-300'
                         />
                     </button>
-                    <DropDownMenu />
                 </div>
             </form>
         </div>
