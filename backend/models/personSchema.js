@@ -10,6 +10,10 @@ const personSchema = new Schema({
         type: [Boolean],
         required: true
     },
+    securityQuestion: {
+        type: String,
+        required: false
+    },
     password: {
         type: String,
         required: false
