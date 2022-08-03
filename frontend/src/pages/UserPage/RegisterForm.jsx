@@ -7,6 +7,7 @@ import {
     faPersonWalkingArrowRight
 } from '@fortawesome/free-solid-svg-icons';
 import DropDownMenu from './DropDownMenu';
+import { useEffect } from 'react';
 
 const RegisterForm = (props) => {
     const { setUserStorage } = props;
@@ -15,13 +16,39 @@ const RegisterForm = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [securityQuestion, setSecurityQuestion] = useState('');
+    const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState('');
+    const [selectedOption, setSelectedOption] = useState('No Password');
+    const [exampleQuestion, setExampleQuestion] = useState('');
+    const exampleQuestions = [
+        'What was the name of your first stuffed animal?',
+        'In what city or town did your mother and father meet?',
+        'What was the first exam you failed?',
+        'What was your favorite food as a child?',
+        'What was the name of your elementary school?',
+        "What is your mother's maiden name?",
+        'What is the name of your first pet?',
+        'In what city were you born?',
+        'What was your childhood nickname?'
+    ];
+    useEffect(() => {
+        setExampleQuestion(
+            exampleQuestions[
+                Math.ceil(Math.random() * exampleQuestions.length - 1)
+            ]
+        );
+    }, []);
     const onUsernameChange = (e) => {
         setUsername(e.target.value);
     };
-
     const onPasswordChange = (e) => {
-        // const result = e.target.value.replace(/\D/g, '');
         setPassword(e.target.value);
+    };
+    const onSecurityQuestionChange = (e) => {
+        setSecurityQuestion(e.target.value);
+    };
+    const onSecurityQuestionAnswerChange = (e) => {
+        setSecurityQuestionAnswer(e.target.value);
     };
 
     const handleSubmit = async (e) => {
@@ -52,34 +79,65 @@ const RegisterForm = (props) => {
         setUserStorage(username);
     };
     return (
-        <div className='mb-4'>
+        <div className='flex justify-center mb-4 bg-blue-100 border-2 rounded-md shadow-md w-[600px] h-auto px-4 py-4'>
             <form onSubmit={handleSubmit}>
+                <DropDownMenu
+                    selectedOption={selectedOption}
+                    setSelectedOption={setSelectedOption}
+                />
                 <div>
                     <label>Username</label>
-                    <input type='text' onChange={onUsernameChange} />
-                    <label>Password (Optional)</label>
                     <input
-                        type={showPassword ? 'text' : 'password'}
-                        onChange={onPasswordChange}
-                        value={password}
+                        type='text'
+                        onChange={onUsernameChange}
+                        className='w-[100%] px-3 py-3'
                     />
-                    <FontAwesomeIcon
-                        className='ml-[-24px] text-slate-600'
-                        icon={showPassword ? faEyeSlash : faEye}
-                        onClick={() => {
-                            setShowPassword(!showPassword);
-                        }}
-                    />
-                    <button
-                        type='submit'
-                        className='group block w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'>
-                        Join Event
-                        <FontAwesomeIcon
-                            icon={faPersonWalkingArrowRight}
-                            className='ml-2 group-hover:ml-4 ease-in duration-300'
-                        />
-                    </button>
-                    <DropDownMenu />
+                    {selectedOption === 'Password' && (
+                        <div>
+                            <label>Password</label>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                onChange={onPasswordChange}
+                                value={password}
+                                className='w-[100%] px-3 py-3'
+                            />
+                            <FontAwesomeIcon
+                                className='ml-[-36px] text-slate-600 text-xl'
+                                icon={showPassword ? faEyeSlash : faEye}
+                                onClick={() => {
+                                    setShowPassword(!showPassword);
+                                }}
+                            />
+                        </div>
+                    )}
+                    {selectedOption === 'Security Question' && (
+                        <div>
+                            <label>Security Question</label>
+                            <input
+                                type='text'
+                                onChange={onSecurityQuestionChange}
+                                placeholder={exampleQuestion}
+                                className='w-[100%] px-3 py-3'
+                            />
+                            <label>Answer</label>
+                            <input
+                                type='text'
+                                onChange={onSecurityQuestionAnswerChange}
+                                className='w-[100%] px-3 py-3'
+                            />
+                        </div>
+                    )}
+                    <div className='mt-4'>
+                        <button
+                            type='submit'
+                            className='group w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300 ease-in duration-150'>
+                            Join Event
+                            <FontAwesomeIcon
+                                icon={faPersonWalkingArrowRight}
+                                className='ml-2 group-hover:ml-5 ease-in duration-300'
+                            />
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

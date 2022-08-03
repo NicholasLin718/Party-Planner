@@ -6,6 +6,7 @@ import Pagination from './Pagination';
 import Columns from './Columns';
 import { store } from '../../store';
 
+//MAIN PAGE
 const Selector = () => {
     const slotArrayRef = useRef();
 
@@ -116,12 +117,12 @@ const Selector = () => {
                     totalColumns={totalColumns}
                 />
             </div>
-            {/* <button
+            <button
                 onClick={() => {
                     slotArrayRef.current.storeSlotArrays();
                 }}>
                 Store
-            </button> */}
+            </button>
             {/* <button
                 onClick={() => {
                     const data = store.getState();

@@ -23,6 +23,7 @@
         "react-elastic-carousel": "^0.11.5",
         "react-icons": "^4.3.1",
         "react-lottie": "^1.2.3",
+        "react-onclickoutside": "^6.12.2",
         "react-redux": "^7.2.6",
         "react-router-dom": "^6.3.0",
         "react-scripts": "^5.0.1",
