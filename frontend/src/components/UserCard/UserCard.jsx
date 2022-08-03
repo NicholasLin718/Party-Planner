@@ -13,15 +13,23 @@ import S11 from '../Sprites/S11.png';
 import S12 from '../Sprites/S12.png';
 import { useState } from 'react';
 import PasswordForm from '../../pages/UserPage/PasswordForm';
+import SecurityQuestionForm from '../../pages/UserPage/SecurityQuestionForm';
 
 const spriteArr = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12];
 const UserCard = (props) => {
     const { user, setUserStorage } = props;
 
     const { username, password, sprite } = user;
-    const [requirePassword, setRequirePassword] = useState(false);
+    const [requireAuth, setRequireAuth] = useState(false);
     const [selectedUser, setSelectedUser] = useState('');
+    const [selectedOption, setSelectedOption] = useState('Password');
+    const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const avatar = spriteArr[sprite];
+
+    const onSecurityQuestionAnswerChange = (e) => {
+        setSecurityQuestionAnswer(e.target.value);
+    };
 
     const handleUserClick = (username) => {
         // const curUser = data.users.find((user) => {
@@ -29,17 +37,21 @@ const UserCard = (props) => {
         // });
         setSelectedUser(username);
         if (password === '') setUserStorage(username);
-        else setRequirePassword(true);
+        else setRequireAuth(true);
     };
     return (
-        <div className='flex align-center rounded-md bg-rose-300 border-neutral-900 border-2 px-4 py-4'>
-            <div className='bg-white inline-block overflow-hidden w-16 pb-16 h-0 rounded-full relative border-neutral-900 border-[1px]'>
+        <div
+            onClick={() => {
+                handleUserClick(username);
+            }}
+            className='flex align-center rounded-md bg-rose-300 border-neutral-900 border-2 px-4 py-4 hover:shadow-md hover:bg-rose-400 ease-in duration-300 cursor-pointer'>
+            <div className='bg-white inline-block overflow-hidden w-16 h-16 rounded-full absolute  border-neutral-900 border-[1px]'>
                 <img
                     src={avatar}
                     className='w-[105%] h-[105%] absolute rounded-full object-cover'
                 />
             </div>
-            <div className='px-5'>
+            <div className='px-5 ml-16'>
                 <div className='text-xl font-mono font-semibold'>
                     {username}
                 </div>
@@ -51,14 +63,22 @@ const UserCard = (props) => {
                     Select
                 </button>
             </div>
-            <div>
-                {requirePassword && (
-                    <PasswordForm
-                        setUserStorage={setUserStorage}
-                        selectedUser={selectedUser}
-                    />
-                )}
-            </div>
+            {requireAuth && (
+                <div>
+                    {selectedOption === 'Password' && (
+                        <PasswordForm
+                            setUserStorage={setUserStorage}
+                            selectedUser={selectedUser}
+                        />
+                    )}
+                    {selectedOption === 'Security Question' && (
+                        <SecurityQuestionForm
+                            setUserStorage={setUserStorage}
+                            selectedUser={selectedUser}
+                        />
+                    )}
+                </div>
+            )}
         </div>
     );
 };

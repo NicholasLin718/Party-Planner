@@ -2,15 +2,15 @@ import React from 'react';
 import { useState } from 'react';
 export default function Slot(props) {
     const { selectableKey, slotData, slotArrays, setSlotArrays } = props;
+    const { i, j, k } = selectableKey;
+
     const [selectedSlot, setSelectedSlot] = useState(slotData.selected);
 
     const handleClick = () => {
         let tempSlotArray = slotArrays.slice();
-        tempSlotArray[selectableKey.k.j].slots[selectableKey.i].selected =
-            !tempSlotArray[selectableKey.k.j].slots[selectableKey.i].selected;
-        setSelectedSlot(
-            tempSlotArray[selectableKey.k.j].slots[selectableKey.i].selected
-        );
+        tempSlotArray[k][j].slots[i].selected =
+            !tempSlotArray[k][j].slots[i].selected;
+        setSelectedSlot(tempSlotArray[k][j].slots[i].selected);
         setSlotArrays(tempSlotArray);
     };
     return (

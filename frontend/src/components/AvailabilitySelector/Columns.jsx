@@ -30,14 +30,6 @@ const Columns = forwardRef((props, ref) => {
 
     console.log(arrayOfPagesOfColumns);
     const [currentPage, setCurrentPage] = useState(1);
-    // const currentColumnData = useMemo(() => {
-    //     const firstPageIndex = (currentPage - 1) * PageSize;
-    //     const lastPageIndex = firstPageIndex + PageSize;
-    //     console.log(firstPageIndex);
-    //     console.log(lastPageIndex);
-    //     console.log(arrayOfColumns.slice(firstPageIndex, lastPageIndex));
-    //     return arrayOfColumns.slice(firstPageIndex, lastPageIndex);
-    // }, [currentPage]);
 
     const handleSelection = (keys) => {
         console.log(keys);
@@ -55,6 +47,7 @@ const Columns = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSlotArrays() {
+            console.log(slotArrays);
             dispatch(storeAvailability(slotArrays));
         }
     }));
