@@ -40,13 +40,13 @@ const UserPage = () => {
                         Select Your User
                     </div>
                     <div className='flex justify-center mt-2 font-mono font-bold text-xl'>
-                        Room: {!loading && data.code}
+                        Room: {data.code}
                     </div>
                     <div className='flex justify-center mt-6 font-mono font-bold text-3xl'>
-                        {!loading && data.meetupName}
+                        {data.meetupName}
                     </div>
                     <div className='flex justify-center mt-2 font-mono font-medium text-2xl'>
-                        {!loading && data.meetupDescription}
+                        {data.meetupDescription}
                     </div>
                     <div className='text-center mt-10'>
                         <button
@@ -61,14 +61,13 @@ const UserPage = () => {
                         )}
                     </div>
                     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 w-[1200px] mx-auto justify-center'>
-                        {!loading &&
-                            data.users.map((user, i) => (
-                                <UserCard
-                                    user={user}
-                                    setUserStorage={setUserStorage}
-                                    key={i}
-                                />
-                            ))}
+                        {data.users.map((user, i) => (
+                            <UserCard
+                                user={user}
+                                setUserStorage={setUserStorage}
+                                key={i}
+                            />
+                        ))}
                     </div>
                 </div>
             )}
