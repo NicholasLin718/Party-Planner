@@ -60,12 +60,15 @@ export default function CreateMeetupPage() {
                         const data = store.getState();
                         if (!data.timeRange.title)
                             alert('Event name required!');
-                        await createCode();
-                        if (localStorage.getItem(code)) {
-                            navigate('/users/' + code);
-                        } else {
-                            alert('Error occured while creating the room!');
-                            navigate('/create');
+                        else {
+                            await createCode();
+                            if (localStorage.getItem(code)) {
+                                navigate('/users/' + code);
+                                window.location.reload(); //CLEARS THE STATES
+                            } else {
+                                alert('Error occured while creating the room!');
+                                navigate('/create');
+                            }
                         }
                     }}
                     className='w-[500px] mt-[550px] px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'>
