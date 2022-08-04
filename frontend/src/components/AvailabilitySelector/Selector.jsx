@@ -1,50 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LabelColumn from './LabelColumn';
 import './selectorStyles.css';
 import { useRef } from 'react';
 import Pagination from './Pagination';
 import Columns from './Columns';
 import { store } from '../../store';
-
+import { useParams } from 'react-router-dom';
 //MAIN PAGE
+//Select page can be rerouted even after logging out
+//Clean out states and code
+//Need to fix the number of columns
+
 const Selector = () => {
     const slotArrayRef = useRef();
 
-    const printList = [
-        { isoTime: '2022-06-29T04:00:00.000Z', dayOfWeek: 3 },
-        { isoTime: '2022-06-28T04:00:00.000Z', dayOfWeek: 2 },
-        { isoTime: '2022-06-27T04:00:00.000Z', dayOfWeek: 1 },
-        { isoTime: '2022-06-26T04:00:00.000Z', dayOfWeek: 0 },
-        { isoTime: '2022-06-22T04:00:00.000Z', dayOfWeek: 3 },
-        { isoTime: '2022-06-21T04:00:00.000Z', dayOfWeek: 2 },
-        { isoTime: '2022-06-30T04:00:00.000Z', dayOfWeek: 4 },
-        { isoTime: '2022-06-25T04:00:00.000Z', dayOfWeek: 6 },
-        { isoTime: '2022-06-24T04:00:00.000Z', dayOfWeek: 5 }
-    ];
+    // const printList = [
+    //     { isoTime: '2022-06-29T04:00:00.000Z', dayOfWeek: 3 },
+    //     { isoTime: '2022-06-28T04:00:00.000Z', dayOfWeek: 2 },
+    //     { isoTime: '2022-06-27T04:00:00.000Z', dayOfWeek: 1 },
+    //     { isoTime: '2022-06-26T04:00:00.000Z', dayOfWeek: 0 },
+    //     { isoTime: '2022-06-22T04:00:00.000Z', dayOfWeek: 3 },
+    //     { isoTime: '2022-06-21T04:00:00.000Z', dayOfWeek: 2 },
+    //     { isoTime: '2022-06-30T04:00:00.000Z', dayOfWeek: 4 },
+    //     { isoTime: '2022-06-25T04:00:00.000Z', dayOfWeek: 6 },
+    //     { isoTime: '2022-06-24T04:00:00.000Z', dayOfWeek: 5 }
+    // ];
     const [currentPage, setCurrentPage] = useState(1);
     const [columnsPerPage] = useState(5);
+    const [currentColumns, setCurrentColumns] = useState([]);
+    const [arrayOfPagesOfColumns, setArrayOfPagesOfColumns] = useState([]);
+    const [totalColumns, setTotalColumns] = useState(0);
 
-    // const printList = useSelector(selectAllDays);
-    // const values = useSelector(selectAllRange);
-    const orderedPrintList = printList
-        .slice()
-        .sort((a, b) => a.isoTime.localeCompare(b.isoTime));
-    // const startValue = values.startValue;
-    // const endValue = values.endValue;
-    const startValue = { hour: 19, is_00: true };
-    const endValue = { hour: 22, is_00: false };
+    /*DEFAULT DATA FETCHING CODE*/
+    const { code } = useParams();
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const getRoom = async () => {
+        const response = await fetch('http://localhost:5000/pages/' + code);
+        const res = await response.json();
+        setData(res);
+        console.log(res);
+        console.log(res.meetupDays);
+        console.log(res.meetupTimeRange);
+        calculateSlots(res);
+    };
+    useEffect(() => {
+        getRoom();
+    }, []);
+    /*END OF DEFAULT DATA FETCHING CODE*/
 
-    // const renderedDays = printList.map((day, i) => (
-    //     <div key={i}>{day.isoTime}</div>
-    // ));
+    let newArr = useRef([]);
 
-    let daysSelected = orderedPrintList.length;
-    let arrayOfColumns = [];
-    let columnObject = [];
-    let hour = startValue.hour;
-    let is_00 = startValue.is_00;
-    for (let i = 0; i < daysSelected; i++) {
-        while (hour < endValue.hour) {
+    let startValue = {};
+    let endValue = {};
+    const calculateSlots = (res) => {
+        const printList = JSON.parse(res.meetupDays);
+        console.log(printList);
+        let start = JSON.parse(res.meetupTimeRange).startValue;
+        let end = JSON.parse(res.meetupTimeRange).endValue;
+        console.log(start);
+        console.log(end);
+        const orderedPrintList = printList
+            .slice()
+            .sort((a, b) => a.isoTime.localeCompare(b.isoTime));
+
+        let daysSelected = orderedPrintList.length;
+        let arrayOfColumns = [];
+        let columnObject = [];
+        let hour = start.hour;
+        let is_00 = start.is_00;
+        while (hour < end.hour) {
             //7:30 - 15:30
             if (is_00) {
                 columnObject.push({
@@ -69,36 +94,55 @@ const Selector = () => {
             }
             hour++;
         }
-        if (!endValue.is_00) {
-            columnObject.push({ hour: hour, is_00: is_00, selected: false });
+        if (!end.is_00) {
+            columnObject.push({
+                hour: hour,
+                is_00: is_00,
+                selected: false
+            });
         }
-        arrayOfColumns.push({ date: orderedPrintList[i], slots: columnObject });
-    }
-    let newArr = [];
-    let page = [];
 
-    let totalColumns = 0;
-
-    arrayOfColumns.forEach((column) => {
-        let newColumn = structuredClone(column);
-        page.push(newColumn);
-        totalColumns++;
-        if (totalColumns % 5 === 0) {
-            newArr.push(page);
-            console.log(newArr);
-            page = [];
+        for (let i = 0; i < daysSelected; i++) {
+            arrayOfColumns.push({
+                date: orderedPrintList[i],
+                slots: columnObject
+            });
         }
-    });
-    if (page.length > 0) newArr.push(page);
-    let arrayOfPagesOfColumns = newArr;
 
-    const indexOfLastColumn = currentPage * columnsPerPage;
-    const indexOfFirstColumn = indexOfLastColumn - columnsPerPage;
-    const currentColumns = arrayOfColumns.slice(
-        indexOfFirstColumn,
-        indexOfLastColumn
-    );
-    console.log(currentColumns);
+        let page = [];
+        let count = 0;
+        arrayOfColumns.forEach((column) => {
+            let newColumn = structuredClone(column);
+            page.push(newColumn);
+            count++;
+            if (count % 5 === 0) {
+                newArr.current.push(page);
+                console.log(newArr);
+                page = [];
+            }
+        });
+        if (page.length > 0) newArr.current.push(page);
+        setTotalColumns(count);
+        setArrayOfPagesOfColumns(newArr.current);
+        startValue = start;
+        endValue = end;
+
+        const indexOfLastColumn = currentPage * columnsPerPage;
+        const indexOfFirstColumn = indexOfLastColumn - columnsPerPage;
+        setCurrentColumns(
+            arrayOfColumns.slice(indexOfFirstColumn, indexOfLastColumn)
+        );
+    };
+    // // const values = useSelector(selectAllRange);
+
+    // // const startValue = values.startValue;
+    // // const endValue = values.endValue;
+    // const startValue = { hour: 19, is_00: true };
+    // const endValue = { hour: 22, is_00: false };
+
+    // // const renderedDays = printList.map((day, i) => (
+    // //     <div key={i}>{day.isoTime}</div>
+    // // ));
 
     return (
         <div>
@@ -115,6 +159,7 @@ const Selector = () => {
                     //arrayOfColumns={arrayOfColumns} //array of all the columns
                     arrayOfPagesOfColumns={arrayOfPagesOfColumns} //array of all pages of the columns (2D array)
                     totalColumns={totalColumns}
+                    newArr={newArr}
                 />
             </div>
             <button

@@ -20,11 +20,12 @@ const SelectableComponent = createSelectable(Slot);
 
 const Columns = forwardRef((props, ref) => {
     const dispatch = useDispatch();
-
-    const { currentColumns, arrayOfPagesOfColumns, totalColumns } = props;
+    console.log(props);
+    const { currentColumns, arrayOfPagesOfColumns, totalColumns, newArr } =
+        props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [booleanSelect, setBooleanSelect] = useState(true);
-    const [slotArrays, setSlotArrays] = useState(arrayOfPagesOfColumns);
+    const [slotArrays, setSlotArrays] = useState(newArr.current);
     const [selectedKeys, setSelectedKeys] = useState([]);
     const PageSize = 5;
 
