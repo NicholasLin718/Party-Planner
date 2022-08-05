@@ -54,12 +54,13 @@ export default function CreateMeetupPage() {
                 <button
                     onClick={async () => {
                         //ADD CONDITIONS FOR REQUIRED FIELDS
-                        CalendarRef.current.storeSelectedList();
                         TimeRangeRef.current.storeRange();
-
+                        CalendarRef.current.storeSelectedList();
                         const data = store.getState();
                         if (!data.timeRange.title)
                             alert('Event name required!');
+                        else if (data.selectedDays.length === 0)
+                            alert('Select at least one day!');
                         else {
                             await createCode();
                             if (localStorage.getItem(code)) {

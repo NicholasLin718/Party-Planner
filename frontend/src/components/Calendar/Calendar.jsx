@@ -11,6 +11,7 @@ import './Calendar.css';
 import Header from './Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { storeList, selectAllDays } from '../../features/CalendarSlice';
+import { store } from '../../store';
 
 const Calendar = forwardRef((props, ref) => {
     const dispatch = useDispatch();
@@ -26,8 +27,12 @@ const Calendar = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSelectedList() {
-            if (selectedList.length > 0) {
-                dispatch(storeList(selectedList));
+            const data = store.getState();
+            let newList = selectedList.filter(
+                (day) => !data.selectedDays.includes(day)
+            );
+            if (newList.length > 0) {
+                dispatch(storeList(newList));
             }
         }
     }));
