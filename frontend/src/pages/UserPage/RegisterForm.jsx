@@ -18,7 +18,7 @@ const RegisterForm = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [securityQuestion, setSecurityQuestion] = useState('');
     const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState('');
-    const [selectedOption, setSelectedOption] = useState('No Password');
+    const [selectedOption, setSelectedOption] = useState('None');
     const [exampleQuestion, setExampleQuestion] = useState('');
     const exampleQuestions = [
         'What was the name of your first stuffed animal?',
@@ -66,6 +66,16 @@ const RegisterForm = (props) => {
         if (!validateFields()) alert('Fields cannot be blank!');
         else {
             const sprite = Math.ceil(Math.random() * 12 - 1);
+            let storedPassword;
+            let storedSecurityQuestion = '';
+            if (selectedOption == 'Password') {
+                storedPassword = password;
+            } else if (selectedOption == 'Security Question') {
+                storedPassword = securityQuestionAnswer;
+                storedSecurityQuestion = securityQuestion;
+            } else {
+                storedPassword = '';
+            }
             const rawBody = {
                 $push: {
                     users: {

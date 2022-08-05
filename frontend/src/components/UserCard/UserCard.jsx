@@ -12,17 +12,17 @@ import S10 from '../Sprites/S10.png';
 import S11 from '../Sprites/S11.png';
 import S12 from '../Sprites/S12.png';
 import { useState } from 'react';
-import PasswordForm from '../../pages/UserPage/PasswordForm';
-import SecurityQuestionForm from '../../pages/UserPage/SecurityQuestionForm';
+import PasswordForm from './PasswordForm';
+import SecurityQuestionForm from './SecurityQuestionForm';
 
 const spriteArr = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12];
 const UserCard = (props) => {
     const { user, setUserStorage } = props;
 
-    const { username, password, sprite } = user;
+    const { username, password, sprite, securityQuestion } = user;
     const [requireAuth, setRequireAuth] = useState(false);
     const [selectedUser, setSelectedUser] = useState('');
-    const [selectedOption, setSelectedOption] = useState('Password');
+    //const [selectedOption, setSelectedOption] = useState('Password');
     const [securityQuestionAnswer, setSecurityQuestionAnswer] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const avatar = spriteArr[sprite];
@@ -65,14 +65,15 @@ const UserCard = (props) => {
             </div>
             {requireAuth && (
                 <div>
-                    {selectedOption === 'Password' && (
+                    {(securityQuestion == "" && password != "") && (
                         <PasswordForm
                             setUserStorage={setUserStorage}
                             selectedUser={selectedUser}
                         />
                     )}
-                    {selectedOption === 'Security Question' && (
+                    {securityQuestion != "" && (
                         <SecurityQuestionForm
+                            securityQuestion={securityQuestion}
                             setUserStorage={setUserStorage}
                             selectedUser={selectedUser}
                         />

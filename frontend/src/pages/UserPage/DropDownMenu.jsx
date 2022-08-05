@@ -5,7 +5,7 @@ import onClickOutside from 'react-onclickoutside';
 
 function DropDownMenu({ selectedOption, setSelectedOption }) {
     const [isActive, setIsActive] = useState(false);
-    const options = ['No Password', 'Password', 'Security Question'];
+    const options = ['None', 'Password', 'Security Question'];
     DropDownMenu.handleClickOutside = () => {
         setIsActive(false);
     };
