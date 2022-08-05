@@ -1,0 +1,36 @@
+.slot-5 {
+    width: calc(1000px / 5);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-4 {
+    width: calc(1000px / 4);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-3 {
+    width: calc(1000px / 3);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-2 {
+    width: calc(1000px / 2);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-1 {
+    width: calc(1000px / 1);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.selected {
+    background-color: chocolate;
+}
+.unselected {
+    background-color: white;
+}

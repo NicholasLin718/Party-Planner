@@ -1,10 +1,10 @@
 .columns {
-    /* display: flex;
-    flex-wrap: wrap; */
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    /* display: grid;
     justify-content: center;
-    align-content: center;
-
+    align-content: center; */
+    justify-content: center;
     grid-gap: 10px;
     grid-auto-flow: column;
 }
@@ -16,11 +16,11 @@
     right: -5px;
 }
 
-.slot {
-    width: 200px;
-    height: 30px;
-    outline: 1px solid;
-}
+/* .slot {
+    
+    height: 20px;
+    outline: 0.5px solid;
+} */
 
 .selected {
     background-color: chocolate;

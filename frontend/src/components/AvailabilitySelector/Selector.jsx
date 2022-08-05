@@ -11,7 +11,8 @@ import { useParams } from 'react-router-dom';
 //Clean out states and code
 //Need to fix the number of columns
 
-const Selector = () => {
+const Selector = (props) => {
+    const { data } = props;
     const slotArrayRef = useRef();
 
     // const printList = [
@@ -31,35 +32,32 @@ const Selector = () => {
     const [arrayOfPagesOfColumns, setArrayOfPagesOfColumns] = useState([]);
     const [totalColumns, setTotalColumns] = useState(0);
 
-    /*DEFAULT DATA FETCHING CODE*/
-    const { code } = useParams();
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const getRoom = async () => {
-        const response = await fetch('http://localhost:5000/pages/' + code);
-        const res = await response.json();
-        setData(res);
-        console.log(res);
-        console.log(res.meetupDays);
-        console.log(res.meetupTimeRange);
-        calculateSlots(res);
-    };
+    // /*DEFAULT DATA FETCHING CODE*/
+    // const { code } = useParams();
+    // const [data, setData] = useState({});
+    // const [loading, setLoading] = useState(true);
+    // const getRoom = async () => {
+    //     const response = await fetch('http://localhost:5000/pages/' + code);
+    //     const res = await response.json();
+    //     setData(res);
+    //     console.log(res);
+    //     console.log(res.meetupDays);
+    //     console.log(res.meetupTimeRange);
+    //     calculateSlots(res);
+    // };
     useEffect(() => {
-        getRoom();
+        calculateSlots();
     }, []);
-    /*END OF DEFAULT DATA FETCHING CODE*/
+    // /*END OF DEFAULT DATA FETCHING CODE*/
 
     let newArr = useRef([]);
 
     let startValue = {};
     let endValue = {};
-    const calculateSlots = (res) => {
-        const printList = JSON.parse(res.meetupDays);
-        console.log(printList);
-        let start = JSON.parse(res.meetupTimeRange).startValue;
-        let end = JSON.parse(res.meetupTimeRange).endValue;
-        console.log(start);
-        console.log(end);
+    const calculateSlots = () => {
+        const printList = JSON.parse(data.meetupDays);
+        let start = JSON.parse(data.meetupTimeRange).startValue;
+        let end = JSON.parse(data.meetupTimeRange).endValue;
         const orderedPrintList = printList
             .slice()
             .sort((a, b) => a.isoTime.localeCompare(b.isoTime));
@@ -117,7 +115,6 @@ const Selector = () => {
             count++;
             if (count % 5 === 0) {
                 newArr.current.push(page);
-                console.log(newArr);
                 page = [];
             }
         });
@@ -156,7 +153,6 @@ const Selector = () => {
                 <Columns
                     ref={slotArrayRef} //reference to slot array
                     currentColumns={currentColumns} //array of 5 columns
-                    //arrayOfColumns={arrayOfColumns} //array of all the columns
                     arrayOfPagesOfColumns={arrayOfPagesOfColumns} //array of all pages of the columns (2D array)
                     totalColumns={totalColumns}
                     newArr={newArr}
@@ -168,13 +164,6 @@ const Selector = () => {
                 }}>
                 Store
             </button>
-            {/* <button
-                onClick={() => {
-                    const data = store.getState();
-                    console.log(data);
-                }}>
-                Click for funny
-            </button> */}
         </div>
     );
 };
