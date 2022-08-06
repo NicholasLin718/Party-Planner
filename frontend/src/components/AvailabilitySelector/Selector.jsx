@@ -149,7 +149,7 @@ const Selector = (props) => {
                 startValue={startValue}
                 endValue={endValue}
             />
-            <div className='column-page bg-slate-800'>
+            <div className='column-page'>
                 <Columns
                     ref={slotArrayRef} //reference to slot array
                     currentColumns={currentColumns} //array of 5 columns

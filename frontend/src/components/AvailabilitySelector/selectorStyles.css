@@ -1,6 +1,5 @@
 .columns {
     display: flex;
-    flex-wrap: wrap;
     /* display: grid;
     justify-content: center;
     align-content: center; */

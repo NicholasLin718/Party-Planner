@@ -1,36 +1,244 @@
-.slot-5 {
-    width: calc(1000px / 5);
-    height: 25px;
-    outline: 0.5px solid;
-    outline-style: dashed;
-}
-.slot-4 {
-    width: calc(1000px / 4);
-    height: 25px;
-    outline: 0.5px solid;
-    outline-style: dashed;
-}
-.slot-3 {
-    width: calc(1000px / 3);
-    height: 25px;
-    outline: 0.5px solid;
-    outline-style: dashed;
-}
-.slot-2 {
-    width: calc(1000px / 2);
-    height: 25px;
-    outline: 0.5px solid;
-    outline-style: dashed;
-}
-.slot-1 {
-    width: calc(1000px / 1);
-    height: 25px;
-    outline: 0.5px solid;
-    outline-style: dashed;
-}
 .selected {
     background-color: chocolate;
 }
 .unselected {
     background-color: white;
+}
+
+:root {
+    --default: 400px;
+    --sm: 400px;
+    --md: 500px;
+    --lg: 600px;
+    --xl: 800px;
+    --xl2: 1000px;
+    --xl3: 1200px;
+}
+
+.slot-5 {
+    width: calc(var(--default) / 5);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-4 {
+    width: calc(var(--default) / 4);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-3 {
+    width: calc(var(--default) / 3);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-2 {
+    width: calc(var(--default) / 2);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+.slot-1 {
+    width: calc(var(--default) / 1);
+    height: 25px;
+    outline: 0.5px solid;
+    outline-style: dashed;
+}
+
+@media (min-width: 640px) {
+    .slot-5 {
+        width: calc(var(--sm) / 5);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-4 {
+        width: calc(var(--sm) / 4);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-3 {
+        width: calc(var(--sm) / 3);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-2 {
+        width: calc(var(--sm) / 2);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-1 {
+        width: calc(var(--sm) / 1);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+}
+
+@media (min-width: 768px) {
+    .slot-5 {
+        width: calc(var(--md) / 5);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-4 {
+        width: calc(var(--md) / 4);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-3 {
+        width: calc(var(--md) / 3);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-2 {
+        width: calc(var(--md) / 2);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-1 {
+        width: calc(var(--md) / 1);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+}
+
+@media (min-width: 1024px) {
+    .slot-5 {
+        width: calc(var(--lg) / 5);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-4 {
+        width: calc(var(--lg) / 4);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-3 {
+        width: calc(var(--lg) / 3);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-2 {
+        width: calc(var(--lg) / 2);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-1 {
+        width: calc(var(--lg) / 1);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+}
+
+@media (min-width: 1280px) {
+    .slot-5 {
+        width: calc(var(--xl) / 5);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-4 {
+        width: calc(var(--xl) / 4);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-3 {
+        width: calc(var(--xl) / 3);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-2 {
+        width: calc(var(--xl) / 2);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-1 {
+        width: calc(var(--xl) / 1);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+}
+
+@media (min-width: 1536px) {
+    .slot-5 {
+        width: calc(var(--xl2) / 5);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-4 {
+        width: calc(var(--xl2) / 4);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-3 {
+        width: calc(var(--xl2) / 3);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-2 {
+        width: calc(var(--xl2) / 2);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-1 {
+        width: calc(var(--xl2) / 1);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+}
+@media (min-width: 1700px) {
+    .slot-5 {
+        width: calc(var(--xl3) / 5);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-4 {
+        width: calc(var(--xl3) / 4);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-3 {
+        width: calc(var(--xl3) / 3);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-2 {
+        width: calc(var(--xl3) / 2);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
+    .slot-1 {
+        width: calc(var(--xl3) / 1);
+        height: 25px;
+        outline: 0.5px solid;
+        outline-style: dashed;
+    }
 }
