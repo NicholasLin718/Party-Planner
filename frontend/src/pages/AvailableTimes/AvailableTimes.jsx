@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Selector from '../../components/AvailabilitySelector/Selector';
 import { useParams } from 'react-router-dom';
 const AvailableTimes = () => {
     const [showSelector, setShowSelector] = useState(false);
-
+    const selectorRef = useRef();
     /*DEFAULT DATA FETCHING CODE*/
     const { code } = useParams();
     const [data, setData] = useState({});
@@ -18,23 +18,45 @@ const AvailableTimes = () => {
     useEffect(() => {
         getRoom();
     }, []);
-    /*END OF DEFAULT DATA FETCHING CODE*/
+
+    // const submitAvailability = () => {
+
+    // };
+
     return (
         <div>
             {!loading && (
                 <div>
-                    <div className='flex justify-center mt-12 font-mono font-semibold text-5xl'>
+                    <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
                         Select Your Available Times
                     </div>
-                    <div className='text-center mt-10'>
-                        <button
-                            className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
-                            onClick={() => setShowSelector(!showSelector)}>
-                            Add/Edit Your Availability
-                        </button>
-                    </div>
+                    {!showSelector ? (
+                        <div className='text-center mt-10'>
+                            <button
+                                className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                onClick={() => setShowSelector(!showSelector)}>
+                                Add/Edit Your Availability
+                            </button>
+                        </div>
+                    ) : (
+                        <div className='text-center mt-10'>
+                            <button
+                                className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                onClick={() => setShowSelector(!showSelector)}>
+                                Cancel
+                            </button>
+                            <button
+                                className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                onClick={() => {
+                                    selectorRef.current.callStoreSlotArrays();
+                                    setShowSelector(!showSelector);
+                                }}>
+                                Submit Your Availability
+                            </button>
+                        </div>
+                    )}
 
-                    {showSelector && <Selector data={data} />}
+                    {showSelector && <Selector ref={selectorRef} data={data} />}
                 </div>
             )}
         </div>

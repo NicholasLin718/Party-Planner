@@ -20,7 +20,6 @@ const SelectableComponent = createSelectable(Slot);
 
 const Columns = forwardRef((props, ref) => {
     const dispatch = useDispatch();
-    console.log(props);
     const { currentColumns, arrayOfPagesOfColumns, totalColumns, newArr } =
         props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -48,6 +47,7 @@ const Columns = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSlotArrays() {
+            console.log('fr');
             console.log(slotArrays);
             dispatch(storeAvailability(slotArrays));
         }
@@ -64,15 +64,13 @@ const Columns = forwardRef((props, ref) => {
                 clickHandler={() => setBooleanSelect(!booleanSelect)}
             />
             {slotArrays.map((page, k) => (
-                <div>
+                <div className='flex justify-center'>
                     {currentPage === k + 1 && (
                         <SelectableGroup
                             key={k}
                             onSelection={handleSelection}
-                            className='columns bg-slate-100'>
+                            className='flex gap-2 w-[80%]'>
                             {page.map((column, j) => {
-                                console.log(column);
-                                console.log(column.slots);
                                 const date = column.date.isoTime;
                                 const dayOfWeek = column.date.dayOfWeek;
                                 let formattedDay =
@@ -82,12 +80,11 @@ const Columns = forwardRef((props, ref) => {
                                         key={j}
                                         className={
                                             formattedDay[0].substring(5, 10) +
-                                            ' bg-slate-500'
+                                            ' grow bg-slate-500'
                                         }>
                                         {formattedDay[0].substring(5, 10)}
                                         <br />
                                         {listOfWeekDays[dayOfWeek]}
-                                        {console.log(column)}
                                         {column.slots.map((slotData, i) => {
                                             return (
                                                 <SelectableComponent
@@ -97,6 +94,9 @@ const Columns = forwardRef((props, ref) => {
                                                     slotArrays={slotArrays}
                                                     setSlotArrays={
                                                         setSlotArrays
+                                                    }
+                                                    booleanSelect={
+                                                        booleanSelect
                                                     }></SelectableComponent>
                                             );
                                         })}

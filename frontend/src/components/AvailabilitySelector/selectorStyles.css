@@ -1,5 +1,6 @@
 .columns {
     display: flex;
+    width: 1000px;
     /* display: grid;
     justify-content: center;
     align-content: center; */
@@ -14,12 +15,6 @@
     bottom: 0;
     right: -5px;
 }
-
-/* .slot {
-    
-    height: 20px;
-    outline: 0.5px solid;
-} */
 
 .selected {
     background-color: chocolate;
