@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import {
     setRange,
     setTitle,
-    setDescription
+    setDescription,
+    setTimeZone
 } from '../../features/TimeRangeSlice';
 import './styles.css';
 import CreatePageTextBoxComponent from './CreatePageTextBoxComponent';
@@ -26,15 +27,13 @@ const TimeRange = forwardRef((props, ref) => {
 
     const onTitleFieldChanged = (e) => {
         setTitleField(e.target.value);
-        console.log(e.target.value);
     };
     const onDescriptionFieldChanged = (e) =>
         setDescriptionField(e.target.value);
 
     const createValue = (time) => {
         let result = time.match(/\d\d:\d\d/);
-        let hour =
-            parseInt(result[0].substring(0, 2)) + selectedTimezone.offset;
+        let hour = parseInt(result[0].substring(0, 2));
         if (hour < 0) hour += 24;
         return { hour: hour, is_00: result[0].substring(3, 5) === '00' };
     };
@@ -49,6 +48,7 @@ const TimeRange = forwardRef((props, ref) => {
             dispatch(setTitle(titleField));
             dispatch(setDescription(descriptionField));
             dispatch(setRange(startValue, endValue));
+            dispatch(setTimeZone(selectedTimezone.abbrev));
         }
     }));
     //return value would be {JSON.stringify(selectedTimezone, null, 4)}

@@ -8,7 +8,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     range: {},
     title: 'Enter Title',
-    description: 'Enter Description'
+    description: 'Enter Description',
+    timezone: 'EDT'
 };
 const timeRangeSlice = createSlice({
     name: 'Time Range',
@@ -34,10 +35,15 @@ const timeRangeSlice = createSlice({
         setDescription: (state, action) => {
             const description = action.payload;
             state.description = description;
+        },
+        setTimeZone: (state, action) => {
+            const timezone = action.payload;
+            state.timezone = timezone;
         }
     }
 });
 
 export const selectAllRange = (state) => state.selectRange;
-export const { setRange, setTitle, setDescription } = timeRangeSlice.actions;
+export const { setRange, setTitle, setDescription, setTimeZone } =
+    timeRangeSlice.actions;
 export default timeRangeSlice.reducer;

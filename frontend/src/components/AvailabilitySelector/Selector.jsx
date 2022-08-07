@@ -25,7 +25,9 @@ const Selector = forwardRef((props, ref) => {
     const [currentColumns, setCurrentColumns] = useState([]);
     const [arrayOfPagesOfColumns, setArrayOfPagesOfColumns] = useState([]);
     const [totalColumns, setTotalColumns] = useState(0);
-
+    const [startValue, setStartValue] = useState({});
+    const [endValue, setEndValue] = useState({});
+    const [timeZone, setTimeZone] = useState('');
     useEffect(() => {
         calculateSlots();
     }, []);
@@ -38,12 +40,11 @@ const Selector = forwardRef((props, ref) => {
 
     let newArr = useRef([]);
 
-    let startValue = {};
-    let endValue = {};
     const calculateSlots = () => {
         const printList = JSON.parse(data.meetupDays);
         let start = JSON.parse(data.meetupTimeRange).startValue;
         let end = JSON.parse(data.meetupTimeRange).endValue;
+        let timezone = JSON.parse(data.meetupTimeZone);
         const orderedPrintList = printList
             .slice()
             .sort((a, b) => a.isoTime.localeCompare(b.isoTime));
@@ -51,6 +52,10 @@ const Selector = forwardRef((props, ref) => {
         let daysSelected = orderedPrintList.length;
         let arrayOfColumns = [];
         let columnObject = [];
+
+        if (start.hour === 0 && start.is_00 && end.hour === 0 && end.is_00) {
+            end.hour = 24;
+        }
         let hour = start.hour;
         let is_00 = start.is_00;
         while (hour < end.hour) {
@@ -107,8 +112,9 @@ const Selector = forwardRef((props, ref) => {
         if (page.length > 0) newArr.current.push(page);
         setTotalColumns(count);
         setArrayOfPagesOfColumns(newArr.current);
-        startValue = start;
-        endValue = end;
+        setStartValue(start);
+        setEndValue(end);
+        setTimeZone(timezone);
 
         const indexOfLastColumn = currentPage * columnsPerPage;
         const indexOfFirstColumn = indexOfLastColumn - columnsPerPage;
@@ -130,11 +136,6 @@ const Selector = forwardRef((props, ref) => {
     return (
         <div>
             {/* {renderedDays} */}
-            <LabelColumn
-                className='label'
-                startValue={startValue}
-                endValue={endValue}
-            />
             <div className='column-page'>
                 <Columns
                     ref={slotArrayRef} //reference to slot array
@@ -142,6 +143,9 @@ const Selector = forwardRef((props, ref) => {
                     arrayOfPagesOfColumns={arrayOfPagesOfColumns} //array of all pages of the columns (2D array)
                     totalColumns={totalColumns}
                     newArr={newArr}
+                    startValue={startValue}
+                    endValue={endValue}
+                    timeZone={timeZone}
                 />
             </div>
         </div>

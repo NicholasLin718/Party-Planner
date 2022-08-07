@@ -27,7 +27,8 @@ export default function CreateMeetupPage() {
             meetupDescription: data.timeRange.description,
             meetupLocation: null,
             meetupDays: JSON.stringify(data.selectedDays),
-            meetupTimeRange: JSON.stringify(data.timeRange.range)
+            meetupTimeRange: JSON.stringify(data.timeRange.range),
+            meetupTimeZone: JSON.stringify(data.timeRange.timezone)
         };
         console.log(rawBody);
         await postData(rawBody);

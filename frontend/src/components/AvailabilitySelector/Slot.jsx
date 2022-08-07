@@ -22,7 +22,8 @@ export default function Slot(props) {
             <div
                 onClick={handleClick}
                 className={
-                    'h-[15px] outline-[0.5px] outline-dashed ' +
+                    'h-[15px] border-x-[0.2px] ' +
+                    (slotData.is_00 ? 'border-b-0 ' : 'border-b-[0.5px] ') +
                     (slotData.selected
                         ? 'selected' +
                           (!booleanSelect

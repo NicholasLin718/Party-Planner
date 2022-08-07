@@ -15,13 +15,21 @@ import {
     selectAllAvailability
 } from '../../features/AvailabilitySlice';
 import Pagination from './Pagination';
+import LabelColumn from './LabelColumn';
 
 const SelectableComponent = createSelectable(Slot);
 
 const Columns = forwardRef((props, ref) => {
     const dispatch = useDispatch();
-    const { currentColumns, arrayOfPagesOfColumns, totalColumns, newArr } =
-        props;
+    const {
+        currentColumns,
+        arrayOfPagesOfColumns,
+        totalColumns,
+        newArr,
+        startValue,
+        endValue,
+        timeZone
+    } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [booleanSelect, setBooleanSelect] = useState(true);
     const [slotArrays, setSlotArrays] = useState(newArr.current);
@@ -69,7 +77,13 @@ const Columns = forwardRef((props, ref) => {
                         <SelectableGroup
                             key={k}
                             onSelection={handleSelection}
-                            className='flex gap-2 w-[80%]'>
+                            className='flex w-[80%]'>
+                            <LabelColumn
+                                className='text-sm'
+                                startValue={startValue}
+                                endValue={endValue}
+                                timeZone={timeZone}
+                            />
                             {page.map((column, j) => {
                                 const date = column.date.isoTime;
                                 const dayOfWeek = column.date.dayOfWeek;
@@ -80,11 +94,14 @@ const Columns = forwardRef((props, ref) => {
                                         key={j}
                                         className={
                                             formattedDay[0].substring(5, 10) +
-                                            ' grow bg-slate-500'
+                                            ' grow bg-slate-300 font-mono text-center'
                                         }>
-                                        {formattedDay[0].substring(5, 10)}
-                                        <br />
-                                        {listOfWeekDays[dayOfWeek]}
+                                        <div className='text-sm font-bold'>
+                                            {listOfWeekDays[dayOfWeek]}
+                                        </div>
+                                        <div>
+                                            {formattedDay[0].substring(5, 10)}
+                                        </div>
                                         {column.slots.map((slotData, i) => {
                                             return (
                                                 <SelectableComponent
