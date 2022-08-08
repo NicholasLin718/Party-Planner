@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import UserCard from '../../components/UserCard/UserCard';
-
+import Location from '../../components/Location/Location';
 /*
 With routing, we want protected routing such that the user must enter a username in the userpage to authenticate. After that, the link with code will always work without userpage authentication.
 */
@@ -65,6 +65,7 @@ const UserPage = () => {
                         />
                     ))}
             </div>
+            <Location/>
         </div>
     );
 };

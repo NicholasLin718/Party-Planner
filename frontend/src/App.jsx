@@ -2,7 +2,6 @@ import React from 'react';
 import Calendar from './components/Calendar/Calendar';
 import Selector from './components/AvailabilitySelector/Selector';
 import TimeRange from './components/TimeRange/TimeRange';
-import FindPage from './components/LandingPages/findPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PartyPage from './components/partyPages/partyPage';
 import HomePage from './pages/HomePage/HomePage';
@@ -22,7 +21,6 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<HomePage />} />
-                <Route path='/findpage' element={<FindPage />} />
                 {/* <Route path='/:code' element={<PartyPage />} /> */}
                 <Route path='/create' element={<CreateMeetupPage />} />
                 <Route path='/range' element={<TimeRange />} />

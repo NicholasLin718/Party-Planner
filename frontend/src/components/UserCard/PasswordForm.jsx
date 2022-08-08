@@ -42,7 +42,7 @@ const PasswordForm = (props) => {
         if (res.message == 'SUCCESS') {
             setUserStorage(selectedUser);
         } else {
-            console.log('wrong password');
+            alert("wrong password");
         }
     };
 
