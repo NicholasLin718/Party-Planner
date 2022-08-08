@@ -43,6 +43,10 @@ const pageSchema = new Schema({
         type: String,
         required: true // true
     },
+    meetupTimeZone: {
+        type: String,
+        required: true
+    },
     polls: {
         type: [pollSchema],
         required: false,

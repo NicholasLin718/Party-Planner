@@ -68,7 +68,7 @@ const PasswordForm = (props) => {
                 <div className='mt-4'>
                     <button
                         type='submit'
-                        className='group ml-2 mt-1 w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-400 ease-in duration-150'>
+                        className='group ml-2 mt-1 w-auto px-2 py-[6px] rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-400 ease-in duration-150'>
                         Join Event
                         <FontAwesomeIcon
                             icon={faPersonWalkingArrowRight}

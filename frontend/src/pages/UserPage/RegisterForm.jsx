@@ -51,43 +51,55 @@ const RegisterForm = (props) => {
         setSecurityQuestionAnswer(e.target.value);
     };
 
+    const validateFields = () => {
+        if (!username) return false;
+        else if (selectedOption === 'Password' && !password) return false;
+        else if (
+            selectedOption === 'Security Question' &&
+            (!securityQuestion || !securityQuestionAnswer)
+        )
+            return false;
+        return true;
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const sprite = Math.ceil(Math.random() * 12 - 1);
-        let storedPassword;
-        let storedSecurityQuestion = "";
-        if(selectedOption == "Password"){
-            storedPassword = password;
-        } else if(selectedOption == "Security Question"){
-            storedPassword = securityQuestionAnswer;
-            storedSecurityQuestion = securityQuestion;
-        } else {
-            storedPassword = "";
-        }
-        const rawBody = {
-            $push: {
-                users: {
-                    username: username,
-                    password: storedPassword,
-                    securityQuestion: storedSecurityQuestion,
-                    sprite: sprite,
-                    availableTimes: new Array(24).fill(false)
-                }
+        if (!validateFields()) alert('Fields cannot be blank!');
+        else {
+            const sprite = Math.ceil(Math.random() * 12 - 1);
+            let storedPassword;
+            let storedSecurityQuestion = '';
+            if (selectedOption == 'Password') {
+                storedPassword = password;
+            } else if (selectedOption == 'Security Question') {
+                storedPassword = securityQuestionAnswer;
+                storedSecurityQuestion = securityQuestion;
+            } else {
+                storedPassword = '';
             }
-        };
-        //most likely need to fetch full thing and then update users
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(rawBody)
-        };
-        console.log(requestOptions.body);
-        const response = await fetch(
-            'http://localhost:5000/pages/' + code,
-            requestOptions
-        );
-        console.log(response);
-        setUserStorage(username);
+            const rawBody = {
+                $push: {
+                    users: {
+                        username: username,
+                        password: password,
+                        sprite: sprite,
+                        availableTimes: new Array(24).fill(false)
+                    }
+                }
+            };
+            //most likely need to fetch full thing and then update users
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(rawBody)
+            };
+            console.log(requestOptions.body);
+            const response = await fetch(
+                'http://localhost:5000/pages/' + code,
+                requestOptions
+            );
+            console.log(response);
+            setUserStorage(username);
+        }
     };
     return (
         <div className='flex justify-center mb-4 bg-blue-100 border-2 rounded-md shadow-md w-[600px] h-auto px-4 py-4'>

@@ -30,7 +30,6 @@ export default function Header({
 
     return (
         <div className='header'>
-            {console.log(currentMonth)}
             {currentMonth > 0 && (
                 <FontAwesomeIcon
                     icon={faChevronCircleLeft}

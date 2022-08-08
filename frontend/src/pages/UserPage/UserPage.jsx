@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import UserCard from '../../components/UserCard/UserCard';
-import Location from '../../components/Location/Location';
+
 /*
 With routing, we want protected routing such that the user must enter a username in the userpage to authenticate. After that, the link with code will always work without userpage authentication.
 */
 const UserPage = () => {
-    const { code } = useParams();
     const navigate = useNavigate();
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
     const [registerForm, setRegisterForm] = useState(false);
 
+    /*DEFAULT DATA FETCHING CODE*/
+    const { code } = useParams();
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
     async function getRoom() {
         const response = await fetch('http://localhost:5000/pages/' + code);
         const res = await response.json();
@@ -23,6 +24,7 @@ const UserPage = () => {
     useEffect(() => {
         getRoom();
     }, []);
+    /*END OF DEFAULT DATA FETCHING CODE*/
 
     const setUserStorage = (username) => {
         localStorage.setItem(code, username);
@@ -65,7 +67,6 @@ const UserPage = () => {
                         />
                     ))}
             </div>
-            <Location/>
         </div>
     );
 };

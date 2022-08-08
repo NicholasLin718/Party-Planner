@@ -15,16 +15,24 @@ import {
     selectAllAvailability
 } from '../../features/AvailabilitySlice';
 import Pagination from './Pagination';
+import LabelColumn from './LabelColumn';
 
 const SelectableComponent = createSelectable(Slot);
 
 const Columns = forwardRef((props, ref) => {
     const dispatch = useDispatch();
-
-    const { currentColumns, arrayOfPagesOfColumns, totalColumns } = props;
+    const {
+        currentColumns,
+        arrayOfPagesOfColumns,
+        totalColumns,
+        newArr,
+        startValue,
+        endValue,
+        timeZone
+    } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [booleanSelect, setBooleanSelect] = useState(true);
-    const [slotArrays, setSlotArrays] = useState(arrayOfPagesOfColumns);
+    const [slotArrays, setSlotArrays] = useState(newArr.current);
     const [selectedKeys, setSelectedKeys] = useState([]);
     const PageSize = 5;
 
@@ -47,6 +55,7 @@ const Columns = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSlotArrays() {
+            console.log('fr');
             console.log(slotArrays);
             dispatch(storeAvailability(slotArrays));
         }
@@ -63,15 +72,19 @@ const Columns = forwardRef((props, ref) => {
                 clickHandler={() => setBooleanSelect(!booleanSelect)}
             />
             {slotArrays.map((page, k) => (
-                <div>
+                <div className='flex justify-center'>
                     {currentPage === k + 1 && (
                         <SelectableGroup
                             key={k}
                             onSelection={handleSelection}
-                            className='columns bg-slate-100'>
+                            className='flex w-[80%]'>
+                            <LabelColumn
+                                className='text-sm'
+                                startValue={startValue}
+                                endValue={endValue}
+                                timeZone={timeZone}
+                            />
                             {page.map((column, j) => {
-                                console.log(column);
-                                console.log(column.slots);
                                 const date = column.date.isoTime;
                                 const dayOfWeek = column.date.dayOfWeek;
                                 let formattedDay =
@@ -81,12 +94,14 @@ const Columns = forwardRef((props, ref) => {
                                         key={j}
                                         className={
                                             formattedDay[0].substring(5, 10) +
-                                            ' bg-slate-500'
+                                            ' grow bg-slate-300 font-mono text-center'
                                         }>
-                                        {formattedDay[0].substring(5, 10)}
-                                        <br />
-                                        {listOfWeekDays[dayOfWeek]}
-                                        {console.log(column)}
+                                        <div className='text-sm font-bold'>
+                                            {listOfWeekDays[dayOfWeek]}
+                                        </div>
+                                        <div>
+                                            {formattedDay[0].substring(5, 10)}
+                                        </div>
                                         {column.slots.map((slotData, i) => {
                                             return (
                                                 <SelectableComponent
@@ -96,6 +111,9 @@ const Columns = forwardRef((props, ref) => {
                                                     slotArrays={slotArrays}
                                                     setSlotArrays={
                                                         setSlotArrays
+                                                    }
+                                                    booleanSelect={
+                                                        booleanSelect
                                                     }></SelectableComponent>
                                             );
                                         })}

@@ -23,6 +23,5 @@ export default function buildCalendar(selectedDay) {
         // day = day.clone().subtract(1, "week");
     }
     //return matrix
-    console.log(calendar);
     return calendar;
 }

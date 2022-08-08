@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Pagination = (props) => {
     const { columnsPerPage, totalColumns, paginate } = props;
-
+    const [active, setActive] = useState(1);
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalColumns / columnsPerPage); i++) {
@@ -10,20 +10,44 @@ const Pagination = (props) => {
     }
     return (
         <div>
-            <ul className='pagination'>
+            <div className='flex items-center justify-center select-none pt-3'>
+                <div
+                    onClick={() => {
+                        if (active > 1) {
+                            paginate(active - 1);
+                            setActive(active - 1);
+                        }
+                    }}
+                    className='rounded-l-lg px-4 py-2 bg-gray-200 hover:transition hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
+                    {'<<'}
+                </div>
                 {pageNumbers.map((number) => (
-                    <li key={number} className='page-number'>
-                        <button
-                            onClick={() => {
-                                paginate(number);
-                                console.log(number);
-                            }}
-                            className='page-link block'>
-                            {number}
-                        </button>
-                    </li>
+                    <div
+                        onClick={() => {
+                            paginate(number);
+                            setActive(number);
+                            console.log(number);
+                        }}
+                        className={
+                            'px-4 py-2 hover:duration-500 hover:ease-in-out hover:cursor-pointer ' +
+                            (active === number
+                                ? 'bg-rose-500'
+                                : 'bg-gray-200 border-gray-300 hover:bg-gray-500')
+                        }>
+                        {number}
+                    </div>
                 ))}
-            </ul>
+                <div
+                    onClick={() => {
+                        if (active < Math.ceil(totalColumns / columnsPerPage)) {
+                            paginate(active + 1);
+                            setActive(active + 1);
+                        }
+                    }}
+                    className='rounded-r-lg px-4 py-2 bg-gray-200 hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
+                    {'>>'}
+                </div>
+            </div>
         </div>
     );
 };

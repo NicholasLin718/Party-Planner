@@ -27,7 +27,8 @@ export default function CreateMeetupPage() {
             meetupDescription: data.timeRange.description,
             meetupLocation: null,
             meetupDays: JSON.stringify(data.selectedDays),
-            meetupTimeRange: JSON.stringify(data.timeRange.range)
+            meetupTimeRange: JSON.stringify(data.timeRange.range),
+            meetupTimeZone: JSON.stringify(data.timeRange.timezone)
         };
         console.log(rawBody);
         await postData(rawBody);
@@ -54,18 +55,22 @@ export default function CreateMeetupPage() {
                 <button
                     onClick={async () => {
                         //ADD CONDITIONS FOR REQUIRED FIELDS
-                        CalendarRef.current.storeSelectedList();
                         TimeRangeRef.current.storeRange();
-
+                        CalendarRef.current.storeSelectedList();
                         const data = store.getState();
                         if (!data.timeRange.title)
                             alert('Event name required!');
-                        await createCode();
-                        if (localStorage.getItem(code)) {
-                            navigate('/users/' + code);
-                        } else {
-                            alert('Error occured while creating the room!');
-                            navigate('/create');
+                        else if (data.selectedDays.length === 0)
+                            alert('Select at least one day!');
+                        else {
+                            await createCode();
+                            if (localStorage.getItem(code)) {
+                                navigate('/users/' + code);
+                                window.location.reload(); //CLEARS THE STATES
+                            } else {
+                                alert('Error occured while creating the room!');
+                                navigate('/create');
+                            }
                         }
                     }}
                     className='w-[500px] mt-[550px] px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'>
