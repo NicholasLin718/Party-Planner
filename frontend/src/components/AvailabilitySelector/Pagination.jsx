@@ -11,16 +11,16 @@ const Pagination = (props) => {
     return (
         <div>
             <div className='flex items-center justify-center select-none pt-3'>
-                <div
-                    onClick={() => {
-                        if (active > 1) {
+                {active > 1 && (
+                    <div
+                        onClick={() => {
                             paginate(active - 1);
                             setActive(active - 1);
-                        }
-                    }}
-                    className='rounded-l-lg px-4 py-2 bg-gray-200 hover:transition hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
-                    {'<<'}
-                </div>
+                        }}
+                        className='rounded-l-lg px-4 py-2 bg-gray-200 hover:transition hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
+                        {'<<'}
+                    </div>
+                )}
                 {pageNumbers.map((number) => (
                     <div
                         onClick={() => {
@@ -37,16 +37,16 @@ const Pagination = (props) => {
                         {number}
                     </div>
                 ))}
-                <div
-                    onClick={() => {
-                        if (active < Math.ceil(totalColumns / columnsPerPage)) {
+                {active < Math.ceil(totalColumns / columnsPerPage) && (
+                    <div
+                        onClick={() => {
                             paginate(active + 1);
                             setActive(active + 1);
-                        }
-                    }}
-                    className='rounded-r-lg px-4 py-2 bg-gray-200 hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
-                    {'>>'}
-                </div>
+                        }}
+                        className='rounded-r-lg px-4 py-2 bg-gray-200 hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
+                        {'>>'}
+                    </div>
+                )}
             </div>
         </div>
     );

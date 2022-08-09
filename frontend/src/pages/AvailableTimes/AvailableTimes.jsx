@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Selector from '../../components/AvailabilitySelector/Selector';
 import { useParams } from 'react-router-dom';
+import { store } from '../../store';
 const AvailableTimes = () => {
     const [showSelector, setShowSelector] = useState(false);
     const selectorRef = useRef();
@@ -19,12 +20,20 @@ const AvailableTimes = () => {
         getRoom();
     }, []);
 
-    // const submitAvailability = () => {
+    const submitAvailability = () => {
+        selectorRef.current.callStoreSlotArrays();
+        let reduxData = store.getState();
+        setShowSelector(!showSelector);
+        console.log(reduxData);
 
-    // };
+        let username = localStorage.getItem(code); //username
+        console.log(username);
+        let userAvailability = reduxData.availability; //array of arrays that contain 5 objects max, each object contains date and slots
+        console.log(userAvailability);
+    };
 
     return (
-        <div>
+        <div className='pb-12'>
             {!loading && (
                 <div>
                     <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
@@ -33,7 +42,7 @@ const AvailableTimes = () => {
                     {!showSelector ? (
                         <div className='text-center mt-10'>
                             <button
-                                className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                 onClick={() => setShowSelector(!showSelector)}>
                                 Add/Edit Your Availability
                             </button>
@@ -41,16 +50,13 @@ const AvailableTimes = () => {
                     ) : (
                         <div className='text-center mt-10'>
                             <button
-                                className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                className='px-2 py-1 mx-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                 onClick={() => setShowSelector(!showSelector)}>
                                 Cancel
                             </button>
                             <button
-                                className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
-                                onClick={() => {
-                                    selectorRef.current.callStoreSlotArrays();
-                                    setShowSelector(!showSelector);
-                                }}>
+                                className='px-2 py-1 mx-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                onClick={() => submitAvailability()}>
                                 Submit Your Availability
                             </button>
                         </div>
