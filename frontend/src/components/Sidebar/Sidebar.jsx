@@ -35,8 +35,8 @@ const Sidebar = (props) => {
             <div
                 className={
                     showSidebar
-                        ? 'z-50 top-0 left-0 w-[300px] bg-slate-800 p-6 text-white fixed h-full ease-in-out duration-200 translate-x-0 '
-                        : 'z-50 flex flex-col fixed h-full min-h-screen w-12 bg-slate-800 ease-in-out duration-200 -translate-x-0 '
+                        ? 'z-50 top-0 left-0 w-[300px] bg-slate-800 p-6 text-white fixed h-full ease-in-out duration-300 translate-x-0 '
+                        : 'z-50 w-12 bg-slate-800 fixed h-full min-h-screen ease-in-out duration-300 -translate-x-0 '
                 }>
                 {showSidebar ? (
                     <button
@@ -56,12 +56,12 @@ const Sidebar = (props) => {
                         <div
                             onClick={() => navigate(item.url)}
                             className={
-                                'link decoration-0 text-2xl py-4 text-slate-100 block transition duration-300 border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer ' +
+                                'link decoration-0 text-2xl py-4 text-slate-100 block border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer whitespace-nowrap ' +
                                 (showSidebar ? '' : 'text-center')
                             }>
                             <FontAwesomeIcon icon={item.icon} />
                             {showSidebar && (
-                                <span className='px-2'>{item.name}</span>
+                                <span className='px-2 '>{item.name}</span>
                             )}
                         </div>
                     ))}
@@ -80,12 +80,13 @@ const Sidebar = (props) => {
                 )}
                 <div
                     className={
-                        'absolute bottom-0' + (showSidebar ? ' ' : ' w-12')
+                        'absolute bottom-0 bg-slate-900 ease-in-out duration-200' +
+                        (showSidebar ? ' ml-[-24px] pl-6 w-[300px]' : ' w-12')
                     }>
                     <div
                         className={
-                            'decoration-0 text-2xl py-4 text-slate-100 block transition duration-300 border-b-[1px] border-blue-50 ' +
-                            (showSidebar ? '' : 'text-center')
+                            'decoration-0 text-2xl py-4 text-slate-100 block transition duration-300 whitespace-nowrap ' +
+                            (showSidebar ? '' : 'text-center ')
                         }>
                         <FontAwesomeIcon icon={faGear} />
                         {showSidebar && <span className='px-2'>Settings</span>}
