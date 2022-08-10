@@ -2,7 +2,7 @@ import React from 'react';
 import './selectorStyles.css';
 const SelectButton = (props) => {
     return (
-        <div className='flex justify-center px-3 py-3'>
+        <div className='flex justify-end w-[85%] py-3'>
             <label className='switch btn-color-mode-switch'>
                 <input
                     type='checkbox'
