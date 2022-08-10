@@ -16,6 +16,7 @@ import {
 } from '../../features/AvailabilitySlice';
 import Pagination from './Pagination';
 import LabelColumn from './LabelColumn';
+import { store } from '../../store';
 
 const SelectableComponent = createSelectable(Slot);
 
@@ -32,7 +33,9 @@ const Columns = forwardRef((props, ref) => {
     } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [booleanSelect, setBooleanSelect] = useState(true);
+    console.log(newArr.current);
     const [slotArrays, setSlotArrays] = useState(newArr.current);
+    console.log(slotArrays);
     const [selectedKeys, setSelectedKeys] = useState([]);
     const PageSize = 5;
 
@@ -40,9 +43,7 @@ const Columns = forwardRef((props, ref) => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const handleSelection = (keys) => {
-        console.log(keys);
         let arr = slotArrays.slice();
-        console.log(arr);
         keys.forEach((key) => {
             const { i, j, k } = key;
             arr[k][j].slots[i].selected = booleanSelect;
@@ -55,8 +56,6 @@ const Columns = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSlotArrays() {
-            console.log('fr');
-            console.log(slotArrays);
             dispatch(storeAvailability(slotArrays));
         }
     }));
@@ -68,16 +67,19 @@ const Columns = forwardRef((props, ref) => {
 
     return (
         <div>
-            <SelectButton
-                clickHandler={() => setBooleanSelect(!booleanSelect)}
-            />
+            <div className='flex justify-center'>
+                <SelectButton
+                    className='flex justify-center'
+                    clickHandler={() => setBooleanSelect(!booleanSelect)}
+                />
+            </div>
             {slotArrays.map((page, k) => (
                 <div className='flex justify-center'>
                     {currentPage === k + 1 && (
                         <SelectableGroup
                             key={k}
                             onSelection={handleSelection}
-                            className='flex w-[80%]'>
+                            className='flex w-[85%]'>
                             <LabelColumn
                                 className='text-sm'
                                 startValue={startValue}
@@ -85,6 +87,7 @@ const Columns = forwardRef((props, ref) => {
                                 timeZone={timeZone}
                             />
                             {page.map((column, j) => {
+                                console.log(slotArrays);
                                 const date = column.date.isoTime;
                                 const dayOfWeek = column.date.dayOfWeek;
                                 let formattedDay =
@@ -124,11 +127,13 @@ const Columns = forwardRef((props, ref) => {
                     )}
                 </div>
             ))}
+            {/* {totalColumns / PageSize === 1 && ( */}
             <Pagination
                 columnsPerPage={PageSize}
                 totalColumns={totalColumns}
                 paginate={paginate}
             />
+            {/* )} */}
         </div>
     );
 });

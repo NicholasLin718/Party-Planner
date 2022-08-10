@@ -39,7 +39,7 @@ const Selector = forwardRef((props, ref) => {
     }));
 
     let newArr = useRef([]);
-
+    console.log(newArr);
     const calculateSlots = () => {
         const printList = JSON.parse(data.meetupDays);
         let start = JSON.parse(data.meetupTimeRange).startValue;
@@ -97,7 +97,6 @@ const Selector = forwardRef((props, ref) => {
                 slots: columnObject
             });
         }
-
         let page = [];
         let count = 0;
         arrayOfColumns.forEach((column) => {
@@ -105,17 +104,24 @@ const Selector = forwardRef((props, ref) => {
             page.push(newColumn);
             count++;
             if (count % 5 === 0) {
-                newArr.current.push(page);
+                if (
+                    !JSON.stringify(newArr.current).includes(
+                        JSON.stringify(page)
+                    )
+                )
+                    newArr.current.push(page);
                 page = [];
             }
         });
-        if (page.length > 0) newArr.current.push(page);
+        if (page.length > 0) {
+            if (!JSON.stringify(newArr.current).includes(JSON.stringify(page)))
+                newArr.current.push(page);
+        }
         setTotalColumns(count);
         setArrayOfPagesOfColumns(newArr.current);
         setStartValue(start);
         setEndValue(end);
         setTimeZone(timezone);
-
         const indexOfLastColumn = currentPage * columnsPerPage;
         const indexOfFirstColumn = indexOfLastColumn - columnsPerPage;
         setCurrentColumns(

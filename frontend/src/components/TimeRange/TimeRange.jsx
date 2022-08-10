@@ -20,8 +20,13 @@ const TimeRange = forwardRef((props, ref) => {
         abbrev: 'EDT',
         altName: 'Eastern Daylight Time'
     }); //set default to EDT
-    const [startTime, setStartTime] = useState(moment().toISOString());
-    const [endTime, setEndTime] = useState(moment().toISOString());
+    const [startTime, setStartTime] = useState(
+        moment().local().startOf('day').toISOString()
+    );
+    console.log(moment().local().startOf('day').toISOString());
+    const [endTime, setEndTime] = useState(
+        moment().local().startOf('day').toISOString()
+    );
     const [titleField, setTitleField] = useState('');
     const [descriptionField, setDescriptionField] = useState('');
 
@@ -33,14 +38,14 @@ const TimeRange = forwardRef((props, ref) => {
 
     const createValue = (time) => {
         let result = time.match(/\d\d:\d\d/);
-        let hour = parseInt(result[0].substring(0, 2));
+        let hour =
+            parseInt(result[0].substring(0, 2)) + selectedTimezone.offset;
         if (hour < 0) hour += 24;
         return { hour: hour, is_00: result[0].substring(3, 5) === '00' };
     };
 
-    let defaultValue = createValue(startTime);
-    const [startValue, setStartValue] = useState(defaultValue);
-    const [endValue, setEndValue] = useState(defaultValue);
+    const [startValue, setStartValue] = useState(createValue(startTime));
+    const [endValue, setEndValue] = useState(createValue(endTime));
     dispatch(setRange(startValue, endValue));
 
     useImperativeHandle(ref, () => ({

@@ -30,8 +30,8 @@ export default function LabelColumn(props) {
     console.log(columnArr);
     return (
         <div className='px-2'>
-            <div className='flex justify-end font-mono text-sm'>{'____'}</div>
             <div className='flex justify-end font-mono '>{timeZone}</div>
+            <div className='flex justify-end font-mono text-sm'>{'————'}</div>
             {columnArr.map((time, i) => (
                 <div key={i}>
                     <div
