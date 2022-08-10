@@ -56,7 +56,7 @@ const Sidebar = (props) => {
                         <div
                             onClick={() => navigate(item.url)}
                             className={
-                                'link decoration-0 text-2xl py-4 text-slate-100 block border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer whitespace-nowrap ' +
+                                'link decoration-0 text-2xl py-4 text-slate-100 block border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer ease-in-out duration-150 whitespace-nowrap ' +
                                 (showSidebar ? '' : 'text-center')
                             }>
                             <FontAwesomeIcon icon={item.icon} />
@@ -80,12 +80,12 @@ const Sidebar = (props) => {
                 )}
                 <div
                     className={
-                        'absolute bottom-0 bg-slate-900 ease-in-out duration-200' +
+                        'absolute bottom-0 bg-slate-900 ease-in-out duration-300' +
                         (showSidebar ? ' ml-[-24px] pl-6 w-[300px]' : ' w-12')
                     }>
                     <div
                         className={
-                            'decoration-0 text-2xl py-4 text-slate-100 block transition duration-300 whitespace-nowrap ' +
+                            'decoration-0 text-2xl py-4 text-slate-100 block whitespace-nowrap hover:text-rose-400 hover:cursor-pointer ease-in-out duration-150 ' +
                             (showSidebar ? '' : 'text-center ')
                         }>
                         <FontAwesomeIcon icon={faGear} />
