@@ -16,28 +16,20 @@ export default function Day(props) {
     }, [currentMonth]);
 
     useEffect(() => {
-        const date = new Date(day.toISOString());
+        // const date = new Date(day.toISOString());
+        // const dayOfWeek = date.getDay();
         if (select) {
-            if (
-                !selectedList.some((item) => item.isoTime === day.toISOString())
-            ) {
-                selectedList.push({
-                    isoTime: day.toISOString(),
-                    dayOfWeek: date.getDay()
-                });
+            if (!selectedList.some((item) => item === day.toISOString())) {
+                selectedList.push(day.toISOString());
             }
         } else {
-            let index = selectedList
-                .map((object) => object.isoTime)
-                .indexOf(day.toISOString());
+            let index = selectedList.indexOf(day.toISOString());
             if (index != -1) {
                 selectedList.splice(index, 1);
             }
         }
         setSelectedList(
-            selectedList
-                .slice()
-                .sort((a, b) => a.isoTime.localeCompare(b.isoTime))
+            selectedList.slice().sort((a, b) => a.localeCompare(b))
         );
     }, [select]);
 
