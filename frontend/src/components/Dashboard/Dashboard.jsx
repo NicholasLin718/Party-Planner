@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar';
 // import rooms from './code.json';
 const Dashboard = () => {
     const { code } = useParams();
@@ -29,10 +28,6 @@ const Dashboard = () => {
     return (
         <div className='transition duration-500 '>
             {/* className='flex flex-col items-center justify-center min-h-screen py-2' */}
-            <Sidebar
-                showSidebar={showSidebar}
-                setShowSidebar={setShowSidebar}
-            />
             <div
                 className={
                     'transition-all duration-500 ease-in-out transform px-2 ' +

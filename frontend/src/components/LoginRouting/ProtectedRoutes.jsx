@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import UserPage from '../../pages/UserPage/UserPage';
 import EnterCode from './EnterCode';
-
+import Sidebar from '../Sidebar/Sidebar';
 const ProtectedRoutes = () => {
     const { code } = useParams();
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-
+    const [showSidebar, setShowSidebar] = useState(false);
     async function getRoom() {
         //need error handling
         const response = await fetch('http://localhost:5000/pages/' + code);
@@ -21,7 +21,17 @@ const ProtectedRoutes = () => {
 
     const isAuth = localStorage.getItem(code);
 
-    return isAuth && !loading && data ? <Outlet /> : <UserPage />;
+    let component = (
+        <div>
+            {' '}
+            <Sidebar
+                showSidebar={showSidebar}
+                setShowSidebar={setShowSidebar}
+            />
+            <Outlet />
+        </div>
+    );
+    return isAuth && !loading && data ? component : <UserPage />;
 };
 
 export default ProtectedRoutes;

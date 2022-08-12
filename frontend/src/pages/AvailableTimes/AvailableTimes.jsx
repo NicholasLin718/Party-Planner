@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Selector from '../../components/AvailabilitySelector/Selector';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
-import Sidebar from '../../components/Sidebar/Sidebar';
+
 const AvailableTimes = () => {
     const [showSelector, setShowSelector] = useState(false);
     const selectorRef = useRef();
@@ -10,7 +10,6 @@ const AvailableTimes = () => {
     const { code } = useParams();
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-    const [showSidebar, setShowSidebar] = useState(false);
     async function getRoom() {
         const response = await fetch('http://localhost:5000/pages/' + code);
         const res = await response.json();
@@ -21,6 +20,7 @@ const AvailableTimes = () => {
     useEffect(() => {
         getRoom();
     }, []);
+    /*END OF DATA FETCH*/
 
     const submitAvailability = () => {
         selectorRef.current.callStoreSlotArrays();
@@ -38,10 +38,6 @@ const AvailableTimes = () => {
         <div className='pb-12'>
             {!loading && (
                 <div>
-                    <Sidebar
-                        showSidebar={showSidebar}
-                        setShowSidebar={setShowSidebar}
-                    />
                     <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
                         Select Your Available Times
                     </div>
