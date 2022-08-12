@@ -27,10 +27,6 @@ const UserCard = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const avatar = spriteArr[sprite];
 
-    const onSecurityQuestionAnswerChange = (e) => {
-        setSecurityQuestionAnswer(e.target.value);
-    };
-
     const handleUserClick = (username) => {
         // const curUser = data.users.find((user) => {
         //     return user.username === username;
@@ -65,13 +61,13 @@ const UserCard = (props) => {
             </div>
             {requireAuth && (
                 <div>
-                    {(securityQuestion == "" && password != "") && (
+                    {securityQuestion == '' && password != '' && (
                         <PasswordForm
                             setUserStorage={setUserStorage}
                             selectedUser={selectedUser}
                         />
                     )}
-                    {securityQuestion != "" && (
+                    {securityQuestion != '' && (
                         <SecurityQuestionForm
                             securityQuestion={securityQuestion}
                             setUserStorage={setUserStorage}
