@@ -17,6 +17,7 @@ import UserPage from './pages/UserPage/UserPage';
 import PageNotFound from './pages/ErrorPages/PageNotFound';
 import './style.css';
 import AvailableTimes from './pages/AvailableTimes/AvailableTimes';
+import TaskPage from './pages/TaskPage/TaskPage';
 function App() {
     return (
         <BrowserRouter>
@@ -24,17 +25,20 @@ function App() {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/create' element={<CreateMeetupPage />} />
                 <Route path='/range' element={<TimeRange />} />
-                <Route path='/r/:code/select' element={<AvailableTimes />} />
-                {/*<Route path='/enter' element={<EnterCode />} >*/}
-                <Route path='/r/:code/polls' element={<PollPage />} />
-                <Route
-                    path='/r/:code/polls/create'
-                    element={<CreatePollPage />}
-                />
                 {/* <Route path='/r/:code' element={<Dashboard />} /> */}
                 <Route path='/users/:code' element={<UserPage />} />
                 <Route element={<ProtectedRoutes />}>
                     <Route path='/r/:code' element={<Dashboard />} />
+                    <Route
+                        path='/r/:code/select'
+                        element={<AvailableTimes />}
+                    />
+                    <Route path='/r/:code/polls' element={<PollPage />} />
+                    <Route
+                        path='/r/:code/polls/create'
+                        element={<CreatePollPage />}
+                    />
+                    <Route path='/r/:code/tasks' element={<TaskPage />} />
                 </Route>
                 <Route path='*' element={<PageNotFound />} />
                 <Route path='/r/404' element={<PageNotFound />} />

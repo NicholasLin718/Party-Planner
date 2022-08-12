@@ -2,10 +2,11 @@ const asyncHandler = require('express-async-handler');
 const Page = require('../models/pageModel');
 class TaskController {
     // @desc Create task
-    // @route POST /tasks/create
+    // @route POST /pages/:code/tasks
     // @access Public
     static async createTask(req, res) {
-        if (!req.body || !req.body.task || !req.body.completed) {
+        console.log(req.body);
+        if (!req.body || !req.body.task) {
             res.status(400);
             throw new Error('Body has missing values');
         }
@@ -23,13 +24,13 @@ class TaskController {
         };
         curPage.tasks.push(newTask);
         await curPage.save();
-        res.status(200).json(newPoll);
+        res.status(200).json(newTask);
     }
 
     // @desc Update a task
     // @route PUT /pages/:code/tasks/:id
     // @access Private
-    static async updatePoll(req, res) {
+    static async updateTask(req, res) {
         if (!req.body) {
             res.status(400);
             throw new Error('Body has missing values');
@@ -38,13 +39,14 @@ class TaskController {
         const id = parseInt(req.params.id);
 
         const curPage = await Page.findOne({ code: code });
-        let found = false;
-        for (let i = 0; i < curPage.tasks.length; i++) {
-            if (curPage.tasks[i].id === id) {
-                curPage.tasks[i] = req.body;
-                found = true;
-            }
-        }
+        let found = curPage.tasks.find((tasks) => tasks.id === id);
+        // let found = false;
+        // for (let i = 0; i < curPage.tasks.length; i++) {
+        //     if (curPage.tasks[i].id === id) {
+        //         curPage.tasks[i] = req.body;
+        //         found = true;
+        //     }
+        // }
         if (!found) {
             res.status(404);
             throw new Error('Task not found');
@@ -60,7 +62,7 @@ class TaskController {
     // @desc delete a task
     // @route DELETE /pages/:code/tasks/:id
     // @access Private
-    static async deletePoll(req, res) {
+    static async deleteTask(req, res) {
         const codeToUpdate = req.params.code;
         const idToDelete = parseInt(req.params.id);
         const curPage = await Page.findOne({ code: codeToUpdate });
@@ -80,3 +82,7 @@ class TaskController {
         res.status(200).json(curPage);
     }
 }
+
+module.exports = {
+    TaskController
+};
