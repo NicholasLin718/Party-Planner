@@ -56,10 +56,15 @@ const Sidebar = (props) => {
                         <div
                             onClick={() => navigate(item.url)}
                             className={
-                                'link decoration-0 text-2xl py-4 text-slate-100 block border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer ease-in-out duration-150 whitespace-nowrap ' +
+                                'group link decoration-0 text-2xl py-4 text-slate-100 block border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer ease-in-out duration-150 whitespace-nowrap ' +
                                 (showSidebar ? '' : 'text-center')
                             }>
                             <FontAwesomeIcon icon={item.icon} />
+                            <span class='invisible text-sm w-auto bg-gray-900 text-slate-50 text-center rounded-md px-5 absolute z-1 left-[110%] group-hover:visible'>
+                                {item.name}
+                            </span>
+
+                            {/* absolute top-1/2 right-full mt-[-5px] border-2 bor */}
                             {showSidebar && (
                                 <span className='px-2 '>{item.name}</span>
                             )}
