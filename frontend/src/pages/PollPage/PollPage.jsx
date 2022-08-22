@@ -71,8 +71,8 @@ const PollPage = () => {
     };
 
     return (
-        <div className='flex flex-col items-center min-h-screen py-2'>
-            <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
+        <div className='flex flex-col min-h-screen'>
+            <div className='flex justify-center pt-12 pb-6 font-mono font-semibold text-5xl'>
                 Polls
             </div>
             <div>{!loading && data.code}</div>

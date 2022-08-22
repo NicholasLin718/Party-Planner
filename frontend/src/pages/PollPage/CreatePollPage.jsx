@@ -45,10 +45,16 @@ export default function CreatePollPage() {
     };
     return (
         <div>
-            <div>hi</div>
+            <div className='flex items-center justify-center pt-12 pb-6 font-mono font-semibold text-5xl'>
+                Create a Poll
+            </div>
             <form onSubmit={postPoll}>
                 <label>Poll Name</label>
-                <input type='text' onChange={onPollNameChange} />
+                <input
+                    type='text'
+                    onChange={onPollNameChange}
+                    className='w-[100%] px-3 py-3'
+                />
                 {options?.map((option, i) => (
                     <input
                         type='text'
