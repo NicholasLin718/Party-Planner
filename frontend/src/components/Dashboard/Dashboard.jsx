@@ -30,8 +30,7 @@ const Dashboard = () => {
             {/* className='flex flex-col items-center justify-center min-h-screen py-2' */}
             <div
                 className={
-                    'transition-all duration-500 ease-in-out transform px-2 ' +
-                    (showSidebar ? 'ml-[500px] ' : 'ml-16 ')
+                    'transition-all duration-500 ease-in-out transform px-2 '
                 }>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.

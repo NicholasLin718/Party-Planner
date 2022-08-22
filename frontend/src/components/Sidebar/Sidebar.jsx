@@ -35,7 +35,7 @@ const Sidebar = (props) => {
             <div
                 className={
                     showSidebar
-                        ? 'z-50 top-0 left-0 w-[300px] bg-slate-800 p-6 text-white fixed h-full ease-in-out duration-300 translate-x-0 '
+                        ? 'z-50 top-0 left-0 w-[300px] bg-slate-800 p-6 text-white fixed h-full ease-in-out duration-300 translate-x-0 overflow-x-hidden overflow-y-auto'
                         : 'z-50 w-12 bg-slate-800 fixed h-full min-h-screen ease-in-out duration-300 -translate-x-0 '
                 }>
                 {showSidebar ? (
@@ -52,15 +52,16 @@ const Sidebar = (props) => {
                     </div>
                 )}
                 <div className='mt-20 clear-both'>
-                    {navbarContent.map((item) => (
+                    {navbarContent.map((item, i) => (
                         <div
+                            key={i}
                             onClick={() => navigate(item.url)}
                             className={
-                                'group link decoration-0 text-2xl py-4 text-slate-100 block border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer ease-in-out duration-150 whitespace-nowrap ' +
+                                'group link overflow-hidden decoration-0 text-2xl py-4 text-slate-100 block border-b-[1px] border-blue-50 hover:text-rose-400 hover:cursor-pointer ease-in-out duration-150 whitespace-nowrap ' +
                                 (showSidebar ? '' : 'text-center')
                             }>
                             <FontAwesomeIcon icon={item.icon} />
-                            <span class='invisible text-sm w-auto bg-gray-900 text-slate-50 text-center rounded-md px-5 absolute z-1 left-[110%] group-hover:visible'>
+                            <span className='invisible text-sm w-auto bg-gray-900 text-slate-50 text-center rounded-md px-5 absolute z-1 left-[110%] group-hover:visible'>
                                 {item.name}
                             </span>
 
@@ -83,9 +84,9 @@ const Sidebar = (props) => {
                         </button>
                     </div>
                 )}
-                <div
+                {/* <div
                     className={
-                        'absolute bottom-0 bg-slate-900 ease-in-out duration-300' +
+                        'fixed bottom-0 bg-slate-900 ease-in-out duration-300' +
                         (showSidebar ? ' ml-[-24px] pl-6 w-[300px]' : ' w-12')
                     }>
                     <div
@@ -96,7 +97,7 @@ const Sidebar = (props) => {
                         <FontAwesomeIcon icon={faGear} />
                         {showSidebar && <span className='px-2'>Settings</span>}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
