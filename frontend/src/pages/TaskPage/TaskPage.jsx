@@ -111,7 +111,11 @@ const TaskPage = () => {
                                 className='flex justify-center'
                                 selectedOption={selectedOption}
                                 setSelectedOption={setSelectedOption}
+                                tasksOwnerArray={tasksOwnerArray}
+                                setTasksOwnerArray={setTasksOwnerArray}
                                 users={data.users}
+                                currentUser={currentUser}
+                                tasks={data.tasks}
                             />
                         )}
                     </div>
@@ -120,7 +124,7 @@ const TaskPage = () => {
                         <label className='inline-flex items-center w-full'>
                             <input
                                 type='checkbox'
-                                className='w-5 h-5 text-cyan-500 rounded-full border-none focus:ring-0 focus:shadow-none focus:ring-offset-0 hover:cursor-pointer'
+                                className='w-5 h-5 pb-6 text-cyan-500 rounded-full border-none focus:ring-0 focus:shadow-none focus:ring-offset-0 hover:cursor-pointer'
                                 onChange={() =>
                                     setDeleteTasksOption(!deleteTasksOption)
                                 }

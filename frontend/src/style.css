@@ -1571,6 +1571,10 @@ select {
   padding-right: 10px;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .text-center {
   text-align: center;
 }

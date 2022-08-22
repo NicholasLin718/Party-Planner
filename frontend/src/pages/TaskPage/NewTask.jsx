@@ -6,10 +6,18 @@ import UserDropDownMenu from './UserDropDownMenu';
 import { useEffect } from 'react';
 
 const NewTask = (props) => {
-    const { selectedOption, setSelectedOption, users } = props;
+    const {
+        selectedOption,
+        setSelectedOption,
+        tasksOwnerArray,
+        setTasksOwnerArray,
+        users,
+        currentUser,
+        tasks
+    } = props;
     const navigate = useNavigate();
     const [task, setTask] = useState('');
-    const [taskOwner, setTaskOwner] = useState('');
+    const [taskOwner, setTaskOwner] = useState('$unassigned');
     const [priority, setPriority] = useState('');
     // /*DEFAULT DATA FETCHING CODE*/
     const { code } = useParams();
@@ -27,13 +35,23 @@ const NewTask = (props) => {
     // }, []);
 
     const postTask = async (e) => {
+        e.preventDefault();
         if (!task) return;
+
         const rawBody = {
+            id: tasks[tasks.length - 1].id + 1,
             task: task,
             completed: false,
             priority: priority,
             taskOwner: taskOwner
         };
+
+        let tempTasksArray = structuredClone(tasksOwnerArray);
+        console.log(tempTasksArray);
+        console.log(taskOwner);
+        tempTasksArray[taskOwner].push(rawBody);
+        setTasksOwnerArray(tempTasksArray);
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -44,7 +62,6 @@ const NewTask = (props) => {
             requestOptions
         );
         console.log(response);
-        navigate('/r/' + code + '/tasks');
     };
 
     const onTaskChange = (e) => {
