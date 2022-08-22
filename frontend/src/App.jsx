@@ -34,10 +34,6 @@ function App() {
                         element={<AvailableTimes />}
                     />
                     <Route path='/r/:code/polls' element={<PollPage />} />
-                    <Route
-                        path='/r/:code/polls/create'
-                        element={<CreatePollPage />}
-                    />
                     <Route path='/r/:code/tasks' element={<TaskPage />} />
                 </Route>
                 <Route path='*' element={<PageNotFound />} />

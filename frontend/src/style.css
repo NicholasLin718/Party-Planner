@@ -1467,6 +1467,11 @@ select {
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+}
+
 .object-cover {
   object-fit: cover;
 }
@@ -1485,6 +1490,10 @@ select {
 
 .p-\[10px\] {
   padding: 10px;
+}
+
+.p-2 {
+  padding: 0.5rem;
 }
 
 .px-3 {

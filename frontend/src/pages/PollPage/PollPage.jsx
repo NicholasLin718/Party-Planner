@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Poll from '../../components/Polls/Poll';
+import NewPoll from './NewPoll';
 const PollPage = () => {
     const { code } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-
+    const [newPollForm, setNewPollForm] = useState(false);
     async function getRoom() {
         const response = await fetch('http://localhost:5000/pages/' + code);
         const res = await response.json();
@@ -91,9 +92,8 @@ const PollPage = () => {
                         <br></br>
                     </div>
                 ))}
-            <button onClick={() => navigate('/r/' + code + '/polls/create')}>
-                Create
-            </button>
+            <button onClick={() => setNewPollForm(!newPollForm)}>Create</button>
+            {!newPollForm && <NewPoll />}
         </div>
     );
 };
