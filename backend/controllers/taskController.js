@@ -20,6 +20,7 @@ class TaskController {
             id: newId,
             task: req.body.task,
             completed: req.body.completed,
+            priority: req.body.priority,
             taskOwner: req.body.taskOwner
         };
         curPage.tasks.push(newTask);
@@ -39,14 +40,14 @@ class TaskController {
         const id = parseInt(req.params.id);
 
         const curPage = await Page.findOne({ code: code });
-        let found = curPage.tasks.find((tasks) => tasks.id === id);
-        // let found = false;
-        // for (let i = 0; i < curPage.tasks.length; i++) {
-        //     if (curPage.tasks[i].id === id) {
-        //         curPage.tasks[i] = req.body;
-        //         found = true;
-        //     }
-        // }
+        // let found = curPage.tasks.find((tasks) => tasks.id === id);
+        let found = false;
+        for (let i = 0; i < curPage.tasks.length; i++) {
+            if (curPage.tasks[i].id === id) {
+                curPage.tasks[i] = req.body;
+                found = true;
+            }
+        }
         if (!found) {
             res.status(404);
             throw new Error('Task not found');
