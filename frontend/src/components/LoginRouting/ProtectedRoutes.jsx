@@ -28,7 +28,13 @@ const ProtectedRoutes = () => {
                 showSidebar={showSidebar}
                 setShowSidebar={setShowSidebar}
             />
-            <Outlet />
+            <div
+                className={
+                    'transition-all duration-500 ease-in-out transform px-2 ' +
+                    (showSidebar ? 'ml-[300px] ' : 'ml-[48px] ')
+                }>
+                <Outlet />
+            </div>
         </div>
     );
     return isAuth && !loading && data ? component : <UserPage />;
