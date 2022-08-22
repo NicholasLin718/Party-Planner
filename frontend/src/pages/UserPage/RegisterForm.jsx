@@ -50,7 +50,11 @@ const RegisterForm = (props) => {
                 )
             ) {
                 result += e.target.value.charAt(i);
-            }
+            } else if (
+                e.target.value.charCodeAt(i) === 32 ||
+                e.target.value.charCodeAt(i) === 39
+            )
+                result += e.target.value.charAt(i);
         }
         e.target.value = result;
         setUsername(result);

@@ -57,7 +57,10 @@ const UserPage = () => {
                     </div>
                     <div className='flex justify-center mt-4'>
                         {registerForm && (
-                            <RegisterForm setUserStorage={setUserStorage} />
+                            <RegisterForm
+                                setUserStorage={setUserStorage}
+                                allUsers={data.users}
+                            />
                         )}
                     </div>
                     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 w-[1200px] mx-auto justify-center'>

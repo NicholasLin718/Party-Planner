@@ -41,7 +41,7 @@ const UserCard = (props) => {
                 handleUserClick(username);
             }}
             className='flex align-center rounded-md bg-rose-300 border-neutral-900 border-2 px-4 py-4 hover:shadow-md hover:bg-rose-400 ease-in duration-300 cursor-pointer'>
-            <div className='bg-white inline-block overflow-hidden w-16 h-16 rounded-full absolute  border-neutral-900 border-[1px]'>
+            <div className='bg-white inline-block overflow-hidden w-16 h-16 rounded-full absolute outline-1 outline'>
                 <img
                     src={avatar}
                     className='w-[105%] h-[105%] absolute rounded-full object-cover'
