@@ -21,6 +21,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<HomePage />} />
+
                 {/* <Route path='/:code' element={<PartyPage />} /> */}
                 <Route path='/create' element={<CreateMeetupPage />} />
                 <Route path='/range' element={<TimeRange />} />

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { daySchema } = require('./daySchema');
 
 const personSchema = new Schema({
     username: {
@@ -7,7 +8,7 @@ const personSchema = new Schema({
         required: true
     },
     availableTimes: {
-        type: [Boolean],
+        type: [daySchema],
         required: true
     },
     securityQuestion: {

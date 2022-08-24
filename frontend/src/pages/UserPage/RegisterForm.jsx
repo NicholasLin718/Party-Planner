@@ -82,7 +82,7 @@ const RegisterForm = (props) => {
                         username: username,
                         password: password,
                         sprite: sprite,
-                        availableTimes: new Array(24).fill(false)
+                        availableTimes: [],
                     }
                 }
             };

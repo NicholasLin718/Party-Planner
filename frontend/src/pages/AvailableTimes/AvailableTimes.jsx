@@ -20,7 +20,18 @@ const AvailableTimes = () => {
         getRoom();
     }, []);
 
-    const submitAvailability = () => {
+    const formatAvailability = (arr) => {
+        let formattedArr = [];
+        for(let i = 0; i < arr.length; i++){
+            for(let j = 0; j < arr[i].length; j++){
+                let newData = structuredClone(arr[i][j]);
+                formattedArr.push(newData);
+            }
+        }
+        return formattedArr;
+    }
+
+    const submitAvailability = async () => {
         selectorRef.current.callStoreSlotArrays();
         let reduxData = store.getState();
         setShowSelector(!showSelector);
@@ -29,6 +40,30 @@ const AvailableTimes = () => {
         let username = localStorage.getItem(code); //username
         console.log(username);
         let userAvailability = reduxData.availability; //array of arrays that contain 5 objects max, each object contains date and slots
+        let rawBody = structuredClone(data);
+        let found = false;
+        for(let i = 0; i < rawBody.users.length; i++){
+            if(rawBody.users[i].username === username){
+                found = true;
+                rawBody.users[i].availableTimes = formatAvailability(userAvailability);
+            }
+        }
+        if(!found){
+            alert("user not found");
+        }
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(rawBody)
+        };
+        console.log(requestOptions.body);
+        const response = await fetch(
+            'http://localhost:5000/pages/' + code,
+            requestOptions
+        );
+        console.log(response);
+
         console.log(userAvailability);
     };
 
