@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Selector from '../../components/AvailabilitySelector/Selector';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
+
 const AvailableTimes = () => {
     const [showSelector, setShowSelector] = useState(false);
     const selectorRef = useRef();
@@ -19,6 +20,7 @@ const AvailableTimes = () => {
     useEffect(() => {
         getRoom();
     }, []);
+    /*END OF DATA FETCH*/
 
     const formatAvailability = (arr) => {
         let formattedArr = [];

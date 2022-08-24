@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const { pollSchema } = require('./pollSchema');
 const { personSchema } = require('./personSchema');
-
+const { taskSchema } = require('./taskSchema');
 const pageSchema = new Schema({
     code: {
         type: String,
@@ -49,6 +49,11 @@ const pageSchema = new Schema({
     },
     polls: {
         type: [pollSchema],
+        required: false,
+        default: []
+    },
+    tasks: {
+        type: [taskSchema],
         required: false,
         default: []
     }

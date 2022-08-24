@@ -33,40 +33,46 @@ const UserPage = () => {
 
     return (
         <div>
-            <div className='flex justify-center mt-12 font-mono font-semibold text-5xl'>
-                Select Your User
-            </div>
-            <div className='flex justify-center mt-2 font-mono font-bold text-xl'>
-                Room: {!loading && data.code}
-            </div>
-            <div className='flex justify-center mt-6 font-mono font-bold text-3xl'>
-                {!loading && data.meetupName}
-            </div>
-            <div className='flex justify-center mt-2 font-mono font-medium text-2xl'>
-                {!loading && data.meetupDescription}
-            </div>
-            <div className='text-center mt-10'>
-                <button
-                    className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
-                    onClick={() => setRegisterForm(!registerForm)}>
-                    Register New User
-                </button>
-            </div>
-            <div className='flex justify-center mt-4'>
-                {registerForm && (
-                    <RegisterForm setUserStorage={setUserStorage} />
-                )}
-            </div>
-            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 w-[1200px] mx-auto justify-center'>
-                {!loading &&
-                    data.users.map((user, i) => (
-                        <UserCard
-                            user={user}
-                            setUserStorage={setUserStorage}
-                            key={i}
-                        />
-                    ))}
-            </div>
+            {!loading && (
+                <div>
+                    <div className='flex justify-center mt-12 font-mono font-semibold text-5xl'>
+                        Select Your User
+                    </div>
+                    <div className='flex justify-center mt-2 font-mono font-bold text-xl'>
+                        Room: {data.code}
+                    </div>
+                    <div className='flex justify-center mt-6 font-mono font-bold text-3xl'>
+                        {data.meetupName}
+                    </div>
+                    <div className='flex justify-center mt-2 font-mono font-medium text-2xl'>
+                        {data.meetupDescription}
+                    </div>
+                    <div className='text-center mt-10'>
+                        <button
+                            className='px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                            onClick={() => setRegisterForm(!registerForm)}>
+                            Register New User
+                        </button>
+                    </div>
+                    <div className='flex justify-center mt-4'>
+                        {registerForm && (
+                            <RegisterForm
+                                setUserStorage={setUserStorage}
+                                allUsers={data.users}
+                            />
+                        )}
+                    </div>
+                    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 w-[1200px] mx-auto justify-center'>
+                        {data.users.map((user, i) => (
+                            <UserCard
+                                user={user}
+                                setUserStorage={setUserStorage}
+                                key={i}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

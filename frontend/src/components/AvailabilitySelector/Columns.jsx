@@ -56,7 +56,13 @@ const Columns = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         storeSlotArrays() {
-            dispatch(storeAvailability(slotArrays));
+            let arrayToStore = [];
+            slotArrays.forEach((pageOfDays) => {
+                pageOfDays.forEach((day) => {
+                    arrayToStore.push(day);
+                });
+            });
+            dispatch(storeAvailability(arrayToStore));
         }
     }));
 
@@ -87,7 +93,6 @@ const Columns = forwardRef((props, ref) => {
                                 timeZone={timeZone}
                             />
                             {page.map((column, j) => {
-                                console.log(slotArrays);
                                 const date = column.date.isoTime;
                                 const dayOfWeek = column.date.dayOfWeek;
                                 let formattedDay =

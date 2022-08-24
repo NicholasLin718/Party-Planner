@@ -25,8 +25,6 @@ const PasswordForm = (props) => {
             username: selectedUser,
             password: password
         };
-        console.log("Raw Body:");
-        console.log(rawBody);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -43,7 +41,7 @@ const PasswordForm = (props) => {
         if (res.message == 'SUCCESS') {
             setUserStorage(selectedUser);
         } else {
-            alert("wrong password");
+            alert('wrong password');
         }
     };
 
@@ -62,14 +60,14 @@ const PasswordForm = (props) => {
                     />
                 </div>
                 <button
-                        type='submit'
-                        className='group ml-2 mt-1 w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-400 ease-in duration-150'>
-                        Join Event
-                        <FontAwesomeIcon
-                            icon={faPersonWalkingArrowRight}
-                            className='ml-2 group-hover:ml-5 ease-in duration-300'
-                        />
-                    </button>
+                    type='submit'
+                    className='group ml-2 mt-1 w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-400 ease-in duration-150'>
+                    Join Event
+                    <FontAwesomeIcon
+                        icon={faPersonWalkingArrowRight}
+                        className='ml-2 group-hover:ml-5 ease-in duration-300'
+                    />
+                </button>
             </form>
         </div>
     );

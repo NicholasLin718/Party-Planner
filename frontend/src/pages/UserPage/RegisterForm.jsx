@@ -10,7 +10,7 @@ import DropDownMenu from './DropDownMenu';
 import { useEffect } from 'react';
 
 const RegisterForm = (props) => {
-    const { setUserStorage } = props;
+    const { setUserStorage, allUsers } = props;
     const navigate = useNavigate();
     const { code } = useParams();
     const [username, setUsername] = useState('');
@@ -39,7 +39,25 @@ const RegisterForm = (props) => {
         );
     }, []);
     const onUsernameChange = (e) => {
-        setUsername(e.target.value);
+        let result = '';
+        for (let i = 0; i < e.target.value.length; i++) {
+            if (
+                !(
+                    e.target.value.charCodeAt(i) < 65 ||
+                    (e.target.value.charCodeAt(i) > 90 &&
+                        e.target.value.charCodeAt(i) < 97) ||
+                    e.target.value.charCodeAt(i) > 122
+                )
+            ) {
+                result += e.target.value.charAt(i);
+            } else if (
+                e.target.value.charCodeAt(i) === 32 ||
+                e.target.value.charCodeAt(i) === 39
+            )
+                result += e.target.value.charAt(i);
+        }
+        e.target.value = result;
+        setUsername(result);
     };
     const onPasswordChange = (e) => {
         setPassword(e.target.value);
@@ -65,6 +83,13 @@ const RegisterForm = (props) => {
         e.preventDefault();
         if (!validateFields()) alert('Fields cannot be blank!');
         else {
+            for (let i = 0; i < allUsers.length; i++) {
+                if (allUsers[i].username === username) {
+                    alert('Username already exists!');
+                    return;
+                }
+            }
+            console.log('hi');
             const sprite = Math.ceil(Math.random() * 12 - 1);
             let storedPassword;
             let storedSecurityQuestion = '';
@@ -114,6 +139,7 @@ const RegisterForm = (props) => {
                         type='text'
                         onChange={onUsernameChange}
                         className='w-[100%] px-3 py-3'
+                        maxLength={50}
                     />
                     {selectedOption === 'Password' && (
                         <div>
