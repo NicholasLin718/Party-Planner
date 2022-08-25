@@ -22,17 +22,23 @@ const AvailableTimes = () => {
     }, []);
     /*END OF DATA FETCH*/
 
-    const formatAvailability = (arr) => {
-        let formattedArr = [];
-        for (let i = 0; i < arr.length; i++) {
-            for (let j = 0; j < arr[i].length; j++) {
-                let newData = structuredClone(arr[i][j]);
-                formattedArr.push(newData);
-            }
-        }
-        return formattedArr;
+    const calculateRoomAvailability = (data) => {
+        let users = data.users;
+        let arrayOfAllAvailability = [];
+        let meetupDays = JSON.parse(data.meetupDays);
+        meetupDays.forEach((day) => {
+            arrayOfAllAvailability.push({
+                date: day,
+                slotSelectedCount: Array(48).fill(0)
+            });
+        });
+        users.forEach((user) => {
+            let availableTimes = user.availableTimes;
+            availableTimes.forEach((day) => {
+                let slots = day.slots;
+            });
+        });
     };
-
     const submitAvailability = async () => {
         selectorRef.current.callStoreSlotArrays();
         let reduxData = store.getState();
@@ -47,8 +53,7 @@ const AvailableTimes = () => {
         for (let i = 0; i < rawBody.users.length; i++) {
             if (rawBody.users[i].username === username) {
                 found = true;
-                rawBody.users[i].availableTimes =
-                    formatAvailability(userAvailability);
+                rawBody.users[i].availableTimes = userAvailability;
             }
         }
         if (!found) {

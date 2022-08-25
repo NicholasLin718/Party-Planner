@@ -10,11 +10,12 @@ export default function Slot(props) {
     } = props;
     const { i, j, k } = selectableKey;
 
-    const [selectedSlot, setSelectedSlot] = useState(slotData.selected);
+    console.log(i);
+    const [selectedSlot, setSelectedSlot] = useState(slotData);
     const handleClick = () => {
         let tempSlotArray = slotArrays.slice();
-        tempSlotArray[k][j].slots[i].selected = booleanSelect;
-        setSelectedSlot(tempSlotArray[k][j].slots[i].selected);
+        tempSlotArray[k][j].slots[i] = booleanSelect;
+        setSelectedSlot(tempSlotArray[k][j].slots[i]);
         setSlotArrays(tempSlotArray);
     };
     return (
@@ -23,8 +24,8 @@ export default function Slot(props) {
                 onClick={handleClick}
                 className={
                     'h-[15px] border-x-[0.2px] ' +
-                    (slotData.is_00 ? 'border-b-0 ' : 'border-b-[0.5px] ') +
-                    (slotData.selected
+                    (i % 2 === 0 ? 'border-b-0 ' : 'border-b-[0.5px] ') +
+                    (slotData
                         ? 'selected' +
                           (!booleanSelect
                               ? ' hover:cursor-pointer'

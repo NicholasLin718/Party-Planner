@@ -21,8 +21,9 @@ const Pagination = (props) => {
                         {'<<'}
                     </div>
                 )}
-                {pageNumbers.map((number) => (
+                {pageNumbers.map((number, i) => (
                     <div
+                        key={i}
                         onClick={() => {
                             paginate(number);
                             setActive(number);

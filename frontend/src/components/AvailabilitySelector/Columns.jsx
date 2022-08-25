@@ -46,7 +46,7 @@ const Columns = forwardRef((props, ref) => {
         let arr = slotArrays.slice();
         keys.forEach((key) => {
             const { i, j, k } = key;
-            arr[k][j].slots[i].selected = booleanSelect;
+            arr[k][j].slots[i] = booleanSelect;
         });
         setSlotArrays(arr);
         setSelectedKeys({
@@ -111,6 +111,8 @@ const Columns = forwardRef((props, ref) => {
                                             {formattedDay[0].substring(5, 10)}
                                         </div>
                                         {column.slots.map((slotData, i) => {
+                                            if (i < startValue || i >= endValue)
+                                                return;
                                             return (
                                                 <SelectableComponent
                                                     key={i}

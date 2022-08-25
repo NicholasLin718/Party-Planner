@@ -25,8 +25,8 @@ const Selector = forwardRef((props, ref) => {
     const [currentColumns, setCurrentColumns] = useState([]);
     const [arrayOfPagesOfColumns, setArrayOfPagesOfColumns] = useState([]);
     const [totalColumns, setTotalColumns] = useState(0);
-    const [startValue, setStartValue] = useState({});
-    const [endValue, setEndValue] = useState({});
+    const [startValue, setStartValue] = useState(0);
+    const [endValue, setEndValue] = useState(0);
     const [timeZone, setTimeZone] = useState('');
     useEffect(() => {
         calculateSlots();
@@ -51,50 +51,11 @@ const Selector = forwardRef((props, ref) => {
 
         let daysSelected = orderedPrintList.length;
         let arrayOfColumns = [];
-        let columnObject = [];
-
-        if (start.hour === 0 && start.is_00 && end.hour === 0 && end.is_00) {
-            end.hour = 24;
-        }
-        let hour = start.hour;
-        let is_00 = start.is_00;
-        while (hour < end.hour) {
-            //7:30 - 15:30
-            if (is_00) {
-                columnObject.push({
-                    hour: hour,
-                    is_00: is_00,
-                    selected: false
-                });
-                is_00 = !is_00;
-                columnObject.push({
-                    hour: hour,
-                    is_00: is_00,
-                    selected: false
-                });
-                is_00 = !is_00;
-            } else {
-                columnObject.push({
-                    hour: hour,
-                    is_00: is_00,
-                    selected: false
-                });
-                is_00 = !is_00;
-            }
-            hour++;
-        }
-        if (!end.is_00) {
-            columnObject.push({
-                hour: hour,
-                is_00: is_00,
-                selected: false
-            });
-        }
 
         for (let i = 0; i < daysSelected; i++) {
             arrayOfColumns.push({
                 date: orderedPrintList[i],
-                slots: columnObject
+                slots: Array(48).fill(false)
             });
         }
         let page = [];
@@ -128,20 +89,9 @@ const Selector = forwardRef((props, ref) => {
             arrayOfColumns.slice(indexOfFirstColumn, indexOfLastColumn)
         );
     };
-    // // const values = useSelector(selectAllRange);
-
-    // // const startValue = values.startValue;
-    // // const endValue = values.endValue;
-    // const startValue = { hour: 19, is_00: true };
-    // const endValue = { hour: 22, is_00: false };
-
-    // // const renderedDays = printList.map((day, i) => (
-    // //     <div key={i}>{day.isoTime}</div>
-    // // ));
 
     return (
         <div>
-            {/* {renderedDays} */}
             <div className='column-page'>
                 <Columns
                     ref={slotArrayRef} //reference to slot array
