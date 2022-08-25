@@ -39,7 +39,7 @@ const NewTask = (props) => {
         if (!task) return;
 
         const rawBody = {
-            id: tasks[tasks.length - 1].id + 1,
+            id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
             task: task,
             completed: false,
             priority: priority,
@@ -49,6 +49,7 @@ const NewTask = (props) => {
         let tempTasksArray = structuredClone(tasksOwnerArray);
         console.log(tempTasksArray);
         console.log(taskOwner);
+        if (!tempTasksArray[taskOwner]) tempTasksArray[taskOwner] = [];
         tempTasksArray[taskOwner].push(rawBody);
         setTasksOwnerArray(tempTasksArray);
 

@@ -12,7 +12,7 @@ import S10 from '../Sprites/S10.png';
 import S11 from '../Sprites/S11.png';
 import S12 from '../Sprites/S12.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const TaskCard = (props) => {
     const spriteArr = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12];
@@ -64,7 +64,7 @@ const TaskCard = (props) => {
                         )}
                         {tasksOwnerArray[currentUser.username] &&
                             tasksOwnerArray[currentUser.username].map(
-                                (card, i) => (
+                                (task, i) => (
                                     <div className='mt-2'>
                                         <label className='inline-flex items-center'>
                                             <input
@@ -72,13 +72,23 @@ const TaskCard = (props) => {
                                                 className='w-6 h-6 text-cyan-500 rounded-full border-none focus:ring-0 focus:shadow-none focus:ring-offset-0'
                                             />
                                             <span className='ml-2  whitespace-nowrap truncate font-mono font-semibold text-base text-black'>
-                                                {card['task']}
+                                                {task['task']}
                                             </span>
                                         </label>
+                                        {deleteTasksOption && (
+                                            <div
+                                                className='hover:cursor-pointer'
+                                                onClick={taskDeleteHandler(
+                                                    task
+                                                )}>
+                                                X
+                                            </div>
+                                        )}
                                     </div>
                                 )
                             )}
                     </ul>
+                    <FontAwesomeIcon icon={faPlus} />
                 </div>
             </div>
             {Object.keys(tasksOwnerArray).map((taskOwner, i) => {
@@ -147,6 +157,7 @@ const TaskCard = (props) => {
                                     </div>
                                 ))}
                             </ul>
+                            <FontAwesomeIcon icon={faPlus} />
                         </div>
                     </div>
                 );

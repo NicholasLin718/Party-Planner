@@ -98,13 +98,15 @@ const TaskPage = () => {
         <div className='ml-2'>
             {!loading && (
                 <div>
+                    <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
+                        Distribute Your Tasks
+                    </div>
                     <button
                         onClick={() => {
                             setNewTask(!newTask);
                         }}>
                         New Task
                     </button>
-
                     <div className='flex justify-center mt-4'>
                         {newTask && (
                             <NewTask
@@ -119,7 +121,6 @@ const TaskPage = () => {
                             />
                         )}
                     </div>
-
                     <div>
                         <label className='inline-flex items-center w-full'>
                             <input
