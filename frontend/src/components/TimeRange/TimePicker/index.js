@@ -89,6 +89,7 @@ class TimeRange extends React.Component {
                         <span className='component'>{calendar[0]}</span>
                     )}
                     <select
+                        className='form-select w-28 '
                         id='select-start'
                         value={
                             timeModel.startTimeValue && timeModel.startTimeValue
@@ -114,6 +115,7 @@ class TimeRange extends React.Component {
                         <span className='component'>{calendar[1]}</span>
                     )}
                     <select
+                        className='form-select w-28 '
                         id='select-end'
                         value={timeModel.endTimeValue && timeModel.endTimeValue}
                         onChange={this.changeTime}
