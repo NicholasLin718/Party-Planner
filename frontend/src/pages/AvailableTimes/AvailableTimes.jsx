@@ -15,12 +15,24 @@ const AvailableTimes = () => {
         const res = await response.json();
         setData(res);
         setLoading(false);
+        findCurrentUser(res);
         console.log(res);
     }
     useEffect(() => {
         getRoom();
     }, []);
     /*END OF DATA FETCH*/
+
+    const [currentUser, setCurrentUser] = useState({});
+    const findCurrentUser = (data) => {
+        let users = data.users;
+        console.log(users);
+        let currUser = users.find(
+            (element) => element.username === localStorage.getItem(code)
+        );
+        console.log(currUser);
+        setCurrentUser(currUser);
+    };
 
     const calculateRoomAvailability = (data) => {
         let users = data.users;
@@ -65,7 +77,6 @@ const AvailableTimes = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(rawBody)
         };
-        console.log('bedge');
         console.log(requestOptions.body);
         const response = await fetch(
             'http://localhost:5000/pages/' + code,
@@ -73,7 +84,7 @@ const AvailableTimes = () => {
         );
         console.log(response);
 
-        console.log(userAvailability);
+        window.location.reload(true);
     };
 
     return (
@@ -106,7 +117,13 @@ const AvailableTimes = () => {
                         </div>
                     )}
 
-                    {showSelector && <Selector ref={selectorRef} data={data} />}
+                    {showSelector && (
+                        <Selector
+                            ref={selectorRef}
+                            data={data}
+                            currentUser={currentUser}
+                        />
+                    )}
                 </div>
             )}
         </div>

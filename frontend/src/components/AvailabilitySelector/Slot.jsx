@@ -10,7 +10,6 @@ export default function Slot(props) {
     } = props;
     const { i, j, k } = selectableKey;
 
-    console.log(i);
     const [selectedSlot, setSelectedSlot] = useState(slotData);
     const handleClick = () => {
         let tempSlotArray = slotArrays.slice();

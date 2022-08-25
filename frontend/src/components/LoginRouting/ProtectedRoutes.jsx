@@ -37,7 +37,7 @@ const ProtectedRoutes = () => {
             </div>
         </div>
     );
-    return isAuth && !loading && data ? component : <UserPage />;
+    return isAuth ? component : <UserPage />;
 };
 
 export default ProtectedRoutes;

@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom';
 //Need to fix the number of columns
 
 const Selector = forwardRef((props, ref) => {
-    const { data } = props;
+    const { data, currentUser } = props;
     const slotArrayRef = useRef();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,6 +41,7 @@ const Selector = forwardRef((props, ref) => {
     let newArr = useRef([]);
     console.log(newArr);
     const calculateSlots = () => {
+        let arrayOfColumns = [];
         const printList = JSON.parse(data.meetupDays);
         let start = JSON.parse(data.meetupTimeRange).startValue;
         let end = JSON.parse(data.meetupTimeRange).endValue;
@@ -48,15 +49,18 @@ const Selector = forwardRef((props, ref) => {
         const orderedPrintList = printList
             .slice()
             .sort((a, b) => a.isoTime.localeCompare(b.isoTime));
-
         let daysSelected = orderedPrintList.length;
-        let arrayOfColumns = [];
 
-        for (let i = 0; i < daysSelected; i++) {
-            arrayOfColumns.push({
-                date: orderedPrintList[i],
-                slots: Array(48).fill(false)
-            });
+        console.log(currentUser);
+        if (currentUser.availableTimes.length !== 0) {
+            arrayOfColumns = currentUser.availableTimes;
+        } else {
+            for (let i = 0; i < daysSelected; i++) {
+                arrayOfColumns.push({
+                    date: orderedPrintList[i],
+                    slots: Array(48).fill(false)
+                });
+            }
         }
         let page = [];
         let count = 0;
