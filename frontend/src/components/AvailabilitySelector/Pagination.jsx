@@ -11,16 +11,19 @@ const Pagination = (props) => {
     return (
         <div>
             <div className='flex items-center justify-center select-none pt-3'>
-                {active > 1 && (
-                    <div
-                        onClick={() => {
-                            paginate(active - 1);
-                            setActive(active - 1);
-                        }}
-                        className='rounded-l-lg px-4 py-2 bg-gray-200 hover:transition hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
-                        {'<<'}
-                    </div>
-                )}
+                <div
+                    onClick={() => {
+                        if (active === 1) return;
+                        paginate(active - 1);
+                        setActive(active - 1);
+                    }}
+                    className={
+                        'rounded-l-lg px-4 py-2 bg-gray-200 hover:transition hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer ' +
+                        (active === 1 ? 'bg-gray-400' : '')
+                    }>
+                    {'<<'}
+                </div>
+
                 {pageNumbers.map((number, i) => (
                     <div
                         key={i}
@@ -38,16 +41,22 @@ const Pagination = (props) => {
                         {number}
                     </div>
                 ))}
-                {active < Math.ceil(totalColumns / columnsPerPage) && (
-                    <div
-                        onClick={() => {
-                            paginate(active + 1);
-                            setActive(active + 1);
-                        }}
-                        className='rounded-r-lg px-4 py-2 bg-gray-200 hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer'>
-                        {'>>'}
-                    </div>
-                )}
+
+                <div
+                    onClick={() => {
+                        if (active === Math.ceil(totalColumns / columnsPerPage))
+                            return;
+                        paginate(active + 1);
+                        setActive(active + 1);
+                    }}
+                    className={
+                        'rounded-r-lg px-4 py-2 bg-gray-200 hover:duration-300 hover:ease-in-out hover:bg-gray-400 hover:cursor-pointer ' +
+                        (active === Math.ceil(totalColumns / columnsPerPage)
+                            ? 'bg-gray-400'
+                            : '')
+                    }>
+                    {'>>'}
+                </div>
             </div>
         </div>
     );

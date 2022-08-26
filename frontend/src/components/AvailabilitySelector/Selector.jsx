@@ -39,12 +39,12 @@ const Selector = forwardRef((props, ref) => {
     }));
 
     let newArr = useRef([]);
-    console.log(newArr);
     const calculateSlots = () => {
         let arrayOfColumns = [];
         const printList = JSON.parse(data.meetupDays);
         let start = JSON.parse(data.meetupTimeRange).startValue;
         let end = JSON.parse(data.meetupTimeRange).endValue;
+        if (end === 0) end = 48;
         let timezone = JSON.parse(data.meetupTimeZone);
         const orderedPrintList = printList
             .slice()

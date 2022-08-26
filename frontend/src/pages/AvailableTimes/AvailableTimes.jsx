@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Selector from '../../components/AvailabilitySelector/Selector';
 import { useParams } from 'react-router-dom';
 import { store } from '../../store';
+import AvailabilityDisplay from '../../components/AvailabilityDisplay/AvailabilityDisplay';
 
 const AvailableTimes = () => {
     const [showSelector, setShowSelector] = useState(false);
@@ -34,23 +35,6 @@ const AvailableTimes = () => {
         setCurrentUser(currUser);
     };
 
-    const calculateRoomAvailability = (data) => {
-        let users = data.users;
-        let arrayOfAllAvailability = [];
-        let meetupDays = JSON.parse(data.meetupDays);
-        meetupDays.forEach((day) => {
-            arrayOfAllAvailability.push({
-                date: day,
-                slotSelectedCount: Array(48).fill(0)
-            });
-        });
-        users.forEach((user) => {
-            let availableTimes = user.availableTimes;
-            availableTimes.forEach((day) => {
-                let slots = day.slots;
-            });
-        });
-    };
     const submitAvailability = async () => {
         selectorRef.current.callStoreSlotArrays();
         let reduxData = store.getState();
@@ -116,7 +100,7 @@ const AvailableTimes = () => {
                             </button>
                         </div>
                     )}
-
+                    {!showSelector && <AvailabilityDisplay data={data} />}
                     {showSelector && (
                         <Selector
                             ref={selectorRef}
