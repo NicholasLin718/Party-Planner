@@ -8,7 +8,6 @@ import CreateMeetupPage from './pages/CreatePage/CreateMeetupPage';
 import EnterCode from './components/LoginRouting/EnterCode';
 import Poll from './components/Polls/Poll';
 import PollPage from './pages/PollPage/PollPage';
-import CreatePollPage from './pages/PollPage/CreatePollPage';
 // import Dashboard from './components/Dashboard/Dashboard';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProtectedRoutes from './components/LoginRouting/ProtectedRoutes';
