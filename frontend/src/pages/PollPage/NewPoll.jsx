@@ -10,7 +10,6 @@ const NewPoll = () => {
     const navigate = useNavigate();
 
     async function postPoll(e) {
-        e.preventDefault();
         const rawBody = {
             title: pollName,
             options: options
@@ -63,12 +62,11 @@ const NewPoll = () => {
                     <label>Answer Options</label>
                 </div>
                 {options?.map((option, i) => (
-                    <div className='pb-1'>
+                    <div className='pb-1' key={i}>
                         <input
                             className='w-[100%] px-3 py-3 rounded placeholder:italic placeholder:text-slate-400 focus:ring-sky-500 focus:border-sky-500'
                             type='text'
                             onChange={(e) => onOptionChange(e, i)}
-                            key={i}
                             placeholder={'Option ' + (i + 1)}
                         />
                     </div>
