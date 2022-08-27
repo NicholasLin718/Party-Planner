@@ -994,16 +994,16 @@ select {
   margin-left: -36px;
 }
 
+.ml-8 {
+  margin-left: 2rem;
+}
+
 .mt-\[550px\] {
   margin-top: 550px;
 }
 
 .mb-4 {
   margin-bottom: 1rem;
-}
-
-.ml-8 {
-  margin-left: 2rem;
 }
 
 .mt-12 {
@@ -1098,8 +1098,8 @@ select {
   min-height: 100vh;
 }
 
-.w-\[85\%\] {
-  width: 85%;
+.w-\[100\%\] {
+  width: 100%;
 }
 
 .w-\[100vw\] {
@@ -1108,10 +1108,6 @@ select {
 
 .w-\[80\%\] {
   width: 80%;
-}
-
-.w-\[100\%\] {
-  width: 100%;
 }
 
 .w-6 {
@@ -1158,16 +1154,20 @@ select {
   width: 1000px;
 }
 
+.w-\[85\%\] {
+  width: 85%;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
 .w-\[500px\] {
   width: 500px;
 }
 
 .w-\[600px\] {
   width: 600px;
-}
-
-.w-8 {
-  width: 2rem;
 }
 
 .w-28 {
@@ -1184,6 +1184,10 @@ select {
 
 .max-w-\[1300px\] {
   max-width: 1300px;
+}
+
+.max-w-\[300px\] {
+  max-width: 300px;
 }
 
 .grow {
@@ -1242,6 +1246,10 @@ select {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .items-center {
   align-items: center;
 }
@@ -1260,6 +1268,12 @@ select {
 
 .gap-4 {
   gap: 1rem;
+}
+
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .self-center {
@@ -1555,6 +1569,11 @@ select {
   padding-right: 0.75rem;
 }
 
+.py-\[10px\] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .px-\[10px\] {
   padding-left: 10px;
   padding-right: 10px;
@@ -1579,6 +1598,14 @@ select {
 
 .pt-12 {
   padding-top: 3rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
 }
 
 .pb-20 {
@@ -1705,12 +1732,25 @@ select {
   color: rgb(71 85 105 / var(--tw-text-opacity));
 }
 
+.line-through {
+  -webkit-text-decoration-line: line-through;
+          text-decoration-line: line-through;
+}
+
 .decoration-0 {
   text-decoration-thickness: 0px;
 }
 
 .opacity-0 {
   opacity: 0;
+}
+
+.opacity-20 {
+  opacity: 0.2;
+}
+
+.opacity-100 {
+  opacity: 1;
 }
 
 .shadow-lg {
@@ -1943,6 +1983,11 @@ select {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .sm\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
   .sm\:text-5xl {
     font-size: 3rem;
     line-height: 1;
@@ -1961,6 +2006,11 @@ select {
 
   .md\:w-\[80\%\] {
     width: 80%;
+  }
+
+  .md\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }
 

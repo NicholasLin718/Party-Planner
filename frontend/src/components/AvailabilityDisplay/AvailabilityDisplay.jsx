@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ColumnsDisplay from './ColumnsDisplay';
-
+import { useDispatch } from 'react-redux';
+import { totalSlotRespondents } from '../../features/RespondentsSlice';
 const AvailabilityDisplay = (props) => {
-    const { data } = props;
+    const { data, setShowUsers, selectedIndividual, showIndividual } = props;
     const [currentPage, setCurrentPage] = useState(1);
     const [columnsPerPage] = useState(5);
     const [currentColumns, setCurrentColumns] = useState([]);
@@ -13,26 +14,19 @@ const AvailabilityDisplay = (props) => {
     const [timeZone, setTimeZone] = useState('');
     const [maxSelectedCount, setMaxSelectedCount] = useState(0);
     // const [slotArrays, setSlotArrays] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         calculateRoomAvailability();
-    }, []);
-
-    // const declareLabels = () => {
-    //     let arrayOfColumns = [];
-    //     const printList = JSON.parse(data.meetupDays);
-    //     let start = JSON.parse(data.meetupTimeRange).startValue;
-    //     let end = JSON.parse(data.meetupTimeRange).endValue;
-    //     if (end === 0) end = 48;
-    //     let timezone = JSON.parse(data.meetupTimeZone);
-    //     const orderedPrintList = printList
-    //         .slice()
-    //         .sort((a, b) => a.isoTime.localeCompare(b.isoTime));
-    //     let daysSelected = orderedPrintList.length;
-    // };
+    }, [showIndividual, selectedIndividual]);
 
     const calculateRoomAvailability = () => {
         let users = data.users;
+        if (showIndividual) {
+            let arr = [];
+            arr.push(selectedIndividual);
+            users = arr; //override to one user
+        }
         let arrayOfAllAvailability = [];
         let meetupDays = JSON.parse(data.meetupDays);
         let maxCount = 0;
@@ -47,6 +41,8 @@ const AvailabilityDisplay = (props) => {
             });
         });
         console.log(arrayOfAllAvailability);
+        let submittedAvailabilityArr = [];
+        console.log(users);
         users.forEach((user) => {
             let availableTimes = user.availableTimes;
             console.log(availableTimes);
@@ -55,14 +51,8 @@ const AvailabilityDisplay = (props) => {
                 console.log(slots);
                 slots.forEach((slot, j) => {
                     if (slot) {
-                        let tempUser = {
-                            username: user.username,
-                            password: user.password,
-                            sprite: user.sprite
-                        };
-
                         arrayOfAllAvailability[i].slotSelectedUsers[j].push(
-                            tempUser
+                            user
                         );
                         if (
                             arrayOfAllAvailability[i].slotSelectedUsers[j]
@@ -72,11 +62,20 @@ const AvailabilityDisplay = (props) => {
                                 arrayOfAllAvailability[i].slotSelectedUsers[j]
                                     .length;
                         }
+                        if (
+                            !submittedAvailabilityArr.some(
+                                (e) => e.username === user.username
+                            )
+                        ) {
+                            submittedAvailabilityArr.push(user);
+                            console.log(submittedAvailabilityArr);
+                        }
                     }
-                    console.log(arrayOfAllAvailability);
                 });
             });
         });
+
+        dispatch(totalSlotRespondents(submittedAvailabilityArr));
         console.log(arrayOfAllAvailability);
         calculateSlots(arrayOfAllAvailability);
         setMaxSelectedCount(maxCount);
@@ -127,6 +126,7 @@ const AvailabilityDisplay = (props) => {
                 endValue={endValue}
                 timeZone={timeZone}
                 maxSelectedCount={maxSelectedCount}
+                setShowUsers={setShowUsers}
             />
         </div>
     );

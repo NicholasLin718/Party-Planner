@@ -29,10 +29,11 @@ const Columns = forwardRef((props, ref) => {
         newArr,
         startValue,
         endValue,
-        timeZone
+        timeZone,
+        booleanSelect
     } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    const [booleanSelect, setBooleanSelect] = useState(true);
+
     console.log(newArr.current);
     const [slotArrays, setSlotArrays] = useState(newArr.current);
     console.log(slotArrays);
@@ -73,19 +74,13 @@ const Columns = forwardRef((props, ref) => {
 
     return (
         <div>
-            <div className='flex justify-center'>
-                <SelectButton
-                    className='flex justify-center'
-                    clickHandler={() => setBooleanSelect(!booleanSelect)}
-                />
-            </div>
             {slotArrays.map((page, k) => (
                 <div className='flex justify-center'>
                     {currentPage === k + 1 && (
                         <SelectableGroup
                             key={k}
                             onSelection={handleSelection}
-                            className='flex w-[85%]'>
+                            className='flex w-[100%]'>
                             <LabelColumn
                                 className='text-sm'
                                 startValue={startValue}

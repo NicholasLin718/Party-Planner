@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom';
 //Need to fix the number of columns
 
 const Selector = forwardRef((props, ref) => {
-    const { data, currentUser } = props;
+    const { data, currentUser, booleanSelect } = props;
     const slotArrayRef = useRef();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -106,6 +106,7 @@ const Selector = forwardRef((props, ref) => {
                     startValue={startValue}
                     endValue={endValue}
                     timeZone={timeZone}
+                    booleanSelect={booleanSelect}
                 />
             </div>
         </div>
