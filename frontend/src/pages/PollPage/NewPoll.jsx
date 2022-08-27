@@ -11,6 +11,12 @@ const NewPoll = () => {
     const navigate = useNavigate();
 
     async function postPoll(e) {
+        //change alert to something more useful
+        if(pollName === '' || options.includes('')){
+            e.preventDefault();
+            alert("you have empty fields");
+            return;
+        }
         const rawBody = {
             title: pollName,
             options: options
