@@ -6,7 +6,7 @@ import { faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
 const NewPoll = () => {
     const { code } = useParams();
     const [pollName, setPollName] = useState('');
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState(['', '']);
     const navigate = useNavigate();
 
     async function postPoll(e) {

@@ -84,7 +84,7 @@ const PollPage = () => {
                 </button>
             </div>
             <div className='flex justify-center'>
-                {!newPollForm && <NewPoll />}
+                {newPollForm && <NewPoll />}
             </div>
             {!loading &&
                 data.polls.map((poll, i) => (
