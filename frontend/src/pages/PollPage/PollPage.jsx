@@ -20,7 +20,11 @@ const PollPage = () => {
     }, []);
 
     const handleVote = async (pollData, option) => {
-        //REMEMBER TO CHECK FOR VOTED HERE
+        //change alert to something more useful
+        if(pollData.voted.includes(localStorage.getItem(code))){
+            alert("you already voted");
+            return;
+        }
         for (let i = 0; i < pollData.options.length; i++) {
             if (pollData.options[i].name === option) {
                 pollData.options[i].numVotes++;
