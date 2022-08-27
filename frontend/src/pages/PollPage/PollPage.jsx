@@ -65,7 +65,7 @@ const PollPage = () => {
 
         setData((data) => {
             let newData = JSON.parse(JSON.stringify(data));
-            const index = newData.polls.find((poll) => poll.id === id);
+            const index = newData.polls.findIndex((poll) => poll.id === id);
             newData.polls.splice(index, 1);
             return newData;
         });
