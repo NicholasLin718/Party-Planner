@@ -88,7 +88,9 @@ const PollPage = () => {
             </div>
             {!loading &&
                 data.polls.map((poll, i) => (
-                    <div key={i}>
+                    <div
+                        className='flex justify-center mb-4 bg-blue-100 border-2 rounded-md shadow-md w-[600px] h-auto px-4 py-4'
+                        key={i}>
                         <Poll pollData={poll} handleVote={handleVote} />
                         <button
                             onClick={() => {
