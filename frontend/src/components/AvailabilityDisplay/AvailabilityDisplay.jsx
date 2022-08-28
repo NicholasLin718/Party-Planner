@@ -3,7 +3,16 @@ import ColumnsDisplay from './ColumnsDisplay';
 import { useDispatch } from 'react-redux';
 import { totalSlotRespondents } from '../../features/RespondentsSlice';
 const AvailabilityDisplay = (props) => {
-    const { data, setShowUsers, selectedIndividual, showIndividual } = props;
+    const {
+        data,
+        setShowUsers,
+        selectedIndividual,
+        showIndividual,
+        scheduleSelect,
+        scheduleConfirm,
+        selectedScheduleSlots,
+        setSelectedScheduleSlots
+    } = props;
     const [currentPage, setCurrentPage] = useState(1);
     const [columnsPerPage] = useState(5);
     const [currentColumns, setCurrentColumns] = useState([]);
@@ -15,6 +24,7 @@ const AvailabilityDisplay = (props) => {
     const [maxSelectedCount, setMaxSelectedCount] = useState(0);
     // const [slotArrays, setSlotArrays] = useState([]);
     const dispatch = useDispatch();
+    console.log(scheduleConfirm);
 
     useEffect(() => {
         calculateRoomAvailability();
@@ -40,15 +50,11 @@ const AvailabilityDisplay = (props) => {
                 slotSelectedUsers: arr
             });
         });
-        console.log(arrayOfAllAvailability);
         let submittedAvailabilityArr = [];
-        console.log(users);
         users.forEach((user) => {
             let availableTimes = user.availableTimes;
-            console.log(availableTimes);
             availableTimes.forEach((day, i) => {
                 let slots = day.slots;
-                console.log(slots);
                 slots.forEach((slot, j) => {
                     if (slot) {
                         arrayOfAllAvailability[i].slotSelectedUsers[j].push(
@@ -68,7 +74,6 @@ const AvailabilityDisplay = (props) => {
                             )
                         ) {
                             submittedAvailabilityArr.push(user);
-                            console.log(submittedAvailabilityArr);
                         }
                     }
                 });
@@ -76,7 +81,6 @@ const AvailabilityDisplay = (props) => {
         });
 
         dispatch(totalSlotRespondents(submittedAvailabilityArr));
-        console.log(arrayOfAllAvailability);
         calculateSlots(arrayOfAllAvailability);
         setMaxSelectedCount(maxCount);
     };
@@ -127,6 +131,10 @@ const AvailabilityDisplay = (props) => {
                 timeZone={timeZone}
                 maxSelectedCount={maxSelectedCount}
                 setShowUsers={setShowUsers}
+                scheduleSelect={scheduleSelect}
+                scheduleConfirm={scheduleConfirm}
+                selectedScheduleSlots={selectedScheduleSlots}
+                setSelectedScheduleSlots={setSelectedScheduleSlots}
             />
         </div>
     );

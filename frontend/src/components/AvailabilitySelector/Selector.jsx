@@ -51,7 +51,6 @@ const Selector = forwardRef((props, ref) => {
             .sort((a, b) => a.isoTime.localeCompare(b.isoTime));
         let daysSelected = orderedPrintList.length;
 
-        console.log(currentUser);
         if (currentUser.availableTimes.length !== 0) {
             arrayOfColumns = currentUser.availableTimes;
         } else {
