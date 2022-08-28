@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from '../AvailabilitySelector/Pagination';
 import LabelColumn from '../AvailabilitySelector/LabelColumn';
 import SlotDisplay from './SlotDisplay';
+import { SelectableGroup, createSelectable } from 'react-selectable';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentSchedule, selectSchedule } from '../../features/ScheduleSlice';
+const SelectableComponent = createSelectable(SlotDisplay);
 const ColumnsDisplay = (props) => {
     const {
         currentColumns,
@@ -11,18 +15,36 @@ const ColumnsDisplay = (props) => {
         endValue,
         timeZone,
         maxSelectedCount,
-        setShowUsers
+        setShowUsers,
+        scheduleSelect,
+        scheduleConfirm,
+        selectedScheduleSlots,
+        setSelectedScheduleSlots
     } = props;
+    const dispatch = useDispatch();
+    // const selectedScheduleSlotsInitial = useSelector(selectSchedule);
+    // console.log(selectedScheduleSlotsInitial);
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [currentPage, setCurrentPage] = useState(1);
+    // const [selectedScheduleSlots, setSelectedScheduleSlots] = useState({
+    //     selectedKeys: selectedScheduleSlotsInitial
+    // });
+    console.log(selectedScheduleSlots);
     const PageSize = 5;
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+    const handleSelection = (keys) => {
+        setSelectedScheduleSlots({
+            selectedKeys: keys
+        });
+        // dispatch(currentSchedule(keys));
+    };
+
     return (
         <div>
             {arrayOfPagesOfColumns.map((page, k) => (
-                <div className='flex justify-center'>
+                <div key={k} className='flex justify-center'>
                     {currentPage === k + 1 && (
                         <div key={k} className='flex w-[100%]'>
                             <LabelColumn
@@ -34,11 +56,9 @@ const ColumnsDisplay = (props) => {
                             <div
                                 onMouseEnter={() => {
                                     setShowUsers(true);
-                                    console.log('true');
                                 }}
                                 onMouseLeave={() => {
                                     setShowUsers(false);
-                                    console.log('false');
                                 }}
                                 className='flex w-[100%]'>
                                 {page.map((column, j) => {
@@ -46,7 +66,59 @@ const ColumnsDisplay = (props) => {
                                     const dayOfWeek = column.date.dayOfWeek;
                                     let formattedDay =
                                         date.match(/\d\d\d\d-\d\d-\d\d/);
-                                    return (
+                                    return scheduleSelect ? (
+                                        <SelectableGroup
+                                            key={j}
+                                            onSelection={handleSelection}
+                                            className={
+                                                formattedDay[0].substring(
+                                                    5,
+                                                    10
+                                                ) +
+                                                ' grow bg-slate-300 font-mono text-center'
+                                            }>
+                                            <div className='text-sm font-bold'>
+                                                {listOfWeekDays[dayOfWeek]}
+                                            </div>
+                                            <div>
+                                                {formattedDay[0].substring(
+                                                    5,
+                                                    10
+                                                )}
+                                            </div>
+                                            {column.slotSelectedUsers.map(
+                                                (slotData, i) => {
+                                                    if (
+                                                        i < startValue ||
+                                                        i >= endValue
+                                                    )
+                                                        return;
+                                                    return (
+                                                        <SelectableComponent
+                                                            key={i}
+                                                            selectableKey={{
+                                                                i,
+                                                                j,
+                                                                k
+                                                            }}
+                                                            slotData={slotData}
+                                                            maxSelectedCount={
+                                                                maxSelectedCount
+                                                            }
+                                                            selectedScheduleSlots={
+                                                                selectedScheduleSlots
+                                                            }
+                                                            scheduleConfirm={
+                                                                scheduleConfirm
+                                                            }
+                                                            scheduleSelect={
+                                                                scheduleSelect
+                                                            }></SelectableComponent>
+                                                    );
+                                                }
+                                            )}
+                                        </SelectableGroup>
+                                    ) : (
                                         <div
                                             key={j}
                                             className={
@@ -83,6 +155,15 @@ const ColumnsDisplay = (props) => {
                                                             slotData={slotData}
                                                             maxSelectedCount={
                                                                 maxSelectedCount
+                                                            }
+                                                            selectedScheduleSlots={
+                                                                selectedScheduleSlots
+                                                            }
+                                                            scheduleConfirm={
+                                                                scheduleConfirm
+                                                            }
+                                                            scheduleSelect={
+                                                                scheduleSelect
                                                             }></SlotDisplay>
                                                     );
                                                 }

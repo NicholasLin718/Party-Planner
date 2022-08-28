@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
+import e from 'cors';
 
 const NewPoll = () => {
     const { code } = useParams();
@@ -10,6 +11,12 @@ const NewPoll = () => {
     const navigate = useNavigate();
 
     async function postPoll(e) {
+        //change alert to something more useful
+        if(pollName === '' || options.includes('')){
+            e.preventDefault();
+            alert("you have empty fields");
+            return;
+        }
         const rawBody = {
             title: pollName,
             options: options
@@ -37,6 +44,13 @@ const NewPoll = () => {
             return options;
         });
     };
+
+    const deleteOption = (e, i) => {
+        console.log(i);
+        e.preventDefault();
+        options.splice(i,1);
+        setOptions([...options]);
+    }
 
     const addOption = (e) => {
         e.preventDefault();
@@ -69,6 +83,9 @@ const NewPoll = () => {
                             onChange={(e) => onOptionChange(e, i)}
                             placeholder={'Option ' + (i + 1)}
                         />
+                        <button onClick = {(e) => deleteOption(e, i)}>
+                            trash
+                        </button>
                     </div>
                 ))}
                 <button className='flex text-rose-500' onClick={addOption}>

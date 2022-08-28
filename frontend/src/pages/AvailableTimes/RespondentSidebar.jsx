@@ -15,7 +15,7 @@ const RespondentSidebar = (props) => {
     console.log(allRespondentsList);
     console.log('he');
     return (
-        <div className='pl-2'>
+        <div className='w-[250px]'>
             {!showSelector && showUsers && (
                 <div className='font-mono text-2xl font-bold'>
                     Respondents{' ('}

@@ -26,8 +26,6 @@ const RespondentSidebarSlot = (props) => {
 
     const isAvailable = availableRespondentList.some((element) => {
         if (element.username === user.username) {
-            // console.log(user);
-            // setRepondentCount(respondentCount + 1);
             return true;
         }
     });

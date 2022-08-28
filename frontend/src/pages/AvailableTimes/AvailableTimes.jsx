@@ -9,20 +9,27 @@ import {
     selectAvailableRespondents,
     selectAllRespondents
 } from '../../features/RespondentsSlice';
+import { clearSchedule, selectSchedule } from '../../features/ScheduleSlice';
 import RespondentSidebar from './RespondentSidebar';
 import SelectButton from '../../components/AvailabilitySelector/SelectButton';
 
 const AvailableTimes = () => {
+    const dispatch = useDispatch();
     const availableRespondentList = useSelector(selectAvailableRespondents);
     const allRespondentsList = useSelector(selectAllRespondents);
-    console.log(availableRespondentList);
-    console.log(allRespondentsList);
     const [showSelector, setShowSelector] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
     const [showUsers, setShowUsers] = useState(false);
     const [booleanSelect, setBooleanSelect] = useState(true);
-    const [showIndividual, setShowIndividual] = useState(false);
-    const [selectedIndividual, setSelectedIndividual] = useState({});
+    const [showIndividual, setShowIndividual] = useState(false); //if they hover over individual user for their available times
+    const [selectedIndividual, setSelectedIndividual] = useState({}); //the hovered individual
+
+    const [scheduleSelect, setScheduleSelect] = useState(false); //show the drag to schedule event
+    const [scheduleConfirm, setScheduleConfirm] = useState(false); //if the user confirmed their drag to select
+    const [selectedScheduleSlots, setSelectedScheduleSlots] = useState({
+        selectedKeys: []
+    }); //the timeslots they selected
+
     const selectorRef = useRef();
     /*DEFAULT DATA FETCHING CODE*/
     const { code } = useParams();
@@ -43,11 +50,9 @@ const AvailableTimes = () => {
 
     const findCurrentUser = (data) => {
         let users = data.users;
-        console.log(users);
         let currUser = users.find(
             (element) => element.username === localStorage.getItem(code)
         );
-        console.log(currUser);
         setCurrentUser(currUser);
     };
 
@@ -55,10 +60,8 @@ const AvailableTimes = () => {
         selectorRef.current.callStoreSlotArrays();
         let reduxData = store.getState();
         setShowSelector(!showSelector);
-        console.log(reduxData);
 
         let username = localStorage.getItem(code); //username
-        console.log(username);
         let userAvailability = reduxData.availability; //array of arrays that contain 5 objects max, each object contains date and slots
         let rawBody = structuredClone(data);
         let found = false;
@@ -96,15 +99,61 @@ const AvailableTimes = () => {
                     </div>
                     <div>
                         {!showSelector ? (
-                            <div className='flex justify-end'>
-                                <button
-                                    className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
-                                    onClick={() =>
-                                        setShowSelector(!showSelector)
-                                    }>
-                                    Add/Edit Your Availability
-                                </button>
-                            </div>
+                            !scheduleSelect ? (
+                                <div>
+                                    <div className='flex justify-end'>
+                                        <button
+                                            className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                            onClick={() => {
+                                                setShowSelector(!showSelector);
+                                            }}>
+                                            Add/Edit Your Availability
+                                        </button>
+                                    </div>
+                                    <div className='flex justify-end'>
+                                        <button
+                                            className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                            onClick={() => {
+                                                setScheduleSelect(
+                                                    !scheduleSelect
+                                                );
+                                            }}>
+                                            Schedule
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className='flex justify-end'>
+                                        <button
+                                            className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                            onClick={() => {
+                                                setScheduleSelect(
+                                                    !scheduleSelect
+                                                );
+                                                setScheduleConfirm(true);
+                                            }}>
+                                            Submit
+                                        </button>
+                                    </div>
+                                    <div className='flex justify-end'>
+                                        <button
+                                            className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                            onClick={() => {
+                                                dispatch(clearSchedule());
+                                                setScheduleSelect(
+                                                    !scheduleSelect
+                                                );
+                                                setScheduleConfirm(false);
+                                                setSelectedScheduleSlots({
+                                                    selectedKeys: []
+                                                });
+                                            }}>
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            )
                         ) : (
                             <div className='flex justify-end'>
                                 <button
@@ -138,6 +187,14 @@ const AvailableTimes = () => {
                                         setShowUsers={setShowUsers}
                                         selectedIndividual={selectedIndividual}
                                         showIndividual={showIndividual}
+                                        scheduleSelect={scheduleSelect}
+                                        scheduleConfirm={scheduleConfirm}
+                                        selectedScheduleSlots={
+                                            selectedScheduleSlots
+                                        }
+                                        setSelectedScheduleSlots={
+                                            setSelectedScheduleSlots
+                                        }
                                     />
                                 )}
                             </div>
@@ -154,8 +211,6 @@ const AvailableTimes = () => {
                         </div>
                         {allRespondentsList.length > 0 && (
                             <div className='pl-4'>
-                                {console.log(showUsers)}
-                                {/* {showUsers && ( */}
                                 <RespondentSidebar
                                     users={data.users}
                                     availableRespondentList={
@@ -169,15 +224,6 @@ const AvailableTimes = () => {
                                     }
                                     setShowIndividual={setShowIndividual}
                                 />
-                                {/* )} */}
-                                {/* {!showUsers && (
-                                    <RespondentSidebar
-                                        users={data.users}
-                                        availableRespondentList={data.users}
-                                        allRespondentsList={allRespondentsList}
-                                        showSelector={showSelector}
-                                    />
-                                )} */}
                             </div>
                         )}
                     </div>
