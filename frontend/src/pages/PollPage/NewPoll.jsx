@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
+import {
+    faPersonWalkingArrowRight,
+    faXmarkCircle
+} from '@fortawesome/free-solid-svg-icons';
 import e from 'cors';
 
 const NewPoll = () => {
@@ -12,9 +15,9 @@ const NewPoll = () => {
 
     async function postPoll(e) {
         //change alert to something more useful
-        if(pollName === '' || options.includes('')){
+        if (pollName === '' || options.includes('')) {
             e.preventDefault();
-            alert("you have empty fields");
+            alert('you have empty fields');
             return;
         }
         const rawBody = {
@@ -48,9 +51,9 @@ const NewPoll = () => {
     const deleteOption = (e, i) => {
         console.log(i);
         e.preventDefault();
-        options.splice(i,1);
+        options.splice(i, 1);
         setOptions([...options]);
-    }
+    };
 
     const addOption = (e) => {
         e.preventDefault();
@@ -83,9 +86,11 @@ const NewPoll = () => {
                             onChange={(e) => onOptionChange(e, i)}
                             placeholder={'Option ' + (i + 1)}
                         />
-                        <button onClick = {(e) => deleteOption(e, i)}>
-                            trash
-                        </button>
+                        <FontAwesomeIcon
+                            icon={faXmarkCircle}
+                            className='ml-2'
+                            onClick={(e) => deleteOption(e, i)}
+                        />
                     </div>
                 ))}
                 <button className='flex text-rose-500' onClick={addOption}>
