@@ -10,10 +10,6 @@ const RespondentSidebar = (props) => {
         setSelectedIndividual,
         setShowIndividual
     } = props;
-    console.log(users);
-    console.log(availableRespondentList);
-    console.log(allRespondentsList);
-    console.log('he');
     return (
         <div className='w-[250px]'>
             {!showSelector && showUsers && (

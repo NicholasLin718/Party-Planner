@@ -40,6 +40,7 @@ const AvailableTimes = () => {
         const res = await response.json();
         setData(res);
         setLoading(false);
+        initializeScheduledTime(res);
         findCurrentUser(res);
         console.log(res);
     }
@@ -54,6 +55,14 @@ const AvailableTimes = () => {
             (element) => element.username === localStorage.getItem(code)
         );
         setCurrentUser(currUser);
+    };
+
+    const initializeScheduledTime = (data) => {
+        let scheduledTime = JSON.parse(data.scheduledTime);
+        if (scheduledTime.selectedKeys.length > 0) {
+            setScheduleConfirm(true);
+            setSelectedScheduleSlots(scheduledTime);
+        }
     };
 
     const submitAvailability = async () => {
@@ -90,6 +99,29 @@ const AvailableTimes = () => {
         window.location.reload(true);
     };
 
+    const submitScheduleTime = async (submit) => {
+        let rawBody = structuredClone(data);
+        if (submit) {
+            rawBody.scheduledTime = JSON.stringify(selectedScheduleSlots);
+        } else {
+            rawBody.scheduledTime = JSON.stringify({
+                selectedKeys: []
+            });
+        }
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(rawBody)
+        };
+        console.log(requestOptions.body);
+        const response = await fetch(
+            'http://localhost:5000/pages/' + code,
+            requestOptions
+        );
+        console.log(response);
+        setScheduleConfirm(submit);
+    };
+
     return (
         <div className='pb-12'>
             {!loading && (
@@ -111,15 +143,30 @@ const AvailableTimes = () => {
                                         </button>
                                     </div>
                                     <div className='flex justify-end'>
-                                        <button
-                                            className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
-                                            onClick={() => {
-                                                setScheduleSelect(
-                                                    !scheduleSelect
-                                                );
-                                            }}>
-                                            Schedule
-                                        </button>
+                                        {scheduleConfirm && (
+                                            <button
+                                                className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                                onClick={() => {
+                                                    setSelectedScheduleSlots({
+                                                        selectedKeys: []
+                                                    });
+                                                    //DELETE FROM DATABASE
+                                                    submitScheduleTime(false);
+                                                }}>
+                                                Unschedule
+                                            </button>
+                                        )}
+                                        {!scheduleConfirm && (
+                                            <button
+                                                className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                                onClick={() => {
+                                                    setScheduleSelect(
+                                                        !scheduleSelect
+                                                    );
+                                                }}>
+                                                Schedule
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             ) : (
@@ -128,10 +175,21 @@ const AvailableTimes = () => {
                                         <button
                                             className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                             onClick={() => {
+                                                if (
+                                                    selectedScheduleSlots
+                                                        .selectedKeys.length ===
+                                                    0
+                                                ) {
+                                                    alert(
+                                                        'select something lol'
+                                                    );
+                                                    return;
+                                                }
                                                 setScheduleSelect(
                                                     !scheduleSelect
                                                 );
-                                                setScheduleConfirm(true);
+                                                //ADD TO DATABASE
+                                                submitScheduleTime(true);
                                             }}>
                                             Submit
                                         </button>
@@ -140,7 +198,6 @@ const AvailableTimes = () => {
                                         <button
                                             className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                             onClick={() => {
-                                                dispatch(clearSchedule());
                                                 setScheduleSelect(
                                                     !scheduleSelect
                                                 );
@@ -189,6 +246,7 @@ const AvailableTimes = () => {
                                         showIndividual={showIndividual}
                                         scheduleSelect={scheduleSelect}
                                         scheduleConfirm={scheduleConfirm}
+                                        setScheduleConfirm={setScheduleConfirm}
                                         selectedScheduleSlots={
                                             selectedScheduleSlots
                                         }

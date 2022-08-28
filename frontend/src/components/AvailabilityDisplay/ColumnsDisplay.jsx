@@ -18,18 +18,15 @@ const ColumnsDisplay = (props) => {
         setShowUsers,
         scheduleSelect,
         scheduleConfirm,
+        setScheduleConfirm,
         selectedScheduleSlots,
         setSelectedScheduleSlots
     } = props;
-    const dispatch = useDispatch();
-    // const selectedScheduleSlotsInitial = useSelector(selectSchedule);
-    // console.log(selectedScheduleSlotsInitial);
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [currentPage, setCurrentPage] = useState(1);
     // const [selectedScheduleSlots, setSelectedScheduleSlots] = useState({
     //     selectedKeys: selectedScheduleSlotsInitial
     // });
-    console.log(selectedScheduleSlots);
     const PageSize = 5;
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -38,7 +35,6 @@ const ColumnsDisplay = (props) => {
         setSelectedScheduleSlots({
             selectedKeys: keys
         });
-        // dispatch(currentSchedule(keys));
     };
 
     return (

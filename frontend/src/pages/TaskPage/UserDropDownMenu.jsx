@@ -32,24 +32,24 @@ function UserDropDownMenu({
         <div className='flex justify-center'>
             <div className='mt-4 relative w-[300px] select-none mx-[100px] my-auto font-mono'>
                 <div
-                    className='flex items-center cursor-pointer justify-between px-[10px] py-[15px] bg-white shadow-md font-bold text-slate-700'
+                    className='flex items-center cursor-pointer justify-between px-[10px] py-[15px] bg-white shadow-md font-bold text-slate-700 w-[100%]'
                     onClick={() => setIsActive(!isActive)}>
                     {!defaultOption && (
-                        <div>
-                            <div className='mt-[-3px] bg-white inline-block overflow-hidden w-8 h-8 rounded-full absolute  outline-1 outline'>
+                        <div className='box-border w-[100%]'>
+                            <div className='mt-[-3px] bg-white inline-block w-8 h-8 rounded-full absolute outline-1 outline'>
                                 <img
                                     src={spriteArr[selectedOption.sprite]}
                                     className='w-[105%] h-[105%] absolute rounded-full object-cover'
                                 />
                             </div>
-                            <div className='px-5 ml-8 w-auto overflow-hidden text-ellipsis'>
+                            <div className='px-5 ml-8 overflow-hidden text-ellipsis'>
                                 {selectedOption.username}
                             </div>
                         </div>
                     )}
                     {defaultOption && (
                         <div>
-                            <div className='mt-[-3px] bg-white inline-block overflow-hidden w-8 h-8 rounded-full absolute  outline-1 outline'>
+                            <div className='mt-[-3px] bg-white inline-block overflow-hidden w-8 h-8 rounded-full absolute outline-1 outline'>
                                 <FontAwesomeIcon
                                     icon={faUser}
                                     className='w-[100%] h-[100%] absolute rounded-full object-cover'
@@ -60,7 +60,10 @@ function UserDropDownMenu({
                             </div>
                         </div>
                     )}
-                    <FontAwesomeIcon icon={faCaretDown} />
+                    <FontAwesomeIcon
+                        icon={faCaretDown}
+                        className='absolute right-3'
+                    />
                 </div>
                 {isActive && (
                     <div className='absolute box-border top-[105%] left-0 p-[10px] bg-white shadow-md font-medium text-slate-800 w-[100%] max-h-[240px] overflow-auto'>
@@ -73,7 +76,7 @@ function UserDropDownMenu({
                             }}
                             className='p-[10px] cursor-pointer transition-all duration-200 hover:bg-slate-300 border-b-[0.05px] border-gray-800'>
                             <div>
-                                <div className='mt-[-3px] bg-white inline-block overflow-hidden w-8 h-8 rounded-full absolute  outline-1 outline'>
+                                <div className='mt-[-3px] bg-white inline-block overflow-hidden w-8 h-8 rounded-full absolute outline-1 outline'>
                                     <FontAwesomeIcon
                                         icon={faUser}
                                         className='w-[100%] h-[100%] absolute rounded-full object-cover'
@@ -95,7 +98,7 @@ function UserDropDownMenu({
                                 }}
                                 className='p-[10px] cursor-pointer transition-all duration-200 hover:bg-slate-300 border-b-[0.05px] border-gray-800'>
                                 <div>
-                                    <div className='mt-[-3px] bg-white inline-block overflow-hidden w-8 h-8 rounded-full absolute  outline-1 outline'>
+                                    <div className='mt-[-3px] bg-white inline-block w-8 h-8 rounded-full absolute  outline-1 outline'>
                                         <img
                                             src={spriteArr[option.sprite]}
                                             className='w-[105%] h-[105%] absolute rounded-full object-cover'
