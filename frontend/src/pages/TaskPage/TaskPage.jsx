@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NewTask from './NewTask';
 import TaskCard from '../../components/TaskCard/TaskCard';
+import 'react-responsive-modal/styles.css';
+import Modal from '../../components/Modal/Modal';
 const TaskPage = () => {
     const [selectedOption, setSelectedOption] = useState({});
     const [tasksOwnerArray, setTasksOwnerArray] = useState({});
@@ -94,6 +96,9 @@ const TaskPage = () => {
             requestOptions
         );
     };
+
+    const [open, setOpen] = useState(false);
+
     return (
         <div className='ml-2'>
             {!loading && (
@@ -101,14 +106,31 @@ const TaskPage = () => {
                     <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
                         Distribute Your Tasks
                     </div>
-                    <button
-                        onClick={() => {
-                            setNewTask(!newTask);
-                        }}>
-                        New Task
-                    </button>
+                    <button onClick={() => setNewTask(true)}>New Task</button>
                     <div className='flex justify-center mt-4'>
-                        {newTask && (
+                        <div>
+                            <button onClick={() => setOpen(true)}>
+                                Open modal
+                            </button>
+                            <Modal
+                                open={open}
+                                setOpen={setOpen}
+                                content={
+                                    <NewTask
+                                        className='flex justify-center'
+                                        selectedOption={selectedOption}
+                                        setSelectedOption={setSelectedOption}
+                                        tasksOwnerArray={tasksOwnerArray}
+                                        setTasksOwnerArray={setTasksOwnerArray}
+                                        users={data.users}
+                                        currentUser={currentUser}
+                                        tasks={data.tasks}
+                                        setOpen={setOpen}
+                                    />
+                                }
+                            />
+                        </div>
+                        {/* {newTask && (
                             <NewTask
                                 className='flex justify-center'
                                 selectedOption={selectedOption}
@@ -119,7 +141,7 @@ const TaskPage = () => {
                                 currentUser={currentUser}
                                 tasks={data.tasks}
                             />
-                        )}
+                        )} */}
                     </div>
                     <div>
                         <label className='inline-flex items-center w-full'>

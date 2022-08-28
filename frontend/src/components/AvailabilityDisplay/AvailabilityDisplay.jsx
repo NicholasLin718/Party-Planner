@@ -10,6 +10,7 @@ const AvailabilityDisplay = (props) => {
         showIndividual,
         scheduleSelect,
         scheduleConfirm,
+        setScheduleConfirm,
         selectedScheduleSlots,
         setSelectedScheduleSlots
     } = props;
@@ -24,7 +25,6 @@ const AvailabilityDisplay = (props) => {
     const [maxSelectedCount, setMaxSelectedCount] = useState(0);
     // const [slotArrays, setSlotArrays] = useState([]);
     const dispatch = useDispatch();
-    console.log(scheduleConfirm);
 
     useEffect(() => {
         calculateRoomAvailability();
@@ -133,6 +133,7 @@ const AvailabilityDisplay = (props) => {
                 setShowUsers={setShowUsers}
                 scheduleSelect={scheduleSelect}
                 scheduleConfirm={scheduleConfirm}
+                setScheduleConfirm={setScheduleConfirm}
                 selectedScheduleSlots={selectedScheduleSlots}
                 setSelectedScheduleSlots={setSelectedScheduleSlots}
             />

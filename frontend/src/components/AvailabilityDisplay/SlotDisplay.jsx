@@ -16,9 +16,7 @@ const SlotDisplay = (props) => {
         scheduleSelect
     } = props;
     let f = chroma.scale(['#ffffff', '#e86438']);
-
     let scheduleSelected = false;
-    console.log(selectedScheduleSlots);
     for (let x = 0; x < selectedScheduleSlots.selectedKeys.length; x++) {
         if (
             JSON.stringify(selectedScheduleSlots.selectedKeys[x]) ===
@@ -68,7 +66,7 @@ const SlotDisplay = (props) => {
                 <div
                     className='absolute left-[10%] w-[80%] bg-purple-500 z-10 rounded-md'
                     style={{ height: height }}>
-                    dhajscdaks
+                    Scheduled Time
                 </div>
             )}
         </div>

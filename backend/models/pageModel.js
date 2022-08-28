@@ -56,6 +56,10 @@ const pageSchema = new Schema({
         type: [taskSchema],
         required: false,
         default: []
+    },
+    scheduledTime: {
+        type: String,
+        required: false
     }
 });
 
