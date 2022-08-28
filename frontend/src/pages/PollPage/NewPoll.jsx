@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
+import e from 'cors';
 
 const NewPoll = () => {
     const { code } = useParams();
@@ -10,7 +11,12 @@ const NewPoll = () => {
     const navigate = useNavigate();
 
     async function postPoll(e) {
-        e.preventDefault();
+        //change alert to something more useful
+        if(pollName === '' || options.includes('')){
+            e.preventDefault();
+            alert("you have empty fields");
+            return;
+        }
         const rawBody = {
             title: pollName,
             options: options
@@ -39,6 +45,13 @@ const NewPoll = () => {
         });
     };
 
+    const deleteOption = (e, i) => {
+        console.log(i);
+        e.preventDefault();
+        options.splice(i,1);
+        setOptions([...options]);
+    }
+
     const addOption = (e) => {
         e.preventDefault();
         console.log(options);
@@ -47,32 +60,48 @@ const NewPoll = () => {
 
     return (
         <div className='flex justify-center mb-4 bg-blue-100 border-2 rounded-md shadow-md w-[600px] h-auto px-4 py-4'>
-            <form onSubmit={postPoll}>
-                <label>Poll Name</label>
+            <form
+                className='flex flex-col w-[100%] sm:w-[500px]'
+                onSubmit={postPoll}>
+                <div>
+                    <label>Poll Name</label>
+                </div>
                 <input
+                    className='w-[100%] px-3 py-3 rounded placeholder:italic placeholder:text-slate-400 focus:ring-sky-500 focus:border-sky-500'
                     type='text'
                     onChange={onPollNameChange}
-                    className='w-[100%] px-3 py-3'
+                    placeholder='Type your question here...'
                 />
+                <div className='pt-4'>
+                    <label>Answer Options</label>
+                </div>
                 {options?.map((option, i) => (
-                    <input
-                        type='text'
-                        onChange={(e) => onOptionChange(e, i)}
-                        key={i}
-                    />
+                    <div className='pb-1' key={i}>
+                        <input
+                            className='w-[100%] px-3 py-3 rounded placeholder:italic placeholder:text-slate-400 focus:ring-sky-500 focus:border-sky-500'
+                            type='text'
+                            onChange={(e) => onOptionChange(e, i)}
+                            placeholder={'Option ' + (i + 1)}
+                        />
+                        <button onClick = {(e) => deleteOption(e, i)}>
+                            trash
+                        </button>
+                    </div>
                 ))}
-                <button className='p-2 bg-red-200' onClick={addOption}>
-                    +
+                <button className='flex text-rose-500' onClick={addOption}>
+                    + Add Option
                 </button>
-                <button
-                    type='submit'
-                    className='group w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300 ease-in duration-150'>
-                    Add Poll
-                    <FontAwesomeIcon
-                        icon={faPersonWalkingArrowRight}
-                        className='ml-2 group-hover:ml-5 ease-in duration-300'
-                    />
-                </button>
+                <div className='flex justify-center'>
+                    <button
+                        type='submit'
+                        className='group w-auto px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300 ease-in duration-150'>
+                        Submit
+                        <FontAwesomeIcon
+                            icon={faPersonWalkingArrowRight}
+                            className='ml-2 group-hover:ml-5 ease-in duration-300'
+                        />
+                    </button>
+                </div>
             </form>
         </div>
     );
