@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Poll from '../../components/Polls/Poll';
 import NewPoll from './NewPoll';
+import Modal from '../../components/Modal/Modal';
 const PollPage = () => {
     const { code } = useParams();
     const navigate = useNavigate();
@@ -88,7 +89,11 @@ const PollPage = () => {
                 </button>
             </div>
             <div className='flex justify-center'>
-                {newPollForm && <NewPoll />}
+                <Modal
+                    open={newPollForm}
+                    setOpen={setNewPollForm}
+                    content={<NewPoll />}
+                />
             </div>
             {!loading &&
                 data.polls.map((poll, i) => (
