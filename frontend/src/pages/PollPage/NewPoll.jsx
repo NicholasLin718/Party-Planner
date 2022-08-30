@@ -62,7 +62,7 @@ const NewPoll = () => {
     };
 
     return (
-        <div className='flex justify-center mb-4 bg-blue-100 border-2 rounded-md shadow-md w-[600px] h-auto px-4 py-4'>
+        <div className='flex justify-center mb-4 bg-blue-100 rounded-md shadow-md w-[600px] h-auto px-4 py-4'>
             <form
                 className='flex flex-col w-[100%] sm:w-[500px]'
                 onSubmit={postPoll}>

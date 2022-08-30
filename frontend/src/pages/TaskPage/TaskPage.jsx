@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NewTask from './NewTask';
-import TaskCard from '../../components/TaskCard/TaskCard';
+import TaskCardLayout from '../../components/TaskCard/TaskCardLayout';
 import 'react-responsive-modal/styles.css';
 import Modal from '../../components/Modal/Modal';
 const TaskPage = () => {
@@ -77,6 +77,27 @@ const TaskPage = () => {
         );
     };
 
+    const updatePriority = async (task) => {
+        let tempTasksArray = structuredClone(tasksOwnerArray);
+        let index = tempTasksArray[task.taskOwner].findIndex(
+            (element) => element.id === task.id
+        );
+        tempTasksArray[task.taskOwner][index].priority =
+            !tempTasksArray[task.taskOwner][index].priority;
+        task.priority = tempTasksArray[task.taskOwner][index].priority;
+        setTasksOwnerArray(tempTasksArray);
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(task)
+        };
+        const response = await fetch(
+            `http://localhost:5000/pages/${code}/tasks/${task.id}`,
+            requestOptions
+        );
+    };
+
     const deleteTask = async (task) => {
         let tempTasksArray = structuredClone(tasksOwnerArray);
         let index = tempTasksArray[task.taskOwner].findIndex(
@@ -85,7 +106,6 @@ const TaskPage = () => {
         tempTasksArray[task.taskOwner].splice(index, 1);
         if (tempTasksArray[task.taskOwner].length === 0)
             delete tempTasksArray[task.taskOwner];
-        console.log(tempTasksArray);
         setTasksOwnerArray(tempTasksArray);
 
         const requestOptions = {
@@ -97,8 +117,6 @@ const TaskPage = () => {
         );
     };
 
-    const [open, setOpen] = useState(false);
-
     return (
         <div className='ml-2'>
             {!loading && (
@@ -106,15 +124,16 @@ const TaskPage = () => {
                     <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
                         Distribute Your Tasks
                     </div>
-                    <button onClick={() => setNewTask(true)}>New Task</button>
                     <div className='flex justify-center mt-4'>
                         <div>
-                            <button onClick={() => setOpen(true)}>
-                                Open modal
+                            <button
+                                className='focus:outline-none'
+                                onClick={() => setNewTask(true)}>
+                                New Task
                             </button>
                             <Modal
-                                open={open}
-                                setOpen={setOpen}
+                                open={newTask}
+                                setOpen={setNewTask}
                                 content={
                                     <NewTask
                                         className='flex justify-center'
@@ -125,7 +144,7 @@ const TaskPage = () => {
                                         users={data.users}
                                         currentUser={currentUser}
                                         tasks={data.tasks}
-                                        setOpen={setOpen}
+                                        setOpen={setNewTask}
                                     />
                                 }
                             />
@@ -148,9 +167,10 @@ const TaskPage = () => {
                             <input
                                 type='checkbox'
                                 className='w-5 h-5 text-cyan-500 rounded-full border-none focus:ring-0 focus:shadow-none focus:ring-offset-0 hover:cursor-pointer'
-                                onChange={() =>
-                                    setDeleteTasksOption(!deleteTasksOption)
-                                }
+                                onChange={() => {
+                                    console.log(!deleteTasksOption);
+                                    setDeleteTasksOption(!deleteTasksOption);
+                                }}
                             />
                             <span className='ml-2 w-[80%] whitespace-nowrap truncate font-mono font-semibold text-lg text-black'>
                                 delete
@@ -158,16 +178,18 @@ const TaskPage = () => {
                         </label>
                     </div>
                     <div>
-                        hi
-                        <TaskCard
+                        <TaskCardLayout
                             code={code}
                             tasksOwnerArray={tasksOwnerArray}
                             setTasksOwnerArray={setTasksOwnerArray}
                             users={data.users}
                             currentUser={currentUser}
                             updateTaskCompletion={updateTaskCompletion}
+                            updatePriority={updatePriority}
                             deleteTasksOption={deleteTasksOption}
                             deleteTask={deleteTask}
+                            setSelectedOption={setSelectedOption}
+                            setNewTask={setNewTask}
                         />
                     </div>
                 </div>

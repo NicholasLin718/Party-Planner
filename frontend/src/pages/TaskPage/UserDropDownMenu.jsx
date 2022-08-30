@@ -24,7 +24,15 @@ function UserDropDownMenu({
     users
 }) {
     const [isActive, setIsActive] = useState(false);
-    const [defaultOption, setDefaultOption] = useState(true);
+    const [defaultOption, setDefaultOption] = useState(
+        Object.keys(selectedOption).length === 0 ? true : false
+    );
+
+    if (Object.keys(selectedOption).length > 0) {
+        console.log('hey');
+
+        setTaskOwner(selectedOption.username);
+    }
     UserDropDownMenu.handleClickOutside = () => {
         setIsActive(false);
     };
@@ -32,7 +40,7 @@ function UserDropDownMenu({
         <div className='flex justify-center'>
             <div className='mt-4 relative w-[300px] select-none mx-[100px] my-auto font-mono'>
                 <div
-                    className='flex items-center cursor-pointer justify-between px-[10px] py-[15px] bg-white shadow-md font-bold text-slate-700 w-[100%]'
+                    className='group flex items-center cursor-pointer justify-between px-[10px] py-[15px] bg-white shadow-md font-bold text-slate-700 w-[100%]'
                     onClick={() => setIsActive(!isActive)}>
                     {!defaultOption && (
                         <div className='box-border w-[100%]'>
@@ -62,7 +70,7 @@ function UserDropDownMenu({
                     )}
                     <FontAwesomeIcon
                         icon={faCaretDown}
-                        className='absolute right-3'
+                        className='absolute right-3 group-hover:animate-bounce'
                     />
                 </div>
                 {isActive && (

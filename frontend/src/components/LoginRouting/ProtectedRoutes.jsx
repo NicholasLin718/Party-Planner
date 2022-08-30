@@ -33,7 +33,7 @@ const ProtectedRoutes = () => {
                     'transition-all duration-500 ease-in-out transform px-2 ' +
                     (showSidebar ? 'ml-[300px] ' : 'ml-[48px] ')
                 }>
-                <Outlet />
+                <Outlet context={[showSidebar, setShowSidebar]} />
             </div>
         </div>
     );

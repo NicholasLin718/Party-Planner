@@ -1,10 +1,14 @@
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 // import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { useOutletContext } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function Example(props) {
+export default function Modal(props) {
     const { open, setOpen, content } = props;
-
+    const [showSidebar, setShowSidebar] = useOutletContext();
+    console.log(showSidebar);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
 
@@ -28,7 +32,11 @@ export default function Example(props) {
                     <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
                 </Transition.Child>
 
-                <div className='fixed z-10 inset-0 overflow-y-auto'>
+                <div
+                    className={
+                        'fixed z-10 inset-0 overflow-y-auto ' +
+                        (showSidebar ? 'ml-[300px]' : 'ml-[48px]')
+                    }>
                     <div className='flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0'>
                         <Transition.Child
                             as={Fragment}
@@ -75,11 +83,17 @@ export default function Example(props) {
                                     </button>
                                 </div>
                             </Dialog.Panel> */}
-                            <Dialog.Panel>
-                                <div className='relative text-left'>
+                            <div>
+                                <div className='relative text-left border-slate-800'>
+                                    <div className='absolute right-3 top-2 cursor-pointer text-2xl'>
+                                        <FontAwesomeIcon
+                                            icon={faXmark}
+                                            onClick={onCloseModal}
+                                        />
+                                    </div>
                                     {content}
                                 </div>
-                            </Dialog.Panel>
+                            </div>
                         </Transition.Child>
                     </div>
                 </div>

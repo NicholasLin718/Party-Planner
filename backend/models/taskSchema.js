@@ -15,7 +15,7 @@ const taskSchema = new Schema({
         required: true
     },
     priority: {
-        type: String,
+        type: Boolean,
         required: false
     },
     taskOwner: {
