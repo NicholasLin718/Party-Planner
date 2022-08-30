@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPersonWalkingArrowRight,
-    faXmarkCircle
+    faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import e from 'cors';
 
@@ -87,13 +87,13 @@ const NewPoll = () => {
                             placeholder={'Option ' + (i + 1)}
                         />
                         <FontAwesomeIcon
-                            icon={faXmarkCircle}
-                            className='ml-2'
+                            icon={faXmark}
+                            className='absolute right-16 py-4 fa-lg text-gray-800 cursor-pointer'
                             onClick={(e) => deleteOption(e, i)}
                         />
                     </div>
                 ))}
-                <button className='flex text-rose-500' onClick={addOption}>
+                <button className='flex text-gray-800' onClick={addOption}>
                     + Add Option
                 </button>
                 <div className='flex justify-center'>
