@@ -60,32 +60,30 @@ const TaskCard = (props) => {
                 cardColour +
                 'align-center rounded-md border-neutral-900 border-2 px-4 py-4 hover:shadow-md ease-in duration-300 cursor-pointer'
             }>
-            <div className='h-8'>
+            <div className='py-2 h-16 max-w-[100%] flex'>
                 {!defaultOption && (
-                    <div className='bg-white inline-block overflow-hidden w-16 h-16 rounded-full relative outline-1 outline z-10'>
+                    <div className='relative bg-white overflow-hidden w-16 h-16 rounded-full outline-1 outline z-10 shrink-0'>
                         <img
                             src={spriteArr[user.sprite]}
-                            className='w-[105%] h-[105%] rounded-full object-cover z-10'
+                            className='w-[105%] h-[105%] absolute rounded-full object-cover z-10'
                         />
                     </div>
                 )}
                 {defaultOption && (
-                    <div className='relative mt-[-3px] bg-white inline-block overflow-hidden w-16 h-16 rounded-full outline-1 outline'>
+                    <div className='relative mt-[-3px] bg-white overflow-hidden w-16 h-16 rounded-full outline-1 outline shrink-0'>
                         <FontAwesomeIcon
                             icon={faUser}
                             className='w-[100%] h-[100%] absolute rounded-full object-cover'
                         />
                     </div>
                 )}
-                <div className='px-5 ml-16 '>
-                    <div className='text-xl font-mono font-semibold'>
-                        {taskOwner === '$unassigned'
-                            ? 'Unassigned Tasks'
-                            : taskOwner}
-                    </div>
+                <div className='px-4 overflow-hidden text-2xl font-mono font-semibold truncate float-left mr-1'>
+                    {taskOwner === '$unassigned'
+                        ? 'Unassigned Tasks'
+                        : taskOwner}
                 </div>
             </div>
-            <div className='mt-16 p-4 block self-center'>
+            <div className='mt-8 p-4 block self-center'>
                 {/* <FontAwesomeIcon icon={faSpinner} className='animate-spin' /> */}
                 <ul className='list-none'>
                     {!tasksOwnerArray[taskOwner] && <div>No tasks!</div>}
@@ -97,7 +95,7 @@ const TaskCard = (props) => {
                                     key={j}
                                     className={
                                         taskColour +
-                                        'group relative p-4 rounded-md border-spacing-0 border-[1px]'
+                                        'group relative p-2 rounded-md border-spacing-0 border-[1px]'
                                     }>
                                     <label className='inline-flex items-center w-full'>
                                         <input
@@ -112,7 +110,7 @@ const TaskCard = (props) => {
                                         </span>
                                     </label>
                                     {!deleteTasksOption && (
-                                        <div className='absolute top-[32%] right-8 flex space-x-2'>
+                                        <div className='absolute top-[20%] right-4 flex space-x-2'>
                                             <PriorityStar
                                                 taskPriorityHandler={
                                                     taskPriorityHandler
@@ -125,19 +123,6 @@ const TaskCard = (props) => {
                                                     addUserTask(taskOwner);
                                                     setTaskEdit(true);
                                                 }}>
-                                                {/* <svg
-                                                    xmlns='http://www.w3.org/2000/svg'
-                                                    fill='none'
-                                                    viewBox='0 0 24 24'
-                                                    strokeWidth={1.5}
-                                                    stroke='currentColor'
-                                                    className='w-6 h-6'>
-                                                    <path
-                                                        strokeLinecap='round'
-                                                        strokeLinejoin='round'
-                                                        d='M4.5 12c0-1.232.046-2.453.138-3.662a4.006 4.006 0 013.7-3.7 48.678 48.678 0 017.324 0 4.006 4.006 0 013.7 3.7c.017.22.032.441.046.662M4.5 12l-3-3m3 3l3-3m12 3c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.657 48.657 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.017-.22-.032-.441-.046-.662M19.5 12l-3 3m3-3l3 3'
-                                                    />
-                                                </svg> */}
                                                 <svg
                                                     xmlns='http://www.w3.org/2000/svg'
                                                     fill='none'
@@ -171,13 +156,14 @@ const TaskCard = (props) => {
                         })}
                 </ul>
 
-                <FontAwesomeIcon
-                    icon={faPlus}
+                <div
                     onClick={() => {
                         addUserTask(taskOwner);
                         setNewTask(true);
                     }}
-                />
+                    className='font-mono text-base font-semibold'>
+                    <FontAwesomeIcon icon={faPlus} /> New Task
+                </div>
             </div>
         </div>
     );

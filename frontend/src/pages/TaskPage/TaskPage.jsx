@@ -5,6 +5,8 @@ import TaskCardLayout from '../../components/TaskCard/TaskCardLayout';
 import 'react-responsive-modal/styles.css';
 import Modal from '../../components/Modal/Modal';
 import TaskReassignment from '../../components/TaskCard/TaskReassignment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 const TaskPage = () => {
     const [selectedOption, setSelectedOption] = useState({});
     const [tasksOwnerArray, setTasksOwnerArray] = useState({});
@@ -163,14 +165,35 @@ const TaskPage = () => {
                     </div>
                     <div className='flex justify-center mt-4'>
                         <div>
-                            <button
-                                className='focus:outline-none'
-                                onClick={() => setNewTask(true)}>
-                                New Task
-                            </button>
-                            {/* <button onClick={() => setTaskEdit(false)}>
-                                yeah
-                            </button> */}
+                            <div className='flex m-4 space-x-2'>
+                                <div
+                                    className='focus:outline-none font-mono font-semibold px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300 hover:cursor-pointer'
+                                    onClick={() => setNewTask(true)}>
+                                    New Task
+                                </div>
+                                <div>
+                                    {!deleteTasksOption && (
+                                        <div
+                                            onClick={() => {
+                                                setDeleteTasksOption(true);
+                                            }}
+                                            className='font-mono font-semibold px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300 hover:cursor-pointer'>
+                                            <FontAwesomeIcon icon={faTrash} />{' '}
+                                            Delete
+                                        </div>
+                                    )}
+                                    {deleteTasksOption && (
+                                        <div
+                                            onClick={() =>
+                                                setDeleteTasksOption(false)
+                                            }
+                                            className='font-mono font-semibold px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300 hover:cursor-pointer'>
+                                            <FontAwesomeIcon icon={faCheck} />{' '}
+                                            Finished
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                             <Modal
                                 open={newTask}
                                 setOpen={setNewTask}
@@ -209,34 +232,8 @@ const TaskPage = () => {
                                 }
                             />
                         </div>
-                        {/* {newTask && (
-                            <NewTask
-                                className='flex justify-center'
-                                selectedOption={selectedOption}
-                                setSelectedOption={setSelectedOption}
-                                tasksOwnerArray={tasksOwnerArray}
-                                setTasksOwnerArray={setTasksOwnerArray}
-                                users={data.users}
-                                currentUser={currentUser}
-                                tasks={data.tasks}
-                            />
-                        )} */}
                     </div>
-                    <div>
-                        <label className='inline-flex items-center w-full'>
-                            <input
-                                type='checkbox'
-                                className='w-5 h-5 text-cyan-500 rounded-full border-none focus:ring-0 focus:shadow-none focus:ring-offset-0 hover:cursor-pointer'
-                                onChange={() => {
-                                    console.log(!deleteTasksOption);
-                                    setDeleteTasksOption(!deleteTasksOption);
-                                }}
-                            />
-                            <span className='ml-2 w-[80%] whitespace-nowrap truncate font-mono font-semibold text-lg text-black'>
-                                delete
-                            </span>
-                        </label>
-                    </div>
+
                     <div>
                         <TaskCardLayout
                             code={code}

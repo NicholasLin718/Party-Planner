@@ -100,7 +100,7 @@ const TaskReassignment = (props) => {
     return (
         <div className='flex justify-center mb-4 bg-blue-100 rounded-md shadow-md w-[600px] h-auto px-4 pb-6 pt-10'>
             <form onSubmit={reassignTask}>
-                <label>Edit Existing Task</label>
+                <label>Edit Task</label>
                 <input
                     type='text'
                     onChange={onTaskChange}
