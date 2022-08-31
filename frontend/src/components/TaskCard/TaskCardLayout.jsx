@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import S1 from '../Sprites/S1.png';
 import S2 from '../Sprites/S2.png';
 import S3 from '../Sprites/S3.png';
@@ -34,8 +34,36 @@ const TaskCardLayout = (props) => {
         setTaskToBeEdited
     } = props;
 
-    console.log(tasksOwnerArray);
-    console.log(selectedOption);
+    useEffect(() => {
+        orderTaskPriority();
+    }, []);
+
+    const orderTaskPriority = () => {
+        // let tempTaskOwnerArray = {};
+        // Object.keys(tasksOwnerArray).forEach((element) => {
+        //     tasksOwnerArray[element].forEach((task) => {
+        //         if (task.priority) {
+        //             if (!tempTaskOwnerArray[element])
+        //                 tempTaskOwnerArray[element] = [];
+        //             tempTaskOwnerArray[element].push(task);
+        //             console.log(JSON.stringify(tempTaskOwnerArray));
+        //         }
+        //     });
+        // });
+        // Object.keys(tasksOwnerArray).forEach((element) => {
+        //     tasksOwnerArray[element].forEach((task) => {
+        //         if (!task.priority) {
+        //             if (!tempTaskOwnerArray[element])
+        //                 tempTaskOwnerArray[element] = [];
+        //             tempTaskOwnerArray[element].push(task);
+        //             console.log(JSON.stringify(tempTaskOwnerArray));
+        //         }
+        //     });
+        // });
+        // console.log(tempTaskOwnerArray);
+        // setTasksOwnerArray(tempTaskOwnerArray);
+    };
+
     const taskCheckboxHandler = (task) => (e) => {
         updateTaskCompletion(task);
     };
@@ -256,6 +284,7 @@ const TaskCardLayout = (props) => {
 
                     return (
                         <TaskCard
+                            key={i}
                             code={code}
                             users={users}
                             currentUser={currentUser}

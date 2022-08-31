@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
 import UserDropDownMenu from './UserDropDownMenu';
 import { useEffect } from 'react';
-import ReassignDropDown from './ReassignDropDown';
+
 const TaskReassignment = (props) => {
     const {
         code,
@@ -23,6 +23,21 @@ const TaskReassignment = (props) => {
     const [taskEdited, setTaskEdited] = useState(taskToBeEdited.task);
     const [taskOwner, setTaskOwner] = useState(taskToBeEdited.taskOwner);
 
+    const sortTaskArray = (arrayOfPersonsTask) => {
+        let reorganizedTasksArray = [];
+        let isPriorityArray = [];
+        let isNotPriorityArray = [];
+        arrayOfPersonsTask.forEach((element) => {
+            if (element.priority) {
+                isPriorityArray.push(element);
+            } else {
+                isNotPriorityArray.push(element);
+            }
+        });
+        reorganizedTasksArray = isPriorityArray.concat(isNotPriorityArray);
+        console.log(JSON.stringify(reorganizedTasksArray));
+        return reorganizedTasksArray;
+    };
     const reassignTask = async (e) => {
         e.preventDefault();
 
@@ -55,6 +70,8 @@ const TaskReassignment = (props) => {
         if (!tempTasksArray[taskOwner]) tempTasksArray[taskOwner] = [];
         tempTasksArray[taskOwner].push(tempTasksArray[task.taskOwner][index]);
         tempTasksArray[oldOwner].splice(index, 1);
+
+        tempTasksArray[taskOwner] = sortTaskArray(tempTasksArray[taskOwner]);
 
         task.taskOwner = taskOwner;
         task.task = taskEdited;

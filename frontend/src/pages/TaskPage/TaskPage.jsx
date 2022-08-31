@@ -47,15 +47,31 @@ const TaskPage = () => {
         let dict = {};
         tasks.forEach((element) => {
             let { id, task, completed, priority, taskOwner } = element;
-            if (taskOwner === '') taskOwner = '$unassigned';
-            if (!dict[taskOwner]) dict[taskOwner] = [];
-            dict[taskOwner].push({
-                id: id,
-                task: task,
-                completed: completed,
-                priority: priority,
-                taskOwner: taskOwner
-            });
+            if (priority) {
+                if (taskOwner === '') taskOwner = '$unassigned';
+                if (!dict[taskOwner]) dict[taskOwner] = [];
+                dict[taskOwner].push({
+                    id: id,
+                    task: task,
+                    completed: completed,
+                    priority: priority,
+                    taskOwner: taskOwner
+                });
+            }
+        });
+        tasks.forEach((element) => {
+            let { id, task, completed, priority, taskOwner } = element;
+            if (!priority) {
+                if (taskOwner === '') taskOwner = '$unassigned';
+                if (!dict[taskOwner]) dict[taskOwner] = [];
+                dict[taskOwner].push({
+                    id: id,
+                    task: task,
+                    completed: completed,
+                    priority: priority,
+                    taskOwner: taskOwner
+                });
+            }
         });
         console.log(dict);
         setTasksOwnerArray(dict);
@@ -92,6 +108,20 @@ const TaskPage = () => {
         tempTasksArray[task.taskOwner][index].priority =
             !tempTasksArray[task.taskOwner][index].priority;
         task.priority = tempTasksArray[task.taskOwner][index].priority;
+
+        let reorganizedTasksArray = [];
+        let isPriorityArray = [];
+        let isNotPriorityArray = [];
+        tempTasksArray[task.taskOwner].forEach((element) => {
+            if (element.priority) {
+                isPriorityArray.push(element);
+            } else {
+                isNotPriorityArray.push(element);
+            }
+        });
+        reorganizedTasksArray = isPriorityArray.concat(isNotPriorityArray);
+        console.log(JSON.stringify(reorganizedTasksArray));
+        tempTasksArray[task.taskOwner] = reorganizedTasksArray;
         setTasksOwnerArray(tempTasksArray);
 
         const requestOptions = {

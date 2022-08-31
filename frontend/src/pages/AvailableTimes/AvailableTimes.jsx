@@ -59,6 +59,7 @@ const AvailableTimes = () => {
 
     const initializeScheduledTime = (data) => {
         let scheduledTime = JSON.parse(data.scheduledTime);
+        console.log(scheduledTime);
         if (scheduledTime.selectedKeys.length > 0) {
             setScheduleConfirm(true);
             setSelectedScheduleSlots(scheduledTime);

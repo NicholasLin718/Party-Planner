@@ -26,8 +26,15 @@ const NewTask = (props) => {
         e.preventDefault();
         if (!task) return;
 
+        let maxTaskID = 0; //state is inconsistent with database, so we cannot use "tasks" to determine the id
+        Object.keys(tasksOwnerArray).forEach((element) => {
+            tasksOwnerArray[element].forEach((item) => {
+                if (item.id > maxTaskID) maxTaskID = item.id;
+            });
+        });
+        console.log(maxTaskID);
         const rawBody = {
-            id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
+            id: maxTaskID > 0 ? maxTaskID + 1 : 1,
             task: task,
             completed: false,
             priority: false,

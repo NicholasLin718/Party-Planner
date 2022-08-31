@@ -43,7 +43,6 @@ const SlotDisplay = (props) => {
             : slotData.length > 0
             ? f(slotData.length / parseFloat(maxSelectedCount)).toString()
             : 'white';
-
     const handleMouseEnter = () => {
         dispatch(currentSlotRespondents(slotData));
     };

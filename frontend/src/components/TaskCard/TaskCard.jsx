@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import S1 from '../Sprites/S1.png';
 import S2 from '../Sprites/S2.png';
 import S3 from '../Sprites/S3.png';
@@ -19,10 +19,6 @@ import {
     faEdit
 } from '@fortawesome/free-solid-svg-icons';
 import PriorityStar from './PriorityStar';
-import ReassignDropDown from './ReassignDropDown';
-import Modal from '../Modal/Modal';
-import TaskReassignment from './TaskReassignment';
-import NewTask from './NewTask';
 
 const TaskCard = (props) => {
     const spriteArr = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12];
@@ -46,8 +42,7 @@ const TaskCard = (props) => {
         setSelectedOption,
         defaultOption
     } = props;
-    console.log(tasksOwnerArray);
-    const [open, setOpen] = useState(false);
+
     const [user] = useState(
         users.find((element) => element.username === taskOwner)
     );
@@ -96,6 +91,7 @@ const TaskCard = (props) => {
                     {!tasksOwnerArray[taskOwner] && <div>No tasks!</div>}
                     {tasksOwnerArray[taskOwner] &&
                         tasksOwnerArray[taskOwner].map((task, j) => {
+                            console.log(JSON.stringify(task.priority));
                             return (
                                 <div
                                     key={j}

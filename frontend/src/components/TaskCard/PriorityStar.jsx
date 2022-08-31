@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react';
 
 const PriorityStar = (props) => {
     const { taskPriorityHandler, task } = props;
-    const [isPriority, setIsPriority] = useState(task.priority);
-    useEffect(() => {
-        console.log(isPriority);
-    }, [isPriority]);
+    console.log('--------------------------------');
+    console.log(task);
+    console.log(task.priority);
+    console.log('--------------------------------');
+
+    // const [isPriority, setIsPriority] = useState(task.priority);
+    // useEffect(() => {
+    //     console.log(isPriority);
+    // }, [isPriority]);
     return (
         <div
             className='hover:animate-pulse'
             onClick={() => {
                 taskPriorityHandler(task);
-                setIsPriority(!isPriority);
+                // setIsPriority(!isPriority);
                 console.log(task);
             }}>
-            {!isPriority && (
+            {!task.priority && (
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -29,7 +34,7 @@ const PriorityStar = (props) => {
                     />
                 </svg>
             )}
-            {isPriority && (
+            {task.priority && (
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 24 24'
