@@ -27,10 +27,15 @@ const TaskCardLayout = (props) => {
         updatePriority,
         deleteTasksOption,
         deleteTask,
+        selectedOption,
         setSelectedOption,
-        setNewTask
+        setNewTask,
+        setTaskEdit,
+        setTaskToBeEdited
     } = props;
 
+    console.log(tasksOwnerArray);
+    console.log(selectedOption);
     const taskCheckboxHandler = (task) => (e) => {
         updateTaskCompletion(task);
     };
@@ -49,6 +54,18 @@ const TaskCardLayout = (props) => {
             let selectedOption = users.find(
                 (element) => element.username === taskOwner
             );
+            console.log(selectedOption);
+            setSelectedOption(selectedOption);
+        }
+    };
+
+    const reassignUserTask = (taskOwner, task) => {
+        if (taskOwner === '$unassigned') setSelectedOption({});
+        else {
+            let selectedOption = users.find(
+                (element) => element.username === taskOwner
+            );
+            console.log(selectedOption);
             setSelectedOption(selectedOption);
         }
     };
@@ -56,27 +73,43 @@ const TaskCardLayout = (props) => {
         <div>
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-1 w-[1000px] mx-auto justify-center'>
                 <TaskCard
-                    user={currentUser}
+                    code={code}
+                    users={users}
+                    currentUser={currentUser}
                     taskOwner={currentUser.username}
                     tasksOwnerArray={tasksOwnerArray}
+                    setTasksOwnerArray={setTasksOwnerArray}
                     deleteTasksOption={deleteTasksOption}
                     taskCheckboxHandler={taskCheckboxHandler}
                     taskPriorityHandler={taskPriorityHandler}
                     taskDeleteHandler={taskDeleteHandler}
                     addUserTask={addUserTask}
+                    reassignUserTask={reassignUserTask}
                     setNewTask={setNewTask}
+                    setTaskEdit={setTaskEdit}
+                    setTaskToBeEdited={setTaskToBeEdited}
+                    selectedOption={selectedOption}
+                    setSelectedOption={setSelectedOption}
                     defaultOption={false}
                 />
                 <TaskCard
-                    user={{}}
+                    code={code}
+                    users={users}
+                    currentUser={currentUser}
                     taskOwner={'$unassigned'}
                     tasksOwnerArray={tasksOwnerArray}
+                    setTasksOwnerArray={setTasksOwnerArray}
                     deleteTasksOption={deleteTasksOption}
                     taskCheckboxHandler={taskCheckboxHandler}
                     taskPriorityHandler={taskPriorityHandler}
                     taskDeleteHandler={taskDeleteHandler}
                     addUserTask={addUserTask}
+                    reassignUserTask={reassignUserTask}
                     setNewTask={setNewTask}
+                    setTaskEdit={setTaskEdit}
+                    setTaskToBeEdited={setTaskToBeEdited}
+                    selectedOption={selectedOption}
+                    setSelectedOption={setSelectedOption}
                     defaultOption={true}
                 />
 
@@ -223,17 +256,23 @@ const TaskCardLayout = (props) => {
 
                     return (
                         <TaskCard
-                            user={users.find(
-                                (element) => element.username === taskOwner
-                            )}
+                            code={code}
+                            users={users}
+                            currentUser={currentUser}
                             taskOwner={taskOwner}
                             tasksOwnerArray={tasksOwnerArray}
+                            setTasksOwnerArray={setTasksOwnerArray}
                             deleteTasksOption={deleteTasksOption}
                             taskCheckboxHandler={taskCheckboxHandler}
                             taskPriorityHandler={taskPriorityHandler}
                             taskDeleteHandler={taskDeleteHandler}
                             addUserTask={addUserTask}
+                            reassignUserTask={reassignUserTask}
                             setNewTask={setNewTask}
+                            setTaskEdit={setTaskEdit}
+                            setTaskToBeEdited={setTaskToBeEdited}
+                            selectedOption={selectedOption}
+                            setSelectedOption={setSelectedOption}
                             defaultOption={false}
                         />
                     );

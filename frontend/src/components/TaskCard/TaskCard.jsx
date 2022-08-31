@@ -16,37 +16,66 @@ import {
     faUser,
     faPlus,
     faMinus,
-    faAngleDown
+    faEdit
 } from '@fortawesome/free-solid-svg-icons';
 import PriorityStar from './PriorityStar';
+import ReassignDropDown from './ReassignDropDown';
+import Modal from '../Modal/Modal';
+import TaskReassignment from './TaskReassignment';
+import NewTask from './NewTask';
 
 const TaskCard = (props) => {
     const spriteArr = [S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12];
     const {
-        user,
+        code,
+        users,
+        currentUser,
         taskOwner,
         tasksOwnerArray,
+        setTasksOwnerArray,
         deleteTasksOption,
         taskCheckboxHandler,
         taskPriorityHandler,
         taskDeleteHandler,
         addUserTask,
+        reassignUserTask,
         setNewTask,
+        setTaskEdit,
+        setTaskToBeEdited,
+        selectedOption,
+        setSelectedOption,
         defaultOption
     } = props;
+    console.log(tasksOwnerArray);
+    const [open, setOpen] = useState(false);
+    const [user] = useState(
+        users.find((element) => element.username === taskOwner)
+    );
+    let cardColour =
+        taskOwner === currentUser.username
+            ? 'bg-blue-300 hover:bg-blue-400 '
+            : 'bg-rose-300 hover:bg-rose-400 ';
+
+    let taskColour =
+        taskOwner === currentUser.username ? 'bg-blue-100 ' : 'bg-rose-100 ';
+
     return (
-        <div className='align-center rounded-md bg-rose-300 border-neutral-900 border-2 px-4 py-4 hover:shadow-md hover:bg-rose-400 ease-in duration-300 cursor-pointer'>
+        <div
+            className={
+                cardColour +
+                'align-center rounded-md border-neutral-900 border-2 px-4 py-4 hover:shadow-md ease-in duration-300 cursor-pointer'
+            }>
             <div className='h-8'>
                 {!defaultOption && (
-                    <div className='bg-white inline-block overflow-hidden w-16 h-16 rounded-full absolute outline-1 outline'>
+                    <div className='bg-white inline-block overflow-hidden w-16 h-16 rounded-full relative outline-1 outline z-10'>
                         <img
                             src={spriteArr[user.sprite]}
-                            className='w-[105%] h-[105%] absolute rounded-full object-cover'
+                            className='w-[105%] h-[105%] rounded-full object-cover z-10'
                         />
                     </div>
                 )}
                 {defaultOption && (
-                    <div className='mt-[-3px] bg-white inline-block overflow-hidden w-16 h-16 rounded-full absolute outline-1 outline'>
+                    <div className='relative mt-[-3px] bg-white inline-block overflow-hidden w-16 h-16 rounded-full outline-1 outline'>
                         <FontAwesomeIcon
                             icon={faUser}
                             className='w-[100%] h-[100%] absolute rounded-full object-cover'
@@ -70,7 +99,10 @@ const TaskCard = (props) => {
                             return (
                                 <div
                                     key={j}
-                                    className='group relative p-4 bg-rose-100 rounded-md border-spacing-0 border-[1px]'>
+                                    className={
+                                        taskColour +
+                                        'group relative p-4 rounded-md border-spacing-0 border-[1px]'
+                                    }>
                                     <label className='inline-flex items-center w-full'>
                                         <input
                                             type='checkbox'
@@ -91,10 +123,39 @@ const TaskCard = (props) => {
                                                 }
                                                 task={task}
                                             />
-                                            <FontAwesomeIcon
-                                                icon={faAngleDown}
-                                                className='h-[24px] text-xl font-bold hover:animate-bounce'
-                                            />
+                                            <div
+                                                onClick={() => {
+                                                    setTaskToBeEdited(task);
+                                                    addUserTask(taskOwner);
+                                                    setTaskEdit(true);
+                                                }}>
+                                                {/* <svg
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    fill='none'
+                                                    viewBox='0 0 24 24'
+                                                    strokeWidth={1.5}
+                                                    stroke='currentColor'
+                                                    className='w-6 h-6'>
+                                                    <path
+                                                        strokeLinecap='round'
+                                                        strokeLinejoin='round'
+                                                        d='M4.5 12c0-1.232.046-2.453.138-3.662a4.006 4.006 0 013.7-3.7 48.678 48.678 0 017.324 0 4.006 4.006 0 013.7 3.7c.017.22.032.441.046.662M4.5 12l-3-3m3 3l3-3m12 3c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.657 48.657 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.017-.22-.032-.441-.046-.662M19.5 12l-3 3m3-3l3 3'
+                                                    />
+                                                </svg> */}
+                                                <svg
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    fill='none'
+                                                    viewBox='0 0 24 24'
+                                                    strokeWidth={1.5}
+                                                    stroke='currentColor'
+                                                    className='w-6 h-6'>
+                                                    <path
+                                                        strokeLinecap='round'
+                                                        strokeLinejoin='round'
+                                                        d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
+                                                    />
+                                                </svg>
+                                            </div>
                                         </div>
                                     )}
                                     {deleteTasksOption && (

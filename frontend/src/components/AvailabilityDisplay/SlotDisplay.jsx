@@ -64,7 +64,7 @@ const SlotDisplay = (props) => {
                 style={{ backgroundColor: color }}></div>
             {firstSelected && scheduleConfirm && (
                 <div
-                    className='absolute left-[10%] w-[80%] bg-purple-500 z-10 rounded-md'
+                    className='absolute left-[10%] w-[80%] bg-purple-500 z-10 rounded-md mt-[-15px] truncate'
                     style={{ height: height }}>
                     Scheduled Time
                 </div>

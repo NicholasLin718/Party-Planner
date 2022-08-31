@@ -11,7 +11,7 @@ import S10 from '../../components/Sprites/S10.png';
 import S11 from '../../components/Sprites/S11.png';
 import S12 from '../../components/Sprites/S12.png';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faUser } from '@fortawesome/free-solid-svg-icons';
 import onClickOutside from 'react-onclickoutside';
@@ -23,16 +23,17 @@ function UserDropDownMenu({
     setTaskOwner,
     users
 }) {
+    console.log(selectedOption);
     const [isActive, setIsActive] = useState(false);
     const [defaultOption, setDefaultOption] = useState(
         Object.keys(selectedOption).length === 0 ? true : false
     );
+    useEffect(() => {
+        if (Object.keys(selectedOption).length > 0) {
+            setTaskOwner(selectedOption.username);
+        }
+    }, []);
 
-    if (Object.keys(selectedOption).length > 0) {
-        console.log('hey');
-
-        setTaskOwner(selectedOption.username);
-    }
     UserDropDownMenu.handleClickOutside = () => {
         setIsActive(false);
     };
@@ -81,6 +82,7 @@ function UserDropDownMenu({
                                 setTaskOwner('$unassigned');
                                 setIsActive(false);
                                 setDefaultOption(true);
+                                console.log('SET TO $UNASSIGNED');
                             }}
                             className='p-[10px] cursor-pointer transition-all duration-200 hover:bg-slate-300 border-b-[0.05px] border-gray-800'>
                             <div>
@@ -103,6 +105,7 @@ function UserDropDownMenu({
                                     setTaskOwner(option.username);
                                     setIsActive(false);
                                     setDefaultOption(false);
+                                    console.log('SET TO ' + option.username);
                                 }}
                                 className='p-[10px] cursor-pointer transition-all duration-200 hover:bg-slate-300 border-b-[0.05px] border-gray-800'>
                                 <div>

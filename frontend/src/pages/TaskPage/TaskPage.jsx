@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import NewTask from './NewTask';
+import NewTask from '../../components/TaskCard/NewTask';
 import TaskCardLayout from '../../components/TaskCard/TaskCardLayout';
 import 'react-responsive-modal/styles.css';
 import Modal from '../../components/Modal/Modal';
+import TaskReassignment from '../../components/TaskCard/TaskReassignment';
 const TaskPage = () => {
     const [selectedOption, setSelectedOption] = useState({});
     const [tasksOwnerArray, setTasksOwnerArray] = useState({});
     const [newTask, setNewTask] = useState(false);
+    const [taskEdit, setTaskEdit] = useState(false);
+    const [taskToBeEdited, setTaskToBeEdited] = useState({});
     const [deleteTasksOption, setDeleteTasksOption] = useState(false);
     /*DEFAULT DATA FETCHING CODE*/
     const { code } = useParams();
@@ -26,6 +29,10 @@ const TaskPage = () => {
     useEffect(() => {
         getRoom();
     }, []);
+
+    useEffect(() => {
+        console.log(selectedOption);
+    }, [selectedOption]);
 
     const findCurrentUser = (data) => {
         let users = data.users;
@@ -131,6 +138,9 @@ const TaskPage = () => {
                                 onClick={() => setNewTask(true)}>
                                 New Task
                             </button>
+                            {/* <button onClick={() => setTaskEdit(false)}>
+                                yeah
+                            </button> */}
                             <Modal
                                 open={newTask}
                                 setOpen={setNewTask}
@@ -145,6 +155,26 @@ const TaskPage = () => {
                                         currentUser={currentUser}
                                         tasks={data.tasks}
                                         setOpen={setNewTask}
+                                    />
+                                }
+                            />
+                            <Modal
+                                open={taskEdit}
+                                setOpen={setTaskEdit}
+                                content={
+                                    <TaskReassignment
+                                        className='flex justify-center'
+                                        code={code}
+                                        selectedOption={selectedOption}
+                                        setSelectedOption={setSelectedOption}
+                                        tasksOwnerArray={tasksOwnerArray}
+                                        setTasksOwnerArray={setTasksOwnerArray}
+                                        users={data.users}
+                                        currentUser={currentUser}
+                                        tasks={data.tasks}
+                                        taskToBeEdited={taskToBeEdited}
+                                        setTaskToBeEdited={setTaskToBeEdited}
+                                        setOpen={setTaskEdit}
                                     />
                                 }
                             />
@@ -188,8 +218,11 @@ const TaskPage = () => {
                             updatePriority={updatePriority}
                             deleteTasksOption={deleteTasksOption}
                             deleteTask={deleteTask}
+                            selectedOption={selectedOption}
                             setSelectedOption={setSelectedOption}
                             setNewTask={setNewTask}
+                            setTaskEdit={setTaskEdit}
+                            setTaskToBeEdited={setTaskToBeEdited}
                         />
                     </div>
                 </div>
