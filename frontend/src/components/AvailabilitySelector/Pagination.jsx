@@ -31,7 +31,6 @@ const Pagination = (props) => {
                             onClick={() => {
                                 paginate(number);
                                 setActive(number);
-                                console.log(number);
                             }}
                             className={
                                 'px-4 py-2 hover:duration-500 hover:ease-in-out hover:cursor-pointer ' +

@@ -32,16 +32,11 @@ const TaskPage = () => {
         getRoom();
     }, []);
 
-    useEffect(() => {
-        console.log(selectedOption);
-    }, [selectedOption]);
-
     const findCurrentUser = (data) => {
         let users = data.users;
         let currUser = users.find(
             (element) => element.username === localStorage.getItem(code)
         );
-        console.log(currUser);
         setCurrentUser(currUser);
     };
     const distributeTasks = (data) => {
@@ -75,7 +70,6 @@ const TaskPage = () => {
                 });
             }
         });
-        console.log(dict);
         setTasksOwnerArray(dict);
     };
 
@@ -84,7 +78,6 @@ const TaskPage = () => {
         let index = tempTasksArray[task.taskOwner].findIndex(
             (element) => element.id === task.id
         );
-        console.log(index);
         tempTasksArray[task.taskOwner][index].completed =
             !tempTasksArray[task.taskOwner][index].completed;
 
@@ -122,7 +115,6 @@ const TaskPage = () => {
             }
         });
         reorganizedTasksArray = isPriorityArray.concat(isNotPriorityArray);
-        console.log(JSON.stringify(reorganizedTasksArray));
         tempTasksArray[task.taskOwner] = reorganizedTasksArray;
         setTasksOwnerArray(tempTasksArray);
 

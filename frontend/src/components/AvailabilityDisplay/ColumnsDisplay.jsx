@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Pagination from '../AvailabilitySelector/Pagination';
 import LabelColumn from '../AvailabilitySelector/LabelColumn';
 import SlotDisplay from './SlotDisplay';
 import { SelectableGroup, createSelectable } from 'react-selectable';
-import { useDispatch, useSelector } from 'react-redux';
-import { currentSchedule, selectSchedule } from '../../features/ScheduleSlice';
 const SelectableComponent = createSelectable(SlotDisplay);
 const ColumnsDisplay = (props) => {
     const {
@@ -24,9 +22,6 @@ const ColumnsDisplay = (props) => {
     } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const [currentPage, setCurrentPage] = useState(1);
-    // const [selectedScheduleSlots, setSelectedScheduleSlots] = useState({
-    //     selectedKeys: selectedScheduleSlotsInitial
-    // });
     const PageSize = 5;
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);

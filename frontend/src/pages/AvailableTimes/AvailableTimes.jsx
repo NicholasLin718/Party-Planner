@@ -9,9 +9,7 @@ import {
     selectAvailableRespondents,
     selectAllRespondents
 } from '../../features/RespondentsSlice';
-import { clearSchedule, selectSchedule } from '../../features/ScheduleSlice';
 import RespondentSidebar from './RespondentSidebar';
-import SelectButton from '../../components/AvailabilitySelector/SelectButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCalendarDays,
@@ -20,13 +18,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const AvailableTimes = () => {
-    const dispatch = useDispatch();
     const availableRespondentList = useSelector(selectAvailableRespondents);
     const allRespondentsList = useSelector(selectAllRespondents);
     const [showSelector, setShowSelector] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
     const [showUsers, setShowUsers] = useState(false);
-    const [booleanSelect, setBooleanSelect] = useState(true);
     const [showIndividual, setShowIndividual] = useState(false); //if they hover over individual user for their available times
     const [selectedIndividual, setSelectedIndividual] = useState({}); //the hovered individual
 
@@ -65,7 +61,6 @@ const AvailableTimes = () => {
 
     const initializeScheduledTime = (data) => {
         let scheduledTime = JSON.parse(data.scheduledTime);
-        console.log(scheduledTime);
         if (scheduledTime.selectedKeys.length > 0) {
             setScheduleConfirm(true);
             setSelectedScheduleSlots(scheduledTime);
@@ -130,11 +125,7 @@ const AvailableTimes = () => {
     };
 
     const calculateScheduledTime = () => {
-        console.log(data);
-        console.log(selectedScheduleSlots.selectedKeys);
-
         if (selectedScheduleSlots.selectedKeys.length === 0) return;
-        console.log(selectedScheduleSlots.selectedKeys[0].i);
         let startTime = '';
         let startHour = Math.floor(selectedScheduleSlots.selectedKeys[0].i / 2);
         startTime += startHour > 12 ? startHour - 12 : startHour;
@@ -143,7 +134,6 @@ const AvailableTimes = () => {
         startTime += +(selectedScheduleSlots.selectedKeys[0].i > 23)
             ? 'pm'
             : 'am';
-        console.log(startTime);
         let endTime = '';
         let endHour = Math.floor(
             (selectedScheduleSlots.selectedKeys[
@@ -171,7 +161,6 @@ const AvailableTimes = () => {
         )
             ? 'pm'
             : 'am';
-        console.log(endTime);
 
         let meetupDays = JSON.parse(data.meetupDays);
         let meetupDay = new Date(
@@ -328,13 +317,6 @@ const AvailableTimes = () => {
                                     onClick={() => submitAvailability()}>
                                     Submit Your Availability
                                 </button>
-                                <div className='flex justify-center'>
-                                    <SelectButton
-                                        clickHandler={() =>
-                                            setBooleanSelect(!booleanSelect)
-                                        }
-                                    />
-                                </div>
                             </div>
                         )}
                     </div>
@@ -365,7 +347,6 @@ const AvailableTimes = () => {
                                         ref={selectorRef}
                                         data={data}
                                         currentUser={currentUser}
-                                        booleanSelect={booleanSelect}
                                     />
                                 )}
                             </div>

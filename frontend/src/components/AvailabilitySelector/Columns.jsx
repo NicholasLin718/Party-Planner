@@ -34,13 +34,10 @@ const Columns = forwardRef((props, ref) => {
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
     const [booleanSelect, setBooleanSelect] = useState(true);
-    console.log(newArr.current);
     const [slotArrays, setSlotArrays] = useState(newArr.current);
-    console.log(slotArrays);
     const [selectedKeys, setSelectedKeys] = useState([]);
     const PageSize = 5;
 
-    console.log(arrayOfPagesOfColumns);
     const [currentPage, setCurrentPage] = useState(1);
 
     const handleSelection = (keys) => {
@@ -69,7 +66,6 @@ const Columns = forwardRef((props, ref) => {
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
-        //slotArrayRef.current.updateSlotArrays(currentColumns);
     };
 
     return (
@@ -132,13 +128,12 @@ const Columns = forwardRef((props, ref) => {
                     )}
                 </div>
             ))}
-            {/* {totalColumns / PageSize === 1 && ( */}
+
             <Pagination
                 columnsPerPage={PageSize}
                 totalColumns={totalColumns}
                 paginate={paginate}
             />
-            {/* )} */}
         </div>
     );
 });

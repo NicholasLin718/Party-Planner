@@ -9,7 +9,7 @@ import {
     setDescription,
     setTimeZone
 } from '../../features/TimeRangeSlice';
-import './styles.css';
+
 import CreatePageTextBoxComponent from './CreatePageTextBoxComponent';
 const TimeRange = forwardRef((props, ref) => {
     const dispatch = useDispatch();
@@ -42,7 +42,6 @@ const TimeRange = forwardRef((props, ref) => {
             parseInt(result[0].substring(0, 2)) + selectedTimezone.offset;
         if (hour < 0) hour += 24;
         return hour * 2 + (result[0].substring(3, 5) === '00' ? 0 : 1);
-        // return { hour: hour, is_00: result[0].substring(3, 5) === '00' };
     };
 
     const [startValue, setStartValue] = useState(createValue(startTime));
@@ -57,17 +56,12 @@ const TimeRange = forwardRef((props, ref) => {
             dispatch(setTimeZone(selectedTimezone.abbrev));
         }
     }));
-    //return value would be {JSON.stringify(selectedTimezone, null, 4)}
     const returnFunctionStart = (e) => {
         setStartTime(e.startTime);
         let result = e.startTime.match(/\d\d:\d\d/);
         let hour =
             parseInt(result[0].substring(0, 2)) + selectedTimezone.offset;
         if (hour < 0) hour += 24;
-        // setStartValue({
-        //     hour: hour,
-        //     is_00: result[0].substring(3, 5) === '00'
-        // });
         setStartValue(hour * 2 + (result[0].substring(3, 5) === '00' ? 0 : 1));
         console.log(startValue);
     };
@@ -79,10 +73,6 @@ const TimeRange = forwardRef((props, ref) => {
         let hour =
             parseInt(result[0].substring(0, 2)) + selectedTimezone.offset;
         if (hour < 0) hour += 24;
-        // setEndValue({
-        //     hour: hour,
-        //     is_00: result[0].substring(3, 5) === '00'
-        // });
         setEndValue(hour * 2 + (result[0].substring(3, 5) === '00' ? 0 : 1));
         console.log(endValue);
     };

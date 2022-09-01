@@ -23,7 +23,6 @@ function UserDropDownMenu({
     setTaskOwner,
     users
 }) {
-    console.log(selectedOption);
     const [isActive, setIsActive] = useState(false);
     const [defaultOption, setDefaultOption] = useState(
         Object.keys(selectedOption).length === 0 ? true : false

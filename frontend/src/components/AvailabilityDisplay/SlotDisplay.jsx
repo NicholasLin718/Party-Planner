@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import chroma from 'chroma-js';
 import { useDispatch } from 'react-redux';
 import {
@@ -73,13 +73,3 @@ const SlotDisplay = (props) => {
 };
 
 export default SlotDisplay;
-
-/*
-            {scheduleSelected && (
-                <div
-                    className='bg-purple-500 w-[80%] mt-[-15px] z-10'
-                    style={{ height: '150%' }}>
-                    dhajscdaks
-                </div>
-            )}
-*/

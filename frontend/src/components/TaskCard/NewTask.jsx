@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
 import UserDropDownMenu from './UserDropDownMenu';
-import { useEffect } from 'react';
 
 const NewTask = (props) => {
     const {
@@ -16,7 +15,6 @@ const NewTask = (props) => {
         tasks,
         setOpen
     } = props;
-    const navigate = useNavigate();
     const [task, setTask] = useState('');
     const [taskOwner, setTaskOwner] = useState('$unassigned');
     // /*DEFAULT DATA FETCHING CODE*/
@@ -32,7 +30,6 @@ const NewTask = (props) => {
                 if (item.id > maxTaskID) maxTaskID = item.id;
             });
         });
-        console.log(maxTaskID);
         const rawBody = {
             id: maxTaskID > 0 ? maxTaskID + 1 : 1,
             task: task,
@@ -42,8 +39,6 @@ const NewTask = (props) => {
         };
 
         let tempTasksArray = structuredClone(tasksOwnerArray);
-        console.log(tempTasksArray);
-        console.log(taskOwner);
         if (!tempTasksArray[taskOwner]) tempTasksArray[taskOwner] = [];
         tempTasksArray[taskOwner].push(rawBody);
         setTasksOwnerArray(tempTasksArray);
