@@ -160,12 +160,12 @@ const TaskPage = () => {
         <div className='ml-2'>
             {!loading && (
                 <div>
-                    <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
+                    <div className='flex justify-center pt-12 pb-6 font-mono font-semibold text-5xl'>
                         Distribute Your Tasks
                     </div>
-                    <div className='flex justify-center mt-4'>
+                    <div className='flex justify-center mb-4'>
                         <div>
-                            <div className='flex m-4 space-x-2'>
+                            <div className='flex space-x-2'>
                                 <div
                                     className='focus:outline-none font-mono font-semibold px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300 hover:cursor-pointer'
                                     onClick={() => setNewTask(true)}>
