@@ -29,11 +29,11 @@ const Columns = forwardRef((props, ref) => {
         newArr,
         startValue,
         endValue,
-        timeZone,
-        booleanSelect
+        timeZone
     } = props;
     const listOfWeekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
+    const [booleanSelect, setBooleanSelect] = useState(true);
     console.log(newArr.current);
     const [slotArrays, setSlotArrays] = useState(newArr.current);
     console.log(slotArrays);
@@ -119,6 +119,9 @@ const Columns = forwardRef((props, ref) => {
                                                     }
                                                     booleanSelect={
                                                         booleanSelect
+                                                    }
+                                                    setBooleanSelect={
+                                                        setBooleanSelect
                                                     }></SelectableComponent>
                                             );
                                         })}
