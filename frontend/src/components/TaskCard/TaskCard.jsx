@@ -91,7 +91,6 @@ const TaskCard = (props) => {
                     )}
                     {tasksOwnerArray[taskOwner] &&
                         tasksOwnerArray[taskOwner].map((task, j) => {
-                            console.log(JSON.stringify(task.priority));
                             return (
                                 <div
                                     key={j}

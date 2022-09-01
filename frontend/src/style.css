@@ -1303,6 +1303,10 @@ select {
   width: 7rem;
 }
 
+.w-\[90\%\] {
+  width: 90%;
+}
+
 .min-w-\[300px\] {
   min-width: 300px;
 }

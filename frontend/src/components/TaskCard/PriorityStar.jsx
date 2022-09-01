@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const PriorityStar = (props) => {
     const { taskPriorityHandler, task } = props;
-    console.log('--------------------------------');
-    console.log(task);
-    console.log(task.priority);
-    console.log('--------------------------------');
 
-    // const [isPriority, setIsPriority] = useState(task.priority);
-    // useEffect(() => {
-    //     console.log(isPriority);
-    // }, [isPriority]);
     return (
         <div
             className='hover:animate-pulse'
             onClick={() => {
                 taskPriorityHandler(task);
-                // setIsPriority(!isPriority);
-                console.log(task);
             }}>
             {!task.priority && (
                 <svg

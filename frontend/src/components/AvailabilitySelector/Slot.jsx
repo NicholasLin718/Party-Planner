@@ -23,7 +23,6 @@ export default function Slot(props) {
             <div
                 onMouseDown={() => {
                     setBooleanSelect(!slotArrays[k][j].slots[i]);
-                    console.log(!slotArrays[k][j].slots[i]);
                 }}
                 onClick={handleClick}
                 className={
