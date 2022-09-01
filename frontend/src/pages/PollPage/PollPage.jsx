@@ -97,15 +97,17 @@ const PollPage = () => {
                     content={<NewPoll />}
                 />
             </div>
-            {!loading &&
-                data.polls.map((poll, i) => (
-                    <PollCard
-                        key={i}
-                        poll={poll}
-                        handleVote={handleVote}
-                        handleDeletePoll={handleDeletePoll}
-                    />
-                ))}
+            <div className='grid grid-cols-1 gap-4 mx-4 sm:grid-cols-2 md:grid-cols-3'>
+                {!loading &&
+                    data.polls.map((poll, i) => (
+                        <PollCard
+                            key={i}
+                            poll={poll}
+                            handleVote={handleVote}
+                            handleDeletePoll={handleDeletePoll}
+                        />
+                    ))}
+            </div>
         </div>
     );
 };
