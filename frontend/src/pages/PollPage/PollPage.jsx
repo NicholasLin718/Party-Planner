@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Poll from '../../components/Polls/Poll';
 import NewPoll from './NewPoll';
 import Modal from '../../components/Modal/Modal';
+import PollCard from '../../components/Polls/PollCard';
+
 const PollPage = () => {
     const { code } = useParams();
     const navigate = useNavigate();
@@ -97,18 +99,12 @@ const PollPage = () => {
             </div>
             {!loading &&
                 data.polls.map((poll, i) => (
-                    <div
-                        className='flex justify-center mb-4 bg-blue-100 border-2 rounded-md shadow-md w-[600px] h-auto px-4 py-4'
-                        key={i}>
-                        <Poll pollData={poll} handleVote={handleVote} />
-                        <button
-                            onClick={() => {
-                                handleDeletePoll(poll.id);
-                            }}>
-                            Delete
-                        </button>
-                        <br></br>
-                    </div>
+                    <PollCard
+                        key={i}
+                        poll={poll}
+                        handleVote={handleVote}
+                        handleDeletePoll={handleDeletePoll}
+                    />
                 ))}
         </div>
     );
