@@ -47,8 +47,8 @@ const UserCard = (props) => {
                     className='w-[105%] h-[105%] absolute rounded-full object-cover'
                 />
             </div>
-            <div className='px-5 ml-16'>
-                <div className='text-xl font-mono font-semibold'>
+            <div className='px-5 ml-16 w-[90%]'>
+                <div className='text-xl font-mono font-semibold truncate'>
                     {username}
                 </div>
                 <button

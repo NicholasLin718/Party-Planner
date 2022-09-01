@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ColumnsDisplay from './ColumnsDisplay';
 import { useDispatch } from 'react-redux';
 import { totalSlotRespondents } from '../../features/RespondentsSlice';

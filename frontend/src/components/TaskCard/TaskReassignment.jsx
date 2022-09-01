@@ -35,29 +35,14 @@ const TaskReassignment = (props) => {
             }
         });
         reorganizedTasksArray = isPriorityArray.concat(isNotPriorityArray);
-        console.log(JSON.stringify(reorganizedTasksArray));
         return reorganizedTasksArray;
     };
     const reassignTask = async (e) => {
         e.preventDefault();
 
         let task = structuredClone(taskToBeEdited);
-        console.log(task);
         if (!task) return;
         let tempTasksArray = structuredClone(tasksOwnerArray);
-        // let tempTasksArray = [];
-        // Object.keys(tasksOwnerArray).forEach((element) => {
-        //     console.log(element);
-        //     if (!tempTasksArray[element]) tempTasksArray[element] = [];
-
-        //     console.log(tasksOwnerArray[element]);
-        //     tasksOwnerArray[element].forEach((task) => {
-        //         tempTasksArray[element].push(task);
-        //     });
-        // });
-        console.log(tempTasksArray);
-
-        console.log(task.id);
 
         let index = tempTasksArray[task.taskOwner].findIndex(
             (element) => element.id === task.id
@@ -100,7 +85,7 @@ const TaskReassignment = (props) => {
     return (
         <div className='flex justify-center mb-4 bg-blue-100 rounded-md shadow-md w-[600px] h-auto px-4 pb-6 pt-10'>
             <form onSubmit={reassignTask}>
-                <label>Edit Existing Task</label>
+                <label>Edit Task</label>
                 <input
                     type='text'
                     onChange={onTaskChange}

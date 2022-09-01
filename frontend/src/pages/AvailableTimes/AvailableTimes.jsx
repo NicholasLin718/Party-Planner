@@ -9,18 +9,20 @@ import {
     selectAvailableRespondents,
     selectAllRespondents
 } from '../../features/RespondentsSlice';
-import { clearSchedule, selectSchedule } from '../../features/ScheduleSlice';
 import RespondentSidebar from './RespondentSidebar';
-import SelectButton from '../../components/AvailabilitySelector/SelectButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faCalendarDays,
+    faUserClock,
+    faCalendarXmark
+} from '@fortawesome/free-solid-svg-icons';
 
 const AvailableTimes = () => {
-    const dispatch = useDispatch();
     const availableRespondentList = useSelector(selectAvailableRespondents);
     const allRespondentsList = useSelector(selectAllRespondents);
     const [showSelector, setShowSelector] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
     const [showUsers, setShowUsers] = useState(false);
-    const [booleanSelect, setBooleanSelect] = useState(true);
     const [showIndividual, setShowIndividual] = useState(false); //if they hover over individual user for their available times
     const [selectedIndividual, setSelectedIndividual] = useState({}); //the hovered individual
 
@@ -59,7 +61,6 @@ const AvailableTimes = () => {
 
     const initializeScheduledTime = (data) => {
         let scheduledTime = JSON.parse(data.scheduledTime);
-        console.log(scheduledTime);
         if (scheduledTime.selectedKeys.length > 0) {
             setScheduleConfirm(true);
             setSelectedScheduleSlots(scheduledTime);
@@ -123,27 +124,110 @@ const AvailableTimes = () => {
         setScheduleConfirm(submit);
     };
 
+    const calculateScheduledTime = () => {
+        if (selectedScheduleSlots.selectedKeys.length === 0) return;
+        let startTime = '';
+        let startHour = Math.floor(selectedScheduleSlots.selectedKeys[0].i / 2);
+        startTime += startHour > 12 ? startHour - 12 : startHour;
+        startTime +=
+            selectedScheduleSlots.selectedKeys[0].i % 2 === 0 ? ':00' : ':30';
+        startTime += +(selectedScheduleSlots.selectedKeys[0].i > 23)
+            ? 'pm'
+            : 'am';
+        let endTime = '';
+        let endHour = Math.floor(
+            (selectedScheduleSlots.selectedKeys[
+                selectedScheduleSlots.selectedKeys.length - 1
+            ].i +
+                1) /
+                2
+        );
+        endTime += endHour > 12 ? endHour - 12 : endHour;
+        endTime +=
+            (selectedScheduleSlots.selectedKeys[
+                selectedScheduleSlots.selectedKeys.length - 1
+            ].i +
+                1) %
+                2 ===
+            0
+                ? ':00'
+                : ':30';
+        endTime += +(
+            selectedScheduleSlots.selectedKeys[
+                selectedScheduleSlots.selectedKeys.length - 1
+            ].i +
+                1 >
+            23
+        )
+            ? 'pm'
+            : 'am';
+
+        let meetupDays = JSON.parse(data.meetupDays);
+        let meetupDay = new Date(
+            meetupDays[
+                5 * selectedScheduleSlots.selectedKeys[0].k +
+                    selectedScheduleSlots.selectedKeys[0].j
+            ].isoTime
+        );
+        const listOfWeekDays = [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday'
+        ];
+        let weekday = listOfWeekDays[meetupDay.getDay()];
+        const listOfMonths = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+        let month = listOfMonths[meetupDay.getMonth()];
+        let date = meetupDay.getDate();
+        let year = meetupDay.getFullYear();
+        return `Scheduled for ${weekday}, ${month} ${date}, ${year} from ${startTime}-${endTime}`;
+    };
     return (
         <div className='pb-12'>
             {!loading && (
                 <div>
-                    <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
-                        Select Your Available Times
+                    <div
+                        className={
+                            'flex justify-center pt-12 font-mono font-semibold ' +
+                            (scheduleConfirm ? 'text-3xl' : 'text-5xl')
+                        }>
+                        {scheduleConfirm
+                            ? calculateScheduledTime()
+                            : 'Select Your Available Times'}
                     </div>
                     <div>
                         {!showSelector ? (
                             !scheduleSelect ? (
-                                <div>
-                                    <div className='flex justify-end'>
+                                <div className='flex justify-center mx-5 sm:mx-10 md:mx-20 mt-10 space-x-2'>
+                                    <div>
                                         <button
                                             className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                             onClick={() => {
                                                 setShowSelector(!showSelector);
                                             }}>
+                                            <FontAwesomeIcon
+                                                icon={faUserClock}
+                                            />{' '}
                                             Add/Edit Your Availability
                                         </button>
                                     </div>
-                                    <div className='flex justify-end'>
+                                    <div>
                                         {scheduleConfirm && (
                                             <button
                                                 className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
@@ -154,6 +238,9 @@ const AvailableTimes = () => {
                                                     //DELETE FROM DATABASE
                                                     submitScheduleTime(false);
                                                 }}>
+                                                <FontAwesomeIcon
+                                                    icon={faCalendarXmark}
+                                                />{' '}
                                                 Unschedule
                                             </button>
                                         )}
@@ -165,6 +252,10 @@ const AvailableTimes = () => {
                                                         !scheduleSelect
                                                     );
                                                 }}>
+                                                {' '}
+                                                <FontAwesomeIcon
+                                                    icon={faCalendarDays}
+                                                />{' '}
                                                 Schedule
                                             </button>
                                         )}
@@ -215,28 +306,21 @@ const AvailableTimes = () => {
                         ) : (
                             <div className='flex justify-end'>
                                 <button
-                                    className='px-2 py-1 mx-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                    className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                     onClick={() =>
                                         setShowSelector(!showSelector)
                                     }>
                                     Cancel
                                 </button>
                                 <button
-                                    className='px-2 py-1 mx-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                    className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                     onClick={() => submitAvailability()}>
                                     Submit Your Availability
                                 </button>
-                                <div className='flex justify-center'>
-                                    <SelectButton
-                                        clickHandler={() =>
-                                            setBooleanSelect(!booleanSelect)
-                                        }
-                                    />
-                                </div>
                             </div>
                         )}
                     </div>
-                    <div className='flex flex-wrap justify-center px-5 sm:px-10 md:px-20 mt-10'>
+                    <div className='flex flex-wrap justify-center mx-5 sm:mx-10 md:mx-20 mt-5'>
                         <div className='grow'>
                             <div>
                                 {!showSelector && (
@@ -263,7 +347,6 @@ const AvailableTimes = () => {
                                         ref={selectorRef}
                                         data={data}
                                         currentUser={currentUser}
-                                        booleanSelect={booleanSelect}
                                     />
                                 )}
                             </div>

@@ -83,17 +83,17 @@ export default function Modal(props) {
                                     </button>
                                 </div>
                             </Dialog.Panel> */}
-                            <div>
+                            <Dialog.Panel>
                                 <div className='relative text-left border-slate-800'>
-                                    <div className='absolute right-3 top-2 cursor-pointer text-2xl'>
+                                    {/* <div className='absolute right-3 top-2 cursor-pointer text-2xl'>
                                         <FontAwesomeIcon
                                             icon={faXmark}
                                             onClick={onCloseModal}
                                         />
-                                    </div>
+                                    </div> */}
                                     {content}
                                 </div>
-                            </div>
+                            </Dialog.Panel>
                         </Transition.Child>
                     </div>
                 </div>

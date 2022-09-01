@@ -4,20 +4,12 @@ import React, {
     forwardRef,
     useImperativeHandle
 } from 'react';
-import LabelColumn from './LabelColumn';
 import './selectorStyles.css';
 import { useRef } from 'react';
-import Pagination from './Pagination';
 import Columns from './Columns';
-import { store } from '../../store';
-import { useParams } from 'react-router-dom';
-//MAIN PAGE
-//Select page can be rerouted even after logging out
-//Clean out states and code
-//Need to fix the number of columns
 
 const Selector = forwardRef((props, ref) => {
-    const { data, currentUser, booleanSelect } = props;
+    const { data, currentUser } = props;
     const slotArrayRef = useRef();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -106,7 +98,6 @@ const Selector = forwardRef((props, ref) => {
                     startValue={startValue}
                     endValue={endValue}
                     timeZone={timeZone}
-                    booleanSelect={booleanSelect}
                 />
             </div>
         </div>

@@ -11,7 +11,7 @@ import S10 from '../../components/Sprites/S10.png';
 import S11 from '../../components/Sprites/S11.png';
 import S12 from '../../components/Sprites/S12.png';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const RespondentSidebarSlot = (props) => {
     const {

@@ -6,7 +6,8 @@ export default function Slot(props) {
         slotData,
         slotArrays,
         setSlotArrays,
-        booleanSelect
+        booleanSelect,
+        setBooleanSelect
     } = props;
     const { i, j, k } = selectableKey;
 
@@ -20,6 +21,9 @@ export default function Slot(props) {
     return (
         <div>
             <div
+                onMouseDown={() => {
+                    setBooleanSelect(!slotArrays[k][j].slots[i]);
+                }}
                 onClick={handleClick}
                 className={
                     'h-[15px] border-x-[0.2px] ' +

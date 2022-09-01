@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Poll from '../../components/Polls/Poll';
 import NewPoll from './NewPoll';
 import Modal from '../../components/Modal/Modal';
+import PollCard from '../../components/Polls/PollCard';
+
 const PollPage = () => {
     const { code } = useParams();
     const navigate = useNavigate();
@@ -81,7 +83,7 @@ const PollPage = () => {
             <div className='flex justify-center pt-12 pb-6 font-mono font-semibold text-5xl'>
                 Polls
             </div>
-            <div className='flex justify-center pb-2'>
+            <div className='flex justify-center mb-4'>
                 <button
                     className='font-mono font-semibold px-2 py-2 rounded bg-rose-100 border-2 border-rose-200 hover:bg-rose-300'
                     onClick={() => setNewPollForm(!newPollForm)}>
@@ -95,21 +97,17 @@ const PollPage = () => {
                     content={<NewPoll />}
                 />
             </div>
-            {!loading &&
-                data.polls.map((poll, i) => (
-                    <div
-                        className='flex justify-center mb-4 bg-blue-100 border-2 rounded-md shadow-md w-[600px] h-auto px-4 py-4'
-                        key={i}>
-                        <Poll pollData={poll} handleVote={handleVote} />
-                        <button
-                            onClick={() => {
-                                handleDeletePoll(poll.id);
-                            }}>
-                            Delete
-                        </button>
-                        <br></br>
-                    </div>
-                ))}
+            <div className='grid grid-cols-1 gap-4 mx-4 sm:grid-cols-2 md:grid-cols-3'>
+                {!loading &&
+                    data.polls.map((poll, i) => (
+                        <PollCard
+                            key={i}
+                            poll={poll}
+                            handleVote={handleVote}
+                            handleDeletePoll={handleDeletePoll}
+                        />
+                    ))}
+            </div>
         </div>
     );
 };
