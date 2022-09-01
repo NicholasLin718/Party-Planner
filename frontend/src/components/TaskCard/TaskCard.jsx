@@ -86,7 +86,9 @@ const TaskCard = (props) => {
             <div className='mt-8 p-4 block self-center'>
                 {/* <FontAwesomeIcon icon={faSpinner} className='animate-spin' /> */}
                 <ul className='list-none'>
-                    {!tasksOwnerArray[taskOwner] && <div>No tasks!</div>}
+                    {!tasksOwnerArray[taskOwner] && (
+                        <div className='font-sans text-lg'>No tasks!</div>
+                    )}
                     {tasksOwnerArray[taskOwner] &&
                         tasksOwnerArray[taskOwner].map((task, j) => {
                             console.log(JSON.stringify(task.priority));
@@ -161,7 +163,7 @@ const TaskCard = (props) => {
                         addUserTask(taskOwner);
                         setNewTask(true);
                     }}
-                    className='font-mono text-base font-semibold'>
+                    className='font-mono text-base font-semibold pt-2'>
                     <FontAwesomeIcon icon={faPlus} /> New Task
                 </div>
             </div>

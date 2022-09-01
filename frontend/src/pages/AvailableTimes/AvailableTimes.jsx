@@ -12,6 +12,12 @@ import {
 import { clearSchedule, selectSchedule } from '../../features/ScheduleSlice';
 import RespondentSidebar from './RespondentSidebar';
 import SelectButton from '../../components/AvailabilitySelector/SelectButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faCalendarDays,
+    faUserClock,
+    faCalendarXmark
+} from '@fortawesome/free-solid-svg-icons';
 
 const AvailableTimes = () => {
     const dispatch = useDispatch();
@@ -123,27 +129,116 @@ const AvailableTimes = () => {
         setScheduleConfirm(submit);
     };
 
+    const calculateScheduledTime = () => {
+        console.log(data);
+        console.log(selectedScheduleSlots.selectedKeys);
+
+        if (selectedScheduleSlots.selectedKeys.length === 0) return;
+        console.log(selectedScheduleSlots.selectedKeys[0].i);
+        let startTime = '';
+        let startHour = Math.floor(selectedScheduleSlots.selectedKeys[0].i / 2);
+        startTime += startHour > 12 ? startHour - 12 : startHour;
+        startTime +=
+            selectedScheduleSlots.selectedKeys[0].i % 2 === 0 ? ':00' : ':30';
+        startTime += +(selectedScheduleSlots.selectedKeys[0].i > 23)
+            ? 'pm'
+            : 'am';
+        console.log(startTime);
+        let endTime = '';
+        let endHour = Math.floor(
+            (selectedScheduleSlots.selectedKeys[
+                selectedScheduleSlots.selectedKeys.length - 1
+            ].i +
+                1) /
+                2
+        );
+        endTime += endHour > 12 ? endHour - 12 : endHour;
+        endTime +=
+            (selectedScheduleSlots.selectedKeys[
+                selectedScheduleSlots.selectedKeys.length - 1
+            ].i +
+                1) %
+                2 ===
+            0
+                ? ':00'
+                : ':30';
+        endTime += +(
+            selectedScheduleSlots.selectedKeys[
+                selectedScheduleSlots.selectedKeys.length - 1
+            ].i +
+                1 >
+            23
+        )
+            ? 'pm'
+            : 'am';
+        console.log(endTime);
+
+        let meetupDays = JSON.parse(data.meetupDays);
+        let meetupDay = new Date(
+            meetupDays[
+                5 * selectedScheduleSlots.selectedKeys[0].k +
+                    selectedScheduleSlots.selectedKeys[0].j
+            ].isoTime
+        );
+        const listOfWeekDays = [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday'
+        ];
+        let weekday = listOfWeekDays[meetupDay.getDay()];
+        const listOfMonths = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+        let month = listOfMonths[meetupDay.getMonth()];
+        let date = meetupDay.getDate();
+        let year = meetupDay.getFullYear();
+        return `Scheduled for ${weekday}, ${month} ${date}, ${year} from ${startTime}-${endTime}`;
+    };
     return (
         <div className='pb-12'>
             {!loading && (
                 <div>
-                    <div className='flex justify-center pt-12 font-mono font-semibold text-5xl'>
-                        Select Your Available Times
+                    <div
+                        className={
+                            'flex justify-center pt-12 font-mono font-semibold ' +
+                            (scheduleConfirm ? 'text-3xl' : 'text-5xl')
+                        }>
+                        {scheduleConfirm
+                            ? calculateScheduledTime()
+                            : 'Select Your Available Times'}
                     </div>
                     <div>
                         {!showSelector ? (
                             !scheduleSelect ? (
-                                <div>
-                                    <div className='flex justify-end'>
+                                <div className='flex justify-center mx-5 sm:mx-10 md:mx-20 mt-10 space-x-2'>
+                                    <div>
                                         <button
                                             className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                             onClick={() => {
                                                 setShowSelector(!showSelector);
                                             }}>
+                                            <FontAwesomeIcon
+                                                icon={faUserClock}
+                                            />{' '}
                                             Add/Edit Your Availability
                                         </button>
                                     </div>
-                                    <div className='flex justify-end'>
+                                    <div>
                                         {scheduleConfirm && (
                                             <button
                                                 className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
@@ -154,6 +249,9 @@ const AvailableTimes = () => {
                                                     //DELETE FROM DATABASE
                                                     submitScheduleTime(false);
                                                 }}>
+                                                <FontAwesomeIcon
+                                                    icon={faCalendarXmark}
+                                                />{' '}
                                                 Unschedule
                                             </button>
                                         )}
@@ -165,6 +263,10 @@ const AvailableTimes = () => {
                                                         !scheduleSelect
                                                     );
                                                 }}>
+                                                {' '}
+                                                <FontAwesomeIcon
+                                                    icon={faCalendarDays}
+                                                />{' '}
                                                 Schedule
                                             </button>
                                         )}
@@ -215,14 +317,14 @@ const AvailableTimes = () => {
                         ) : (
                             <div className='flex justify-end'>
                                 <button
-                                    className='px-2 py-1 mx-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                    className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                     onClick={() =>
                                         setShowSelector(!showSelector)
                                     }>
                                     Cancel
                                 </button>
                                 <button
-                                    className='px-2 py-1 mx-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
+                                    className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                     onClick={() => submitAvailability()}>
                                     Submit Your Availability
                                 </button>
@@ -236,7 +338,7 @@ const AvailableTimes = () => {
                             </div>
                         )}
                     </div>
-                    <div className='flex flex-wrap justify-center px-5 sm:px-10 md:px-20 mt-10'>
+                    <div className='flex flex-wrap justify-center mx-5 sm:mx-10 md:mx-20 mt-5'>
                         <div className='grow'>
                             <div>
                                 {!showSelector && (
