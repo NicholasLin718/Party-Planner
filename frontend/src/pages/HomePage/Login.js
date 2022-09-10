@@ -23,7 +23,7 @@ function Login() {
     return (
         <Toolbar position='center' className={loginStyle.bar}>
             <Typography variant='h4' className={loginStyle.text}>
-                Schedule meetings for everyone without the hassle.
+                Schedule events for everyone without the hassle.
             </Typography>
         </Toolbar>
     );

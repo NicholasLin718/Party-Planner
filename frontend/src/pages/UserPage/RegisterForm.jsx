@@ -89,7 +89,6 @@ const RegisterForm = (props) => {
                     return;
                 }
             }
-            console.log('hi');
             const sprite = Math.ceil(Math.random() * 12 - 1);
             let storedPassword;
             let storedSecurityQuestion = '';
