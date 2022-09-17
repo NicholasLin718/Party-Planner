@@ -16,6 +16,7 @@ import S11 from '../../components/Sprites/S11.png';
 import S12 from '../../components/Sprites/S12.png';
 import { useDispatch } from 'react-redux';
 import { totalSlotRespondents } from '../../features/RespondentsSlice';
+import LocationComponent from './LocationComponent';
 // import rooms from './code.json';
 
 /*
@@ -80,7 +81,6 @@ const Dashboard = () => {
                 });
             });
         });
-        console.log(submittedAvailabilityArr);
 
         dispatch(totalSlotRespondents(submittedAvailabilityArr));
         setAllRespondentsList(submittedAvailabilityArr);
@@ -136,9 +136,11 @@ const Dashboard = () => {
         let month = listOfMonths[meetupDay.getMonth()];
         let date = meetupDay.getDate();
         let year = meetupDay.getFullYear();
-        return `${weekday}, ${month} ${date}, ${year} ${startTime}-${endTime}`;
+        return `${weekday}, ${month} ${date} ${year} at ${startTime}-${endTime}`;
     };
 
+    const [editorState, setEditorState] = useState();
+    console.log(editorState);
     return (
         <div className='transition duration-500 '>
             {/* className='flex flex-col items-center justify-center min-h-screen py-2' */}
@@ -164,10 +166,15 @@ const Dashboard = () => {
                         </div>
                         <div className='mt-2 font-mono font-medium text-lg'>
                             <b>Event Time: </b>{' '}
-                            {calculateScheduledTime(
-                                JSON.parse(data.scheduledTime).selectedKeys,
-                                data
-                            )}
+                            {Object.keys(JSON.parse(data.scheduledTime))
+                                .length > 0 &&
+                                calculateScheduledTime(
+                                    JSON.parse(data.scheduledTime).selectedKeys,
+                                    data
+                                )}
+                        </div>
+                        <div className='mt-2 font-mono font-medium text-lg'>
+                            <b>Event Location:</b> {<LocationComponent />}
                         </div>
                         <div className='mt-2 font-mono font-medium text-lg'>
                             <b>Participants: </b>
