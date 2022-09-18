@@ -16,13 +16,14 @@ import PageNotFound from './pages/ErrorPages/PageNotFound';
 import './style.css';
 import AvailableTimes from './pages/AvailableTimes/AvailableTimes';
 import TaskPage from './pages/TaskPage/TaskPage';
+import HowToPage from './pages/HowToPage/HowToPage';
 function App() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<HomePage />} />
 
-                {/* <Route path='/:code' element={<PartyPage />} /> */}
+                <Route path='/how-it-works' element={<HowToPage />} />
                 <Route path='/create' element={<CreateMeetupPage />} />
                 <Route path='/range' element={<TimeRange />} />
                 {/* <Route path='/r/:code' element={<Dashboard />} /> */}

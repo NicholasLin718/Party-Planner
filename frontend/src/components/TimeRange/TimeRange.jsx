@@ -82,18 +82,18 @@ const TimeRange = forwardRef((props, ref) => {
             <form className='max-w-[1300px] m-auto min-w-[300px]'>
                 <CreatePageTextBoxComponent
                     onChangeHandler={onTitleFieldChanged}
-                    placeholderText={'Enter Event Name'}
+                    placeholderText={'Name your event'}
                     labelText={"What's The Event Called? (Required)"}
                 />
                 <CreatePageTextBoxComponent
                     onChangeHandler={onDescriptionFieldChanged}
-                    placeholderText={'Partayyy'}
+                    placeholderText={'Time to party!'}
                     labelText={"What's The Event About?"}
                 />
             </form>
             <div className='flex max-w-[1300px] m-auto min-w-[400px] '>
                 <TimePicker
-                    className='font-mono text-sm sm:text-base'
+                    className='font-mono text-sm sm:text-xs'
                     label='Time Picker'
                     onStartTimeChange={returnFunctionStart}
                     onEndTimeChange={returnFunctionEnd}

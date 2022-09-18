@@ -1220,10 +1220,6 @@ select {
   width: 100vw;
 }
 
-.w-\[1200px\] {
-  width: 1200px;
-}
-
 .w-auto {
   width: auto;
 }
@@ -1286,6 +1282,10 @@ select {
 
 .w-\[500px\] {
   width: 500px;
+}
+
+.w-\[1200px\] {
+  width: 1200px;
 }
 
 .w-28 {
@@ -2560,6 +2560,16 @@ select {
   .sm\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .sm\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .sm\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
 

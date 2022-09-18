@@ -151,10 +151,8 @@ TimeRange.defaultProps = {
     endLabel: 'to',
     showErrors: true,
     repositionTimes: false,
-    equalTimeError:
-        'Please enter a valid time. Start and End times cannot be equal.',
-    endTimeError:
-        'Please enter a valid time. End time cannot be before start time.'
+    equalTimeError: 'Start and End times cannot be equal.',
+    endTimeError: 'End time cannot be before start time.'
 };
 
 TimeRange.propTypes = {
