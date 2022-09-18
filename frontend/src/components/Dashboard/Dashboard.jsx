@@ -158,11 +158,6 @@ const Dashboard = () => {
                         </div>
                         <div className='mt-2 font-mono font-medium text-lg'>
                             <b>Event Description:</b> {data.meetupDescription}{' '}
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Ex beatae recusandae fugiat expedita inventore
-                            odio error quaerat, sunt, nulla quae obcaecati
-                            exercitationem vero reiciendis quas minus doloremque
-                            iusto culpa porro?
                         </div>
                         <div className='mt-2 font-mono font-medium text-lg'>
                             <b>Event Time: </b>{' '}
@@ -198,12 +193,12 @@ const Dashboard = () => {
                         ))}
                     </div>
                 )}
-                <button
+                {/* <button
                     onClick={() => {
                         navigate('/r/' + code + '/select', { replace: true });
                     }}>
                     Select
-                </button>
+                </button> */}
             </div>
         </div>
     );

@@ -263,7 +263,7 @@ const AvailableTimes = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <div className='flex justify-end'>
+                                    <div className='flex justify-center mx-5 sm:mx-10 md:mx-20 mt-10 space-x-2'>
                                         <button
                                             className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                             onClick={() => {
@@ -285,8 +285,6 @@ const AvailableTimes = () => {
                                             }}>
                                             Submit
                                         </button>
-                                    </div>
-                                    <div className='flex justify-end'>
                                         <button
                                             className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                             onClick={() => {
@@ -304,7 +302,7 @@ const AvailableTimes = () => {
                                 </div>
                             )
                         ) : (
-                            <div className='flex justify-end'>
+                            <div className='flex justify-center mx-5 sm:mx-10 md:mx-20 mt-10 space-x-2'>
                                 <button
                                     className='px-2 py-1 rounded bg-rose-100 border-2 border-rose-200 hover:bg-transparent ease-in duration-150'
                                     onClick={() =>

@@ -2,3 +2,4 @@
 
 ## How it works
 
+<img src="Gifs/Calendar.gif" style="float: center; margin-bottom: 10px"/>
