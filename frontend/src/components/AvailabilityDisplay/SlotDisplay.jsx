@@ -39,7 +39,7 @@ const SlotDisplay = (props) => {
 
     let color =
         scheduleSelected && scheduleSelect
-            ? 'purple'
+            ? '#665bde'
             : slotData.length > 0
             ? f(slotData.length / parseFloat(maxSelectedCount)).toString()
             : 'white';
@@ -63,7 +63,7 @@ const SlotDisplay = (props) => {
                 style={{ backgroundColor: color }}></div>
             {firstSelected && scheduleConfirm && (
                 <div
-                    className='absolute left-[10%] w-[80%] bg-purple-500 z-10 rounded-md mt-[-15px] truncate'
+                    className='absolute left-[10%] w-[80%] bg-[#665bde] z-10 rounded-md mt-[-15px] truncate font-mono text-white'
                     style={{ height: height }}>
                     Scheduled Time
                 </div>
