@@ -1,4 +1,4 @@
-# 📅 Party Planner: Never struggle to plan an event with friends again.
+# 📅 Party Planner: The easy way to plan an event.
 
 ## How it works
 
