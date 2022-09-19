@@ -8,7 +8,7 @@ Create a room for your event on the homepage. Come up with a name and descriptio
 <img src="Gifs/Calendar.gif" style="height: auto; width: 1000px;"/>
 
 ### Create an account
-Your room is now created! Now you will need to create your user for this room. There is **no email sign-up** required and your username is unique for each room! Feel free to protect your account from pesky friends using a password or a security question. Whenever you return to this room, you will be automatically logged in with your respective account.
+Your room is now created! Now you will need to create your user for this room. There is **no email sign-up** required and your username is unique for each room. Feel free to protect your account from pesky friends using a password or a security question. Whenever you return to this room, you will be automatically logged in with your respective account.
 
 <img src="Gifs/SignIn.gif" style="height: auto; width: 1000px;"/>
 
@@ -18,12 +18,12 @@ Time to find a time where everyone is available! Each user will fill in their av
 <img src="Gifs/schedule.gif" style="height: auto; width: 1000px;"/>
 
 ### Schedule your event time
-Now that you have everyone's availabilities, it's time to schedule your event! Find a time slot where everyone (hopefully) is available and select it. The time is now updapted on the screen in real time!
+Now that you have everyone's availabilities, it's time to schedule your event. Find a time slot where everyone is (hopefully) available and select it. The time is now updated on the screen in real time.
 
 <img src="Gifs/scheduleTime.gif" style="height: auto; width: 1000px;"/>
 
 ### Distribute tasks
-In case you wish to delegate tasks amongst each other, Party Planner has you covered! It offers a priority-based task page where you can assign tasks to anyone, and it updates instantly! You can also check off tasks or delete them as you please.
+In case you wish to delegate tasks amongst each other, Party Planner has you covered! It offers a priority-based task page where you can assign tasks to anyone, and it updates instantly. You can also check off tasks or delete them as you please.
 
 <img src="Gifs/tasks.gif" style="height: auto; width: 1000px;"/>
 
